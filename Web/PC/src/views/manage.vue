@@ -2,29 +2,29 @@
   <el-container>
     <div class="menu-btn iconfont" :class="isShowMenu=='true'?'icon-caidan-shousuo':'icon-caidan-dakai'" @click="hideMenu()"></div>
     <el-aside>
-      <el-menu :default-active="defaultActive" style="min-height: 100%;" background-color="#1d2b36" text-color="#fff" active-text-color="#3890df" router :collapse="isShowMenu=='false'">
+      <el-menu :default-active="defaultActive" background-color="#1d2b36" text-color="#fff" active-text-color="#3890df" router :collapse="isShowMenu=='false'">
         <div class="logo"></div>
         <el-menu-item index="home">
-          <i class="el-icon-menu"></i>
-          <span slot="title">home</span>
+          <i class="iconfont icon-shouye-kong"></i>
+          <span slot="title">{{ $t('message.home') }}</span>
         </el-menu-item>
         <el-menu-item index="lists">
-          <i class="el-icon-menu"></i>
-          <span slot="title">home</span>
+          <i class="iconfont icon-zhushuju"></i>
+          <span slot="title">{{ $t('message.list') }}</span>
         </el-menu-item>
         <el-menu-item index="charts">
-          <i class="el-icon-menu"></i>
-          <span slot="title">home</span>
+          <i class="iconfont icon-tubiaofenxi"></i>
+          <span slot="title">{{ $t('message.chart') }}</span>
         </el-menu-item>
         <el-menu-item index="settings">
-          <i class="el-icon-menu"></i>
-          <span slot="title">home</span>
+          <i class="iconfont icon-shezhi-kong"></i>
+          <span slot="title">{{ $t('message.setting') }}</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
-    <el-main>
+    <el-container class="container">
       <router-view></router-view>
-    </el-main>
+  </el-container>
   </el-container>
 </template>
 
@@ -34,7 +34,7 @@
     data() {
       return {
         menuList: [],
-        defaultActive:"/home",
+        defaultActive:"home",
         isShowMenu:'true'
       }
     },
@@ -60,18 +60,16 @@
           setTimeout(function() {
             document.getElementsByClassName('breadcrumb')[0].style.left = '200px';
             document.getElementsByClassName('menu-btn')[0].style.left = '225px';
-            document.getElementsByClassName('el-main')[0].style.marginLeft = '200px';
+            document.getElementsByClassName('container')[0].style.marginLeft = '200px';
             document.getElementsByClassName('top-head')[0].style.marginLeft = '200px';
-            document.getElementsByClassName('el-dropdown')[0].style.marginRight = '220px';
             document.getElementsByClassName('el-aside')[0].style.maxWidth = '200px';
           }, 280);
         } else {
-          document.getElementsByClassName('breadcrumb')[0].style.left = '54px';
-          document.getElementsByClassName('menu-btn')[0].style.left = '60px';
-          document.getElementsByClassName('el-main')[0].style.marginLeft = '44px';
-          document.getElementsByClassName('top-head')[0].style.marginLeft = '44px';
-          document.getElementsByClassName('el-dropdown')[0].style.marginRight = '20px';
-          document.getElementsByClassName('el-aside')[0].style.maxWidth = '44px';
+          document.getElementsByClassName('breadcrumb')[0].style.left = '74px';
+          document.getElementsByClassName('menu-btn')[0].style.left = '90px';
+          document.getElementsByClassName('container')[0].style.marginLeft = '64px';
+          document.getElementsByClassName('top-head')[0].style.marginLeft = '64px';
+          document.getElementsByClassName('el-aside')[0].style.maxWidth = '64px';
         }
       }
     }

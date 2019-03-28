@@ -1,20 +1,22 @@
 <template>
   <div>
-    <head-top :topTitle="headerTitle" :showArrow="showArrow"></head-top>
-    <guide v-if="$store.state.showGuide"></guide>
-    <home-main></home-main>
+    <head-top></head-top>
+    <el-main>
+      <guide v-if="$store.state.showGuide"></guide>
+      <home-main></home-main>
+    </el-main>
   </div>
 </template>
 
 <script>
   import { getLocal } from "../config/mUtils";
-  import HeadTop from '../components/headTop';
   import Guide from "../components/home/guide";
   import HomeMain from "../components/home/homeMain";
+  import HeadTop from "../components/headTop";
 
   export default {
     name: 'home',
-    components: { HomeMain, Guide, HeadTop },
+    components: {HeadTop, HomeMain, Guide },
     data () {
       return {
         headerTitle: this.$t('home'),

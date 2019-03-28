@@ -1,7 +1,7 @@
 <template>
   <el-header>
     <div class="top-head">
-      <el-dropdown @command="handleCommand" trigger="click" class="navdash">
+      <el-dropdown @command="handleCommand" trigger="click" class="navDash">
         <span class="el-dropdown-link" >
           <span>{{userName}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
         </span>
@@ -11,7 +11,11 @@
         </el-dropdown-menu>
       </el-dropdown>
       <el-select v-model="curLanguage" placeholder=" " class="checkLanguage" @change="setLanguage">
-        <el-option v-for="item in languageOptions" :key="item.CultureCode" :label="item.CultureName" :value="item.CultureCode"></el-option>
+        <el-option
+          v-for="item in languageOptions"
+          :key="item.code"
+          :label="item.text"
+          :value="item.code"></el-option>
       </el-select>
     </div>
     <el-dialog class="changePW" :title="$t('message.ModifyPW')" :visible.sync="dialogVisible" width="550px">
@@ -74,14 +78,16 @@
           newPassword: [{ required: true, message:this.$t('message.Input')+this.$t('message.NewPassword'), trigger: "change" }],
           newPasswordagain: [{required: true, validator: validatePass2, trigger: 'change' }]
         },
-        languageOptions: [],
+        languageOptions: [
+          {code: 'zh_CN', text: this.$t('message.chinese')},
+          {code: 'en_US', text: this.$t('message.english')}
+        ],
         isShowMenu: getStore('isShowMenu'),
         curLanguage: getLocal('language')
       };
     },
     created() {
       this.resetLabelWidth();
-      this.languageList();
       if (!this.adminInfo.id) {
         this.getAdminData();
         this.userName = getStore("Name");
@@ -111,13 +117,6 @@
           this.labelW = 85+'px';
         }
       },
-      async languageList() {
-        // debugger;
-        const crs = await getlanguage({})
-        if (crs.Flag) {
-          this.languageOptions = crs.Result;
-        }
-      },
       getMenuStatus(isShowMenu){
         if(isShowMenu=='true'||isShowMenu==null){
           // document.getElementsByClassName('kpi-container')[0].style.marginLeft = '0'
@@ -128,10 +127,9 @@
           // document.getElementsByClassName('kpi-container')[0].style.marginLeft = '200px';
           document.getElementsByClassName('breadcrumb')[0].style.left = '54px';
           document.getElementsByClassName('menu-btn')[0].style.left = '60px';
-          document.getElementsByClassName('el-main')[0].style.marginLeft = '44px';
-          document.getElementsByClassName('top-head')[0].style.marginLeft = '44px';
-          document.getElementsByClassName('el-dropdown')[0].style.marginRight = '20px';
-          document.getElementsByClassName('el-aside')[0].style.maxWidth = '44px';
+          document.getElementsByClassName('container')[0].style.marginLeft = '64px';
+          document.getElementsByClassName('top-head')[0].style.marginLeft = '64px';
+          document.getElementsByClassName('el-aside')[0].style.maxWidth = '64px';
         }
       },
       async handleCommand(command) {
