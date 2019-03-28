@@ -1,0 +1,96 @@
+@import 'iconfont/iconfont.css';
+@import 'mixin';
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.loginBg {
+  width: 100%;
+  height: 100%;
+  background: url("../assets/loginBg.jpg") center no-repeat;
+  background-size: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .loginBox {
+    width: 80%;
+    height: auto;
+    background-color: #ffffff;
+    padding: 10px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .van-field__label {
+      max-width: 60px;
+    }
+    .van-cell {
+      padding: 5px 10px;
+      .van-button {
+        display: block;
+        margin: 5px auto 0;
+      }
+    }
+  }
+}
+.mask {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+.guide {
+  width: 80%;
+  height: auto;
+  background-color: #ffffff;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.van-nav-bar__title {
+  font-size: 14px;
+}
+.van-step {
+  .van-step__title {
+    float: left;
+  }
+}
+.newPanel {
+  margin-top: 10px;
+  .van-panel__header {
+    display: none;
+  }
+  .van-panel__content {
+    padding: 0;
+  }
+  .van-cell {
+    padding: 5px 15px;
+    font-size: 12px;
+    text-align: left;
+  }
+}
+.van-hairline--top-bottom::after {
+  border-bottom: 0;
+}
+.van-panel__footer {
+  text-align: right;
+  .van-button {
+    margin-left: 5px;
+  }
+}

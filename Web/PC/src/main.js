@@ -3,13 +3,24 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import echarts from 'echarts'
+import i18n from './i18n/i18n'
+import store from './store'
 
-Vue.config.productionTip = false
+Vue.use(ElementUI);
+
+Vue.config.productionTip = false;
+
+Vue.prototype.$echarts = echarts;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  i18n,
+  store,
   components: { App },
   template: '<App/>'
 })
