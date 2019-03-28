@@ -1,96 +1,77 @@
 @import 'iconfont/iconfont.css';
 @import 'mixin';
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-style: normal;
+  text-decoration: none;
+  border: none;
+  font-family: "Microsoft Yahei",sans-serif;
+  -webkit-tap-highlight-color:transparent;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  &:focus {
+    outline: none;
+  }
 }
 
-.loginBg {
-  width: 100%;
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 1px rgba(190, 190, 190, 0);
+  box-shadow: inset 0 0 1px rgba(190, 190, 190, 0);
+  border-radius: 8px;
+  background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  -webkit-box-shadow: inset 0 0 8px rgba(128, 128, 128, 0.3);
+  box-shadow: inset 0 0 8px rgba(128, 128, 128, 0.3);
+  background-color: rgb(207, 207, 207);
+}
+
+input[type="button"], input[type="submit"], input[type="search"], input[type="reset"] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+}
+
+html,body{
   height: 100%;
-  background: url("../assets/loginBg.jpg") center no-repeat;
-  background-size: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  .loginBox {
-    width: 80%;
-    height: auto;
-    background-color: #ffffff;
-    padding: 10px 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    .van-field__label {
-      max-width: 60px;
-    }
-    .van-cell {
-      padding: 5px 10px;
-      .van-button {
-        display: block;
-        margin: 5px auto 0;
-      }
-    }
-  }
-}
-.mask {
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #F5F5F5;
+  min-width: 1200px;
+  font-size: 12px!important;
+}
+
+
+.menu-btn{
+  background-size:100% 100%!important;
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9;
+  top: 18px;
+  left: 225px;
+  width: 24px;
+  height: 24px;
+  z-index: 1000;
+  cursor: pointer;
+  font-size: 24px!important;
+  color: #ffffff;
 }
-.guide {
-  width: 80%;
-  height: auto;
-  background-color: #ffffff;
-  padding: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.van-nav-bar__title {
-  font-size: 14px;
-}
-.van-step {
-  .van-step__title {
-    float: left;
-  }
-}
-.newPanel {
-  margin-top: 10px;
-  .van-panel__header {
-    display: none;
-  }
-  .van-panel__content {
-    padding: 0;
-  }
-  .van-cell {
-    padding: 5px 15px;
-    font-size: 12px;
-    text-align: left;
-  }
-}
-.van-hairline--top-bottom::after {
-  border-bottom: 0;
-}
-.van-panel__footer {
-  text-align: right;
-  .van-button {
-    margin-left: 5px;
-  }
+.el-aside {
+  height: 100vh;
+  max-height: 100vh;
+  position: fixed;
+  z-index: 10;
+  overflow-x: hidden!important;
 }
