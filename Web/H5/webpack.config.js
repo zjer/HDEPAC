@@ -4,15 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    mode:'production',
     entry: {
         bundle: path.resolve(__dirname, './src/main.js'),
         //添加要打包在vendor里面的库
-        //vendors: ['react','react-dom','react-router'],
+        vendors: ['react','react-dom','react-router'],
     },
     output: {
         path: path.resolve(__dirname, './build'),
-        filename: '[name][hash].js'
+        filename: '[name].js'
+    },
+    devServer: {
+        host: 'localhost',
+        port: 83,
+        open: true
     },
     module: {
         rules: [
@@ -86,22 +90,11 @@ module.exports = {
     },
     // devtool: 'source-map',
     plugins: [
-        new webpack.DefinePlugin({//设置成production去除警告
-            'process.env':{
-                NODE_ENV: JSON.stringify("production")
-            }
-        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './common.html',
             inject: 'body'
         }),
-        new CleanWebpackPlugin(['dist',
-            'build'], {
-            root:__dirname,
-            verbose: true,
-            dry: false,
-            exclude: ['jslibs']
-        })
+        new CleanWebpackPlugin()
     ]
 };

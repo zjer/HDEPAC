@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "probuild": "webpack --progress --colors --config webpack.production.config.js",
-    "devbuild": "webpack --progress --colors --config webpack.development.config.js",
-    "dev": "webpack-dev-server --progress --colors --content-base build --config webpack.development.config.js"
+    "build": "webpack --progress --colors --config webpack.config.js",
+    "dev": "webpack-dev-server --progress --colors --content-base build --config webpack.config.js"
   },
   "author": "shijun",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^7.1.5",
     "babel-plugin-import": "^1.11.0",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
