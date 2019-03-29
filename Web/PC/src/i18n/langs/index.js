@@ -1,10 +1,11 @@
 import en from './en'
 import cn from './cn'
+
 const messages = {
-  enUS: {
+  en_US: {
     message: en
   },
-  zhCN: {
+  zh_CN: {
     message: cn
   }
 }

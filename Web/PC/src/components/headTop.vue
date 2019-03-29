@@ -120,9 +120,10 @@
       getMenuStatus(isShowMenu){
         if(isShowMenu=='true'||isShowMenu==null){
           // document.getElementsByClassName('kpi-container')[0].style.marginLeft = '0'
-          document.getElementsByClassName('breadcrumb')[0].style.left = '200px';
-          document.getElementsByClassName('menu-btn')[0].style.left = '225px';
-          document.getElementsByClassName('el-aside')[0].style.maxWidth = '200px';
+          document.getElementsByClassName('breadcrumb')[0].style.left = '150px';
+          document.getElementsByClassName('menu-btn')[0].style.left = '175px';
+          document.getElementsByClassName('container')[0].style.marginLeft = '150px';
+          document.getElementsByClassName('el-aside')[0].style.maxWidth = '150px';
         } else {
           // document.getElementsByClassName('kpi-container')[0].style.marginLeft = '200px';
           document.getElementsByClassName('breadcrumb')[0].style.left = '54px';

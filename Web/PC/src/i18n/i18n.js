@@ -1,14 +1,10 @@
 import Vue from 'vue'
 import locale from 'element-ui/lib/locale';
+import messages from './langs'
 import VueI18n from 'vue-i18n'
 import { getLocal } from "../config/mUtils";
 
 Vue.use(VueI18n);
-
-const messages = {
-  'zh_CN': require('./langs/cn'),
-  'en_US': require('./langs/en')
-};
 
 const i18n = new VueI18n({
   locale: getLocal('lang') || 'zh_CN',
