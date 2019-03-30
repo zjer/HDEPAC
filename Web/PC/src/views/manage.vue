@@ -46,6 +46,7 @@
       } else {
         this.isShowMenu = 'true'
       }
+      this.$router.push('home')
     },
     methods: {
       hideMenu(){

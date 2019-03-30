@@ -3,14 +3,14 @@
     <div class="top-head">
       <el-dropdown @command="handleCommand" trigger="click" class="navDash">
         <span class="el-dropdown-link" >
-          <span>{{userName}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
+          <span>{{ userName }}<i class="el-icon-caret-bottom el-icon--right"></i></span>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item  command="changePW" divided style="border-top:0">{{$t('message.ModifyPW')}}</el-dropdown-item>
-          <el-dropdown-item  command="singout" divided>{{$t('message.LogonExit')}}</el-dropdown-item>
+          <el-dropdown-item  command="changePW" divided style="border-top:0">{{$t('message.modifyPW')}}</el-dropdown-item>
+          <el-dropdown-item  command="singout" divided>{{$t('message.logout')}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-select v-model="curLanguage" placeholder=" " class="checkLanguage" @change="setLanguage">
+      <el-select v-model="curLanguage" class="checkLanguage" @change="setLanguage">
         <el-option
           v-for="item in languageOptions"
           :key="item.code"
@@ -18,22 +18,21 @@
           :value="item.code"></el-option>
       </el-select>
     </div>
-    <el-dialog class="changePW" :title="$t('message.ModifyPW')" :visible.sync="dialogVisible" width="550px">
+    <el-dialog class="changePW" :title="$t('message.modifyPW')" :visible.sync="dialogVisible" width="500px">
       <el-form :label-width="labelW" :model="ruleForm" ref="ruleForm" :rules="rules">
-        <el-form-item :label="$t('message.NewPassword')" prop="newPassword">
+        <el-form-item :label="$t('message.newPassword')" prop="newPassword">
           <el-input clearable type="password" v-model="ruleForm.newPassword"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('message.ConfirmNewPassword')" prop="newPasswordagain">
+        <el-form-item :label="$t('message.confirmPassword')" prop="newPasswordagain">
           <el-input clearable type="password" v-model="ruleForm.newPasswordagain"></el-input>
         </el-form-item>
-        <el-alert  :title="$t('message.FirstLogin')" type="error" style="width:98%;margin-left:2%"> </el-alert>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-tooltip class="item" effect="dark" :content="$t('message.Cancel')" placement="top">
-          <el-button @click="cancel" icon="iconfont icon-guanbi-wukuang"></el-button>
+        <el-tooltip class="item" effect="dark" :content="$t('message.cancel')" placement="top">
+          <el-button icon="iconfont icon-guanbi-wukuang" @click="cancel"></el-button>
         </el-tooltip>
-        <el-tooltip class="item" effect="dark" :content="$t('message.Modify')" placement="top">
-          <el-button type="primary" icon="iconfont icon-gou-wukuang" @click="modify('ruleForm')"></el-button>
+        <el-tooltip class="item" effect="dark" :content="$t('message.save')" placement="top">
+          <el-button type="primary" icon="iconfont icon-baocun1" @click="modify('ruleForm')"></el-button>
         </el-tooltip>
       </span>
     </el-dialog>
@@ -46,9 +45,6 @@
 </template>
 
 <script>
-  import { signout, ModPassword } from "@/api/api";
-  import { baseImgPath } from "@/config/env";
-  import { mapActions, mapState } from "vuex";
   import { getStore, setStore, getLocal, setLocal } from "../config/mUtils";
   import en from '../i18n/langs/en';
   import cn from '../i18n/langs/cn';
@@ -66,9 +62,10 @@
         }
       };
       return {
-        baseImgPath,
-        userName: "",
-        dialogVisible:false,
+        isShowMenu: getStore('isShowMenu'),
+        curLanguage: getLocal('language'),
+        userName: getLocal('username'),
+        dialogVisible: false,
         labelW: 0+'px',
         ruleForm: {
           newPassword:"",
@@ -82,34 +79,29 @@
           {code: 'zh_CN', text: this.$t('message.chinese')},
           {code: 'en_US', text: this.$t('message.english')}
         ],
-        isShowMenu: getStore('isShowMenu'),
-        curLanguage: getLocal('language')
       };
     },
     created() {
       this.resetLabelWidth();
-      if (!this.adminInfo.id) {
-        this.getAdminData();
-        this.userName = getStore("Name");
+      if (getLocal('language') === 'en_US') {
+        this.$i18n.locale = "en_US";
+      } else {
+        this.$i18n.locale = "zh_CN";
       }
     },
-    computed: {
-      ...mapState(["adminInfo"])
-    },
     watch:{
-      cn:function(){
+      cn: function(){
         //this.getLanguageResource();
       },
-      en:function(){
+      en: function(){
         // this.getLanguageResource();
       },
-      deep:true
+      deep: true
     },
     mounted() {
       this.getMenuStatus(this.isShowMenu);
     },
     methods: {
-      ...mapActions(["getAdminData"]),
       resetLabelWidth() {
         if (getLocal('language') == 'en_US') {
           this.labelW = 160+'px';
@@ -159,11 +151,11 @@
       setLanguage() {
         setLocal('language', this.curLanguage);
         if (getLocal('language') == 'zh_CN') {
-          this.$i18n.locale = "cn";
+          this.$i18n.locale = "zh_CN";
         } else if (getLocal('language') == 'en_US') {
-          this.$i18n.locale = "en";
+          this.$i18n.locale = "en_US";
         } else {
-          this.$i18n.locale = "cn";
+          this.$i18n.locale = "zh_CN";
         }
       },
       async changePwd(formname){

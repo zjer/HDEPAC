@@ -8,12 +8,16 @@ import 'element-ui/lib/theme-chalk/index.css'
 import echarts from 'echarts'
 import i18n from './i18n/i18n'
 import store from './store'
+import fetch from './config/fetch'
 
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
+Vue.prototype.fetch = fetch;
 Vue.prototype.$echarts = echarts;
+
+let Base64 = require('js-base64').Base64;
 
 /* eslint-disable no-new */
 new Vue({

@@ -74,9 +74,15 @@ html,body{
     border: none;
     min-height: 100%;
     .el-menu-item {
-      padding: 0 25px!important;
+      height: 50px;
+      font-size: 12px;
+      line-height: 50px;
+      i {
+        margin-right: 5px;
+      }
       &.is-active {
-        border-left: 4px solid @blue;
+        border-left: 3px solid @blue;
+        background-color: rgb(23, 34, 43)!important;
       }
     }
   }
@@ -91,6 +97,67 @@ html,body{
 .el-input__inner {
   height: 30px;
   line-height: 30px;
+  font-size: 12px!important;
+}
+
+.el-button {
+  padding: 5px;
+  &.el-button--primary {
+    background-color: @blue;
+    border-color: @blue;
+  }
+}
+
+.el-dropdown-menu {
+  margin: 0;
+  .el-dropdown-menu__item:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.el-dialog__header {
+  padding: 15px 20px;
+  text-align: left;
+  line-height: 20px;
+  .bdb();
+}
+
+.el-dialog__footer {
+  padding: 20px;
+  line-height: 30px;
+  .bdt();
+}
+
+.loginBg {
+  background: url("../assets/img/loginBg.jpg") center no-repeat;
+  background-size: contain;
+  .loginForm {
+    .wh(300px, auto);
+    padding: 30px;
+    .ctt;
+    margin-left: 300px;
+    background-color: @white;
+    .brs(5px);
+    .codeVal {
+      width: 100px;
+      float: left;
+    }
+    .validateCode {
+      width: auto;
+      float: left;
+      margin-left: 10px;
+      line-height: 40px;
+      .authCode {
+        .wh(80px, 25px);
+        border: 1px solid #999999;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .el-select {
+      width: 100%;
+    }
+  }
 }
 
 .container {
@@ -123,10 +190,12 @@ html,body{
   float: right;
 }
 .navDash {
+  color: @white;
   i {
     color: @white;
   }
 }
 .checkLanguage {
-  margin-right: 20px;
+  width: 120px;
+  margin-right: 30px;
 }

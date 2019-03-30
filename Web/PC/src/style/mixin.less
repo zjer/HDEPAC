@@ -1,5 +1,6 @@
 @blue: #0064be;
 @white: #ffffff;
+@bdc: #DCDFE6;
 @bc: #F5F5F5;
 
 // 背景图片地址和大小
@@ -62,4 +63,19 @@
 .fj(@type: space-between){
   display: flex;
   justify-content: @type;
+}
+
+//设置圆角
+.brs(@width){
+  -webkit-border-radius: @width;
+  -moz-border-radius: @width;
+  border-radius: @width;
+}
+
+//设置border
+.bdt {
+  border-top: 1px solid @bdc;
+}
+.bdb {
+  border-bottom: 1px solid @bdc;
 }
