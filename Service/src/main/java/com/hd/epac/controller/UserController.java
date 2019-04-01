@@ -34,14 +34,22 @@ public class UserController {
         ValidateCodeUtil codeUtil = new ValidateCodeUtil(120, 40, 4, 100);
         session.setAttribute("code", codeUtil.getCode());
         codeUtil.write(response.getOutputStream());
-
+        System.out.println(session.getAttribute("code").toString().toLowerCase());
         return null;
     }
 
     @PostMapping(value = "/login")
     @ResponseBody
-    public ResultUtil CheckLogin(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, HttpServletRequest request, HttpServletResponse response) {
+    public ResultUtil CheckLogin(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Object objCode = session.getAttribute("code");
+        System.out.println(objCode);
+        System.out.println(code);
         System.out.println(username + ',' + password);
+        String _code = objCode.toString().toLowerCase();
+        if(!code.equals(_code)){
+            return ResultUtil.error("验证码错误，请重新输入！");
+        }
         User user = userService.CheckLogin(username, password);
         if (user == null) {
             return ResultUtil.error("用户名或者密码不正确，请重新输入！");

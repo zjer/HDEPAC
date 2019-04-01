@@ -2,7 +2,9 @@ package com.hd.epac.dao;
 
 import com.hd.epac.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface UserDao {
     int deleteByPrimaryKey(Integer userid);
 

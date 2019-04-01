@@ -8,13 +8,14 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @MapperScan(basePackages = {"com.hd.epac.dao"})
 @ComponentScan(basePackages = {"com.hd.epac.*"})
 @ServletComponentScan
-public class EpacApplication extends WebMvcConfigurerAdapter {
+public class EpacApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
         SpringApplication.run(EpacApplication.class, args);
