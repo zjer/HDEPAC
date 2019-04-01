@@ -118,9 +118,9 @@
       setLanguage() {
         this.$refs['ruleForm'].resetFields();
         if (this.ruleForm.language === 'en_US') {
-          this.$i18n.locale = "en_US";
+          this.$i18n.locale = 'en_US';
         } else {
-          this.$i18n.locale = "zh_CN";
+          this.$i18n.locale = 'zh_CN';
         }
         setLocal('lang', this.ruleForm.language);
         this.resetLabelWidth();
@@ -136,7 +136,10 @@
             if (res.data.state) {
               setLocal('username', res.data.rows.username);
               console.log(res);
+              let token = Base64.encode(res.data.rows.username + res.data.rows.password + new Date());
+              setLocal('token', token);
               this.$router.push('manage');
+              this.setCode();
             } else {
               this.setCode();
             }

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import { getStore, setStore } from '../config/mUtils';
+  import { getLocal, setLocal } from '../config/mUtils';
   export default {
     data() {
       return {
@@ -41,8 +41,8 @@
     computed: {
     },
     created() {
-      if (getStore('isShowMenu') && getStore('isShowMenu') != null && getStore('isShowMenu') != "") {
-        this.isShowMenu = getStore('isShowMenu')
+      if (getLocal('isShowMenu') && getLocal('isShowMenu') != null && getLocal('isShowMenu') != "") {
+        this.isShowMenu = getLocal('isShowMenu')
       } else {
         this.isShowMenu = 'true'
       }
@@ -56,7 +56,7 @@
         else{
           this.isShowMenu = 'true';
         }
-        setStore('isShowMenu',this.isShowMenu);
+        setLocal('isShowMenu',this.isShowMenu);
         if(this.isShowMenu == 'true'){
           setTimeout(function() {
             document.getElementsByClassName('breadcrumb')[0].style.left = '150px';

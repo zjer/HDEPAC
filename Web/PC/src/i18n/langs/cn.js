@@ -18,6 +18,7 @@ module.exports =  {
   setting: '设置',
   modifyPW: '修改密码',
   logout: '退出',
+  logoutSuccess: '退出成功！',
   newPassword: '新密码',
   confirmPassword: '确认密码',
   cancel: '取消',

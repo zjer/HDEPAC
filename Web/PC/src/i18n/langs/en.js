@@ -18,6 +18,7 @@ module.exports =  {
   setting: 'Setting',
   modifyPW: 'ModifyPW',
   logout: 'Logout',
+  logoutSuccess: 'Logout Success!',
   newPassword: 'New Password',
   confirmPassword: 'Confirm Password',
   cancel: 'Cancel',

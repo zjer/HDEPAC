@@ -7,7 +7,7 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item  command="changePW" divided>{{$t('message.modifyPW')}}</el-dropdown-item>
-          <el-dropdown-item  command="singout" divided>{{$t('message.logout')}}</el-dropdown-item>
+          <el-dropdown-item  command="signOut" divided>{{$t('message.logout')}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <el-select v-model="curLanguage" class="checkLanguage" @change="setLanguage">
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-  import { getStore, setStore, getLocal, setLocal } from "../config/mUtils";
+  import { setLocal, getLocal, removeLocal } from "../config/mUtils";
   import en from '../i18n/langs/en';
   import cn from '../i18n/langs/cn';
 
@@ -62,17 +62,17 @@
         }
       };
       return {
-        isShowMenu: getStore('isShowMenu'),
-        curLanguage: getLocal('language'),
+        isShowMenu: getLocal('isShowMenu'),
+        curLanguage: getLocal('lang'),
         userName: getLocal('username'),
         dialogVisible: false,
         labelW: 0 + 'px',
         ruleForm: {
-          newPassword:"",
-          newPasswordagain:""
+          newPassword: '',
+          newPasswordagain: ''
         },
         rules:{
-          newPassword: [{ required: true, message:this.$t('message.Input')+this.$t('message.NewPassword'), trigger: "change" }],
+          newPassword: [{ required: true, message:this.$t('message.Input')+this.$t('message.NewPassword'), trigger: 'change' }],
           newPasswordagain: [{required: true, validator: validatePass2, trigger: 'change' }]
         },
         languageOptions: [
@@ -83,10 +83,13 @@
     },
     created() {
       this.resetLabelWidth();
-      if (getLocal('language') === 'en_US') {
-        this.$i18n.locale = "en_US";
+      if (getLocal('lang') === 'en_US') {
+        this.$i18n.locale = 'en_US';
       } else {
-        this.$i18n.locale = "zh_CN";
+        this.$i18n.locale = 'zh_CN';
+      }
+      if (!getLocal('token')) {
+        this.$router.push('/');
       }
     },
     watch:{
@@ -124,14 +127,14 @@
         }
       },
       async handleCommand(command) {
-        if (command === "singout") {
-          sessionStorage.removeItem("token");
+        if (command === 'signOut') {
+          removeLocal('token');
           this.$message({
-            message: this.$t('message.Success'),
-            type: "success"
+            message: this.$t('message.logoutSuccess'),
+            type: 'success'
           });
-          this.$router.push("/");
-        } else if (command === "changePW") {
+          this.$router.push('/');
+        } else if (command === 'changePW') {
           this.dialogVisible=true;
         }
       },
@@ -147,32 +150,32 @@
         });
       },
       setLanguage() {
-        if (this.ruleForm.language === 'en_US') {
-          this.$i18n.locale = "en_US";
+        if (this.curLanguage === 'en_US') {
+          this.$i18n.locale = 'en_US';
         } else {
-          this.$i18n.locale = "zh_CN";
+          this.$i18n.locale = 'zh_CN';
         }
         setLocal('lang', this.curLanguage);
       },
-      async changePwd(formname){
+      async changePwd(){
         const res = await ModPassword({
-          userId: sessionStorage.getItem("Id"),
+          userId: sessionStorage.getItem('Id'),
           password: this.ruleForm.newPassword
         });
         if(res.Flag){
           this.$message({
             message: this.$t('message.Success'),
-            type: "success"
+            type: 'success'
           });
           this.$nextTick(function () {
-            this.$refs[formname].resetFields();
+            this.$refs['ruleForm'].resetFields();
           });
         }
       },
       cancel(){
         this.dialogVisible = false;
         this.$nextTick(function () {
-          this.$refs[formname].resetFields();
+          this.$refs['ruleForm'].resetFields();
         });
       }
     }
