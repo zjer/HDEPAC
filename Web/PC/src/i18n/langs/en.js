@@ -1,4 +1,5 @@
 module.exports =  {
+  userLogin: 'UserLogin',
   account: 'Account',
   password: 'Password',
   validateCode: 'VCode',
@@ -6,6 +7,11 @@ module.exports =  {
   login: 'Login',
   chinese: '中文',
   english: 'English',
+  inputUsername: 'Please Input Username',
+  inputPassword: 'Please Input Password',
+  inputVCode: 'Please Input VCode',
+  len5to10: '5 To 10 Characters In Length',
+  len4: '4 Characters In Length',
   home: 'Home',
   list: 'List',
   chart: 'Chart',

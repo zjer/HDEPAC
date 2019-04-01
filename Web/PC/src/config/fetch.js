@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { baseUrl } from "./env";
-import { Message } from 'element-ui';  //element库的消息提示，可以不用
+import { Message } from 'element-ui';
+
+axios.defaults.withCredentials = true;
 
 //创建axios实例
 var service = axios.create({
@@ -10,7 +12,7 @@ var service = axios.create({
     'content-type': 'application/json',
     "token":'14a1347f412b319b0fef270489f'
   }
-})
+});
 
 export default {
   ajax(url, param, method) {
@@ -22,9 +24,9 @@ export default {
       }, { emulateJSON: true }).then(res => {
         //axios返回的是一个promise对象
         let result = res.data;
-        console.log(result)
+        console.log(result);
         if (result.state) {
-          callback(res);   //cback在promise执行器内部
+          callback(res);   //callback在promise执行器内部
           Message({
             showClose: true,
             message: result.message,
@@ -38,19 +40,12 @@ export default {
           });
         }
       }).catch(err => {
-        if (!err.response) {
-          //Message是element库的组件，可以去掉
-          Message({
-            showClose: true,
-            message: '请求错误',
-            type: 'error'
-          });
-        } else {
-          reject(err.response);
-          console.log(err.response, '异常2')
-        }
+        Message({
+          showClose: true,
+          message: err.response,
+          type: 'error'
+        });
       })
-
     })
   }
 }

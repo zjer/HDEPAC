@@ -1,4 +1,5 @@
 module.exports =  {
+  userLogin: '用户登录',
   account: '用户名',
   password: '密码',
   validateCode: '验证码',
@@ -6,6 +7,11 @@ module.exports =  {
   login: '登录',
   chinese: '中文',
   english: 'English',
+  inputUsername: '请输入用户名',
+  inputPassword: '请输入密码',
+  inputVCode: '请输入验证码',
+  len5to10: '长度为 5 到 10 个字符',
+  len4: '长度为4 个字符',
   home: '首页',
   list: '列表',
   chart: '图表',

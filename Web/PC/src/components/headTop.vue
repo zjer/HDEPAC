@@ -6,7 +6,7 @@
           <span>{{ userName }}<i class="el-icon-caret-bottom el-icon--right"></i></span>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item  command="changePW" divided style="border-top:0">{{$t('message.modifyPW')}}</el-dropdown-item>
+          <el-dropdown-item  command="changePW" divided>{{$t('message.modifyPW')}}</el-dropdown-item>
           <el-dropdown-item  command="singout" divided>{{$t('message.logout')}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -66,7 +66,7 @@
         curLanguage: getLocal('language'),
         userName: getLocal('username'),
         dialogVisible: false,
-        labelW: 0+'px',
+        labelW: 0 + 'px',
         ruleForm: {
           newPassword:"",
           newPasswordagain:""
@@ -103,21 +103,19 @@
     },
     methods: {
       resetLabelWidth() {
-        if (getLocal('language') == 'en_US') {
+        if (getLocal('lang') === 'en_US') {
           this.labelW = 160+'px';
         } else {
           this.labelW = 85+'px';
         }
       },
       getMenuStatus(isShowMenu){
-        if(isShowMenu=='true'||isShowMenu==null){
-          // document.getElementsByClassName('kpi-container')[0].style.marginLeft = '0'
+        if(isShowMenu === 'true' || isShowMenu === null){
           document.getElementsByClassName('breadcrumb')[0].style.left = '150px';
           document.getElementsByClassName('menu-btn')[0].style.left = '175px';
           document.getElementsByClassName('container')[0].style.marginLeft = '150px';
           document.getElementsByClassName('el-aside')[0].style.maxWidth = '150px';
         } else {
-          // document.getElementsByClassName('kpi-container')[0].style.marginLeft = '200px';
           document.getElementsByClassName('breadcrumb')[0].style.left = '54px';
           document.getElementsByClassName('menu-btn')[0].style.left = '60px';
           document.getElementsByClassName('container')[0].style.marginLeft = '64px';
@@ -126,14 +124,14 @@
         }
       },
       async handleCommand(command) {
-        if (command == "singout") {
+        if (command === "singout") {
           sessionStorage.removeItem("token");
           this.$message({
-            type: "success",
-            message: this.$t('message.Success')
+            message: this.$t('message.Success'),
+            type: "success"
           });
           this.$router.push("/");
-        } else if (command == "changePW") {
+        } else if (command === "changePW") {
           this.dialogVisible=true;
         }
       },
@@ -149,24 +147,22 @@
         });
       },
       setLanguage() {
-        setLocal('language', this.curLanguage);
-        if (getLocal('language') == 'zh_CN') {
-          this.$i18n.locale = "zh_CN";
-        } else if (getLocal('language') == 'en_US') {
+        if (this.ruleForm.language === 'en_US') {
           this.$i18n.locale = "en_US";
         } else {
           this.$i18n.locale = "zh_CN";
         }
+        setLocal('lang', this.curLanguage);
       },
       async changePwd(formname){
         const res = await ModPassword({
-          userId:sessionStorage.getItem("Id"),
-          password:this.ruleForm.newPassword
+          userId: sessionStorage.getItem("Id"),
+          password: this.ruleForm.newPassword
         });
         if(res.Flag){
           this.$message({
-            type: "success",
-            message: this.$t('message.Success')
+            message: this.$t('message.Success'),
+            type: "success"
           });
           this.$nextTick(function () {
             this.$refs[formname].resetFields();

@@ -129,33 +129,50 @@ html,body{
 }
 
 .loginBg {
-  background: url("../assets/img/loginBg.jpg") center no-repeat;
-  background-size: contain;
-  .loginForm {
+  .wh(100%, 100vh);
+  .bis('../assets/img/loginBg.jpg');
+  overflow: hidden;
+  .loginContainer {
     .wh(300px, auto);
     padding: 30px;
     .ctt;
     margin-left: 300px;
     background-color: @white;
     .brs(5px);
-    .codeVal {
-      width: 100px;
-      float: left;
+    .loginTitle {
+      font-size: 18px;
+      color: @blue;
+      line-height: 25px;
+      text-align: center;
+      margin-bottom: 15px;
     }
-    .validateCode {
-      width: auto;
-      float: left;
-      margin-left: 10px;
-      line-height: 40px;
-      .authCode {
-        .wh(80px, 25px);
-        border: 1px solid #999999;
-        display: inline-block;
-        vertical-align: middle;
-      }
-    }
-    .el-select {
+    .loginForm {
       width: 100%;
+      margin: 0 auto;
+      .el-form-item {
+        .codeVal {
+          width: 100px;
+          float: left;
+        }
+        .validateCode {
+          width: auto;
+          float: left;
+          margin-left: 10px;
+          line-height: 40px;
+          .authCode {
+            .wh(80px, 25px);
+            border: 1px solid #999999;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+        .el-select {
+          width: 100%;
+        }
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }
