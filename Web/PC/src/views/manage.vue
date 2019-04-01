@@ -8,18 +8,30 @@
           <i class="iconfont icon-shouye-kong"></i>
           <span slot="title">{{ $t('message.home') }}</span>
         </el-menu-item>
-        <el-menu-item index="lists">
-          <i class="iconfont icon-zhushuju"></i>
-          <span slot="title">{{ $t('message.list') }}</span>
-        </el-menu-item>
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="iconfont icon-zhushuju"></i>
+            <span slot="title">{{ $t('message.masterData') }}</span>
+          </template>
+          <el-menu-item index="lists">
+            <i class="iconfont icon-renyuanzu-kong"></i>
+            <span slot="title">{{ $t('message.chart') }}</span>
+          </el-menu-item>
+        </el-submenu>
         <el-menu-item index="charts">
           <i class="iconfont icon-tubiaofenxi"></i>
           <span slot="title">{{ $t('message.chart') }}</span>
         </el-menu-item>
-        <el-menu-item index="settings">
-          <i class="iconfont icon-shezhi-kong"></i>
-          <span slot="title">{{ $t('message.setting') }}</span>
-        </el-menu-item>
+        <el-submenu>
+          <template slot="title">
+            <i class="iconfont icon-shezhi-kong"></i>
+            <span slot="title">{{ $t('message.systemSetting') }}</span>
+          </template>
+          <el-menu-item index="settings">
+            <i class="iconfont icon-jiaoseshezhi"></i>
+            <span slot="title">{{ $t('message.systemSetting') }}</span>
+          </el-menu-item>
+        </el-submenu>
       </el-menu>
     </el-aside>
     <el-container class="container">
@@ -59,11 +71,11 @@
         setLocal('isShowMenu',this.isShowMenu);
         if(this.isShowMenu == 'true'){
           setTimeout(function() {
-            document.getElementsByClassName('breadcrumb')[0].style.left = '150px';
-            document.getElementsByClassName('menu-btn')[0].style.left = '175px';
-            document.getElementsByClassName('container')[0].style.marginLeft = '150px';
-            document.getElementsByClassName('top-head')[0].style.marginLeft = '150px';
-            document.getElementsByClassName('el-aside')[0].style.maxWidth = '150px';
+            document.getElementsByClassName('breadcrumb')[0].style.left = '180px';
+            document.getElementsByClassName('menu-btn')[0].style.left = '205px';
+            document.getElementsByClassName('container')[0].style.marginLeft = '180px';
+            document.getElementsByClassName('top-head')[0].style.marginLeft = '180px';
+            document.getElementsByClassName('el-aside')[0].style.maxWidth = '180px';
           }, 280);
         } else {
           document.getElementsByClassName('breadcrumb')[0].style.left = '74px';

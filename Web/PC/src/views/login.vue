@@ -10,12 +10,12 @@
           <el-input v-model="ruleForm.password"></el-input>
         </el-form-item>
         <el-form-item :label="$t('message.validateCode')" prop="validateCode">
-          <el-input v-model="ruleForm.validateCode" maxlength="4" class="codeVal"></el-input>
+          <el-input v-model="ruleForm.validateCode" maxlength="4" class="codeVal" @keyup.enter.native="onSubmit"></el-input>
           <div class="validateCode">
             <img class="authCode" :src="codePath" @click="setCode" />
           </div>
         </el-form-item>
-        <el-form-item :label="$t('message.language')">
+        <el-form-item :label="$t('message.language')" class="choseLanguage">
           <el-select v-model="ruleForm.language" @change="setLanguage">
             <el-option
               v-for="item in languageOptions"
@@ -24,6 +24,9 @@
               :value="item.code">
             </el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item class="remember">
+          <el-checkbox v-model="ruleForm.remember">{{ $t('message.remember') }}</el-checkbox>
         </el-form-item>
         <el-form-item>
           <el-tooltip class="item" effect="dark" :content="$t('message.login')" placement="top">
@@ -74,6 +77,7 @@
           password: '',
           validateCode: '',
           language: getLocal('lang') ? getLocal('lang') : 'zh_CN',
+          remember: getLocal('remember') ? getLocal('remember') : false
         },
         rules: {
           username: [
@@ -137,6 +141,7 @@
               setLocal('username', res.data.rows.username);
               console.log(res);
               let token = Base64.encode(res.data.rows.username + res.data.rows.password + new Date());
+              setLocal('lang', this.ruleForm.language);
               setLocal('token', token);
               this.$router.push('manage');
               this.setCode();
@@ -144,6 +149,9 @@
               this.setCode();
             }
           })
+      },
+      onSubmit() {
+        this.login();
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {

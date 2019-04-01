@@ -18,7 +18,7 @@
           :value="item.code"></el-option>
       </el-select>
     </div>
-    <el-dialog class="changePW" :title="$t('message.modifyPW')" :visible.sync="dialogVisible" width="500px">
+    <el-dialog :title="$t('message.modifyPW')" :visible.sync="dialogVisible" width="500px">
       <el-form :label-width="labelW" :model="ruleForm" ref="ruleForm" :rules="rules">
         <el-form-item :label="$t('message.newPassword')" prop="newPassword">
           <el-input clearable type="password" v-model="ruleForm.newPassword"></el-input>
@@ -46,8 +46,6 @@
 
 <script>
   import { setLocal, getLocal, removeLocal } from "../config/mUtils";
-  import en from '../i18n/langs/en';
-  import cn from '../i18n/langs/cn';
 
   export default {
     name: 'headTop',
@@ -93,13 +91,6 @@
       }
     },
     watch:{
-      cn: function(){
-        //this.getLanguageResource();
-      },
-      en: function(){
-        // this.getLanguageResource();
-      },
-      deep: true
     },
     mounted() {
       this.getMenuStatus(this.isShowMenu);
@@ -107,17 +98,17 @@
     methods: {
       resetLabelWidth() {
         if (getLocal('lang') === 'en_US') {
-          this.labelW = 160+'px';
+          this.labelW = 130+'px';
         } else {
           this.labelW = 85+'px';
         }
       },
       getMenuStatus(isShowMenu){
         if(isShowMenu === 'true' || isShowMenu === null){
-          document.getElementsByClassName('breadcrumb')[0].style.left = '150px';
-          document.getElementsByClassName('menu-btn')[0].style.left = '175px';
-          document.getElementsByClassName('container')[0].style.marginLeft = '150px';
-          document.getElementsByClassName('el-aside')[0].style.maxWidth = '150px';
+          document.getElementsByClassName('breadcrumb')[0].style.left = '180px';
+          document.getElementsByClassName('menu-btn')[0].style.left = '205px';
+          document.getElementsByClassName('container')[0].style.marginLeft = '180px';
+          document.getElementsByClassName('el-aside')[0].style.maxWidth = '180px';
         } else {
           document.getElementsByClassName('breadcrumb')[0].style.left = '54px';
           document.getElementsByClassName('menu-btn')[0].style.left = '60px';
@@ -142,7 +133,7 @@
         this.$refs[formname].validate((valid) => {
           if (valid) {
             this.dialogVisible = false;
-            this.changePwd(formname);
+            this.resetLabelWidth();
           } else {
             console.log('error submit!!');
             return false;
@@ -156,6 +147,7 @@
           this.$i18n.locale = 'zh_CN';
         }
         setLocal('lang', this.curLanguage);
+        this.resetLabelWidth();
       },
       async changePwd(){
         const res = await ModPassword({
