@@ -90,7 +90,7 @@
             { required: true, validator: validateVCode, trigger: "blur" }
           ]
         },
-        codePath: baseUrl + '/user/getAuthCode',
+        codePath: '',
         languageOptions: [
           {code: 'zh_CN', text: this.$t('message.chinese')},
           {code: 'en_US', text: this.$t('message.english')}
@@ -98,6 +98,7 @@
       }
     },
     created() {
+      this.setCode();
       this.resetLabelWidth();
       if (getLocal('lang') === 'en_US') {
         this.$i18n.locale = "en_US";

@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping(value = "/login")
     @ResponseBody
-    public ResultUtil CheckLogin(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response) {
+    public ResultUtil CheckLogin(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "code", required = false) String code, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Object objCode = session.getAttribute("code");
         System.out.println(objCode);

@@ -11,7 +11,7 @@ var service = axios.create({
   baseURL: baseUrl,
   timeout: 5000,
   headers: {
-    'content-type': 'application/json',
+    'content-type': 'application/x-www-form-urlencoded',
     "token": getLocal('token') ? getLocal('token') : '14a1347f412b319b0fef270489f'
   }
 });
@@ -22,7 +22,7 @@ export default {
       service({
         method: method,
         url,
-        params: param,
+        data: qs.stringify(param),
       }, { emulateJSON: true }).then(res => {
         //axios返回的是一个promise对象
         let result = res.data;
