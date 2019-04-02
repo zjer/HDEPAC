@@ -15,7 +15,7 @@
             <img class="authCode" :src="codePath" @click="setCode" />
           </div>
         </el-form-item>
-        <el-form-item :label="$t('message.language')" class="choseLanguage">
+        <el-form-item :label="$t('message.language')" prop="language" class="choseLanguage">
           <el-select v-model="ruleForm.language" @change="setLanguage">
             <el-option
               v-for="item in languageOptions"
@@ -25,8 +25,8 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="remember">
-          <el-checkbox v-model="ruleForm.remember">{{ $t('message.remember') }}</el-checkbox>
+        <el-form-item prop="remember" class="remember">
+          <el-checkbox v-model="ruleForm.remember" @change="setRemember">{{ $t('message.remember') }}</el-checkbox>
         </el-form-item>
         <el-form-item>
           <el-tooltip class="item" effect="dark" :content="$t('message.login')" placement="top">
@@ -40,7 +40,7 @@
 
 <script>
   import { baseUrl } from "../config/env";
-  import { setLocal, getLocal } from "../config/mUtils";
+  import { setLocal, getLocal, removeLocal, setStore } from "../config/mUtils";
 
   export default {
     name: 'login',
@@ -73,11 +73,11 @@
       return {
         labelW: 0 + 'px',
         ruleForm: {
-          username: '',
+          username: getLocal('username') ? getLocal('username') : '',
           password: '',
           validateCode: '',
           language: getLocal('lang') ? getLocal('lang') : 'zh_CN',
-          remember: getLocal('remember') ? getLocal('remember') : false
+          remember: getLocal('remember') === 'true' ? true : false
         },
         rules: {
           username: [
@@ -117,7 +117,7 @@
       setCode() {
         let random = Math.random() * 10000;
         random = Base64.encode(parseInt(random));
-        this.codePath = baseUrl + '/user/getAuthCode/?' + random;
+        this.codePath = baseUrl + '/user/getAuthCode?' + random;
         console.log(this.codePath);
       },
       setLanguage() {
@@ -130,6 +130,15 @@
         setLocal('lang', this.ruleForm.language);
         this.resetLabelWidth();
       },
+      setRemember() {
+        let remember = this.ruleForm.remember;
+        setLocal('remember', remember);
+        if (remember === true) {
+          setLocal('username', this.ruleForm.username);
+        } else {
+          removeLocal('username');
+        }
+      },
       login() {
         let param = {
           username: this.ruleForm.username.trim(),
@@ -139,11 +148,11 @@
         this.fetch.ajax('/user/login', param, 'POST')
           .then(res => {
             if (res.data.state) {
-              setLocal('username', res.data.rows.username);
               console.log(res);
               let token = Base64.encode(res.data.rows.username + res.data.rows.password + new Date());
+              setStore('token', token);
+              setStore('username', res.data.rows.username);
               setLocal('lang', this.ruleForm.language);
-              setLocal('token', token);
               this.$router.push('manage');
               this.setCode();
             } else {

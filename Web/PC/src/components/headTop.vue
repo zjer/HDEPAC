@@ -45,7 +45,7 @@
 </template>
 
 <script>
-  import { setLocal, getLocal, removeLocal } from "../config/mUtils";
+  import { setLocal, getLocal, removeLocal, getStore } from "../config/mUtils";
 
   export default {
     name: 'headTop',
@@ -62,7 +62,7 @@
       return {
         isShowMenu: getLocal('isShowMenu'),
         curLanguage: getLocal('lang'),
-        userName: getLocal('username'),
+        userName: getStore('username'),
         dialogVisible: false,
         labelW: 0 + 'px',
         ruleForm: {
@@ -86,7 +86,7 @@
       } else {
         this.$i18n.locale = 'zh_CN';
       }
-      if (!getLocal('token')) {
+      if (!getStore('token')) {
         this.$router.push('/');
       }
     },

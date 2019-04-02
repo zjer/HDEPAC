@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import { baseUrl } from "./env";
-import { getLocal } from "./mUtils";
+import { getStore } from "./mUtils";
 import { Message } from 'element-ui';
 
 axios.defaults.withCredentials = true;
@@ -12,7 +12,7 @@ var service = axios.create({
   timeout: 5000,
   headers: {
     'content-type': 'application/x-www-form-urlencoded',
-    "token": getLocal('token') ? getLocal('token') : '14a1347f412b319b0fef270489f'
+    "token": getStore('token') ? getStore('token') : '14a1347f412b319b0fef270489f'
   }
 });
 

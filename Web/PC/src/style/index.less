@@ -126,6 +126,15 @@ html,body{
   }
 }
 
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: @blue;
+  border-color: @blue;
+}
+
+.el-checkbox__input.is-checked+.el-checkbox__label {
+  color: @blue;
+}
+
 .el-dropdown-menu {
   margin: 0;
   .el-dropdown-menu__item {
