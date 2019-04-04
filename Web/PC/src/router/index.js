@@ -4,6 +4,7 @@ import Login from '@/views/login'
 import Manage from '@/views/manage'
 import Home from '@/views/home'
 import Lists from '@/views/lists'
+import userManage from '@/views/master/userManage'
 import Charts from '@/views/charts'
 import Settings from '@/views/settings'
 
@@ -23,20 +24,29 @@ export default new Router({
         {
           path: '/home',
           name: 'home',
-          component: Home
+          component: Home,
+          meta: ['home']
         }, {
           path: '/lists',
           name: 'lists',
-          component: Lists
+          component: Lists,
+          meta: ['aa', 'dd']
         }, {
           path: '/charts',
           name: 'charts',
-          component: Charts
+          component: Charts,
+          meta: ['aa', 'dd']
         }, {
           path: '/settings',
           name: 'settings',
-          component: Settings
-        }
+          component: Settings,
+          meta: ['aa', 'dd']
+        }, {
+          path: '/userManage',
+          name: 'userManage',
+          component: userManage,
+          meta: ['aa', 'dd']
+        },
       ]
     }
   ]

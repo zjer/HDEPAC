@@ -160,6 +160,15 @@ html,body{
   .bdt();
 }
 
+.breadcrumb {
+  position: fixed;
+  top: 60px;
+  padding: 20px;
+  .el-breadcrumb__inner, .el-breadcrumb__separator {
+    line-height: 20px;
+  }
+}
+
 .loginBg {
   .wh(100%, 100vh);
   .bis('../assets/img/loginBg.jpg');
@@ -225,7 +234,7 @@ html,body{
   height: 24px;
   z-index: 1000;
   cursor: pointer;
-  font-size: 24px!important;
+  font-size: 20px!important;
   color: @white;
 }
 

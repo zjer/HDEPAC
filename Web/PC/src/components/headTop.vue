@@ -110,7 +110,7 @@
           document.getElementsByClassName('container')[0].style.marginLeft = '180px';
           document.getElementsByClassName('el-aside')[0].style.maxWidth = '180px';
         } else {
-          document.getElementsByClassName('breadcrumb')[0].style.left = '54px';
+          document.getElementsByClassName('breadcrumb')[0].style.left = '64px';
           document.getElementsByClassName('menu-btn')[0].style.left = '60px';
           document.getElementsByClassName('container')[0].style.marginLeft = '64px';
           document.getElementsByClassName('top-head')[0].style.marginLeft = '64px';

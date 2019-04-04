@@ -13,7 +13,7 @@
             <i class="iconfont icon-zhushuju"></i>
             <span slot="title">{{ $t('message.masterData') }}</span>
           </template>
-          <el-menu-item index="lists">
+          <el-menu-item index="userManage">
             <i class="iconfont icon-renyuanzu-kong"></i>
             <span slot="title">{{ $t('message.chart') }}</span>
           </el-menu-item>
@@ -78,7 +78,7 @@
             document.getElementsByClassName('el-aside')[0].style.maxWidth = '180px';
           }, 280);
         } else {
-          document.getElementsByClassName('breadcrumb')[0].style.left = '74px';
+          document.getElementsByClassName('breadcrumb')[0].style.left = '64px';
           document.getElementsByClassName('menu-btn')[0].style.left = '90px';
           document.getElementsByClassName('container')[0].style.marginLeft = '64px';
           document.getElementsByClassName('top-head')[0].style.marginLeft = '64px';
