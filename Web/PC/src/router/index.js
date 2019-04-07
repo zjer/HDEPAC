@@ -45,7 +45,7 @@ export default new Router({
           path: '/userManage',
           name: 'userManage',
           component: userManage,
-          meta: ['aa', 'dd']
+          meta: ['masterData', 'userData']
         },
       ]
     }

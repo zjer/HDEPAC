@@ -135,6 +135,33 @@ html,body{
   color: @blue;
 }
 
+.el-switch {
+  .el-switch__core {
+    height: 16px;
+    &:after {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  &.is-checked {
+    .el-switch__core::after {
+      margin-left: -13px;
+    }
+  }
+}
+
+.el-input-number.is-controls-right {
+  .el-input-number__increase, .el-input-number__decrease {
+    line-height: 15px;
+  }
+  .el-input-number__increase {
+    top: 5px;
+  }
+  .el-input-number__decrease {
+    bottom: 5px;
+  }
+}
+
 .el-dropdown-menu {
   margin: 0;
   .el-dropdown-menu__item {
@@ -163,9 +190,12 @@ html,body{
 .breadcrumb {
   position: fixed;
   top: 60px;
-  padding: 20px;
-  .el-breadcrumb__inner, .el-breadcrumb__separator {
-    line-height: 20px;
+  padding: 15px 20px;
+  .el-breadcrumb {
+    font-size: 12px;
+    .el-breadcrumb__inner, .el-breadcrumb__separator {
+      line-height: 20px;
+    }
   }
 }
 
@@ -263,5 +293,49 @@ html,body{
     height: 30px;
     line-height: 30px;
     font-size: 12px;
+  }
+}
+
+.table_container {
+  padding: 20px;
+  background-color: @white;
+  margin: 50px 20px 20px;
+  .brs(5px);
+  .tableBtns {
+    margin-bottom: 10px;
+  }
+  .tableStyle {
+    border: 1px solid #EBEEF5;
+    border-bottom: none;
+    th {
+      padding: 10px 0;
+      font-size: 12px;
+    }
+    tr {
+      &.hover-row {
+        .hoverBtn {
+          background-color: transparent;
+        }
+      }
+      td {
+        padding: 5px 0;
+        font-size: 12px;
+      }
+      .hoverBtn {
+        border: none;
+        &:hover {
+          background-color: @blue;
+          i {
+            color: @white;
+          }
+        }
+      }
+    }
+  }
+  .Pagination {
+    margin-top: 10px;
+    .el-pagination.is-background .el-pager li:not(.disabled).active {
+      background-color: @blue;
+    }
   }
 }

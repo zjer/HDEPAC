@@ -15,14 +15,14 @@
           </template>
           <el-menu-item index="userManage">
             <i class="iconfont icon-renyuanzu-kong"></i>
-            <span slot="title">{{ $t('message.chart') }}</span>
+            <span slot="title">{{ $t('message.userData') }}</span>
           </el-menu-item>
         </el-submenu>
         <el-menu-item index="charts">
           <i class="iconfont icon-tubiaofenxi"></i>
           <span slot="title">{{ $t('message.chart') }}</span>
         </el-menu-item>
-        <el-submenu>
+        <el-submenu index="2">
           <template slot="title">
             <i class="iconfont icon-shezhi-kong"></i>
             <span slot="title">{{ $t('message.systemSetting') }}</span>

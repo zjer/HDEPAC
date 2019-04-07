@@ -2,8 +2,6 @@
   <div>
     <head-top></head-top>
     <el-main>
-      <guide v-if="$store.state.showGuide"></guide>
-      <home-main></home-main>
     </el-main>
   </div>
 </template>
@@ -16,7 +14,7 @@
 
   export default {
     name: 'home',
-    components: {HeadTop, HomeMain, Guide },
+    components: { HeadTop },
     data () {
       return {
         headerTitle: this.$t('home'),
@@ -25,15 +23,15 @@
       }
     },
     computed: {
-      listenGuid() {
+      /*listenGuid() {
         return this.$store.state.showGuide
-      }
+      }*/
     },
     watch: {
-      listenGuid: function (val) {
+      /*listenGuid: function (val) {
         console.log(val)
         this.$store.state.showGuide = val;
-      }
+      }*/
     },
   }
 </script>
