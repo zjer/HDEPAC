@@ -5,84 +5,38 @@
     <id column="userid" jdbcType="INTEGER" property="userid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="registtime" jdbcType="TIMESTAMP" property="registtime" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="birth" jdbcType="VARCHAR" property="birth" />
+    <result column="admin" jdbcType="INTEGER" property="admin" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, password, lasttime
+    userid, username, password, registtime, place, age, birth, admin, state
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from hd_user
-    where userid = #{userid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hd_user
-    where userid = #{userid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.hd.epac.entity.User">
-    insert into hd_user (userid, username, password,
-      lasttime)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{lasttime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hd.epac.entity.User">
-    insert into hd_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userid != null">
-        userid,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="lasttime != null">
-        lasttime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userid != null">
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="lasttime != null">
-        #{lasttime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hd.epac.entity.User">
-    update hd_user
-    <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="lasttime != null">
-        lasttime = #{lasttime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where userid = #{userid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hd.epac.entity.User">
-    update hd_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP}
-    where userid = #{userid,jdbcType=INTEGER}
-  </update>
     <select id="checkLogin" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from hd_user
         where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
     </select>
+
+    <select id="findAllUsers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hd_user
+    </select>
+
+    <insert id="addUser">
+    insert into hd_user (userid, username, password,
+      registtime, place, age,
+      birth, admin, state,
+      sex)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{registtime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+      #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
+      #{sex,jdbcType=INTEGER})
+  </insert>
 </mapper>
