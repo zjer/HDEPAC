@@ -9,8 +9,7 @@ import echarts from 'echarts'
 import i18n from './i18n/i18n'
 import store from './store'
 import fetch from './config/fetch'
-
-Vue.use(ElementUI);
+import { getLocal } from "./config/mUtils";
 
 Vue.config.productionTip = false;
 
@@ -19,12 +18,14 @@ Vue.prototype.$echarts = echarts;
 
 let Base64 = require('js-base64').Base64;
 
+Vue.use(ElementUI);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   i18n,
   store,
-  components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  components: { App }
 })
