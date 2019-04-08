@@ -19,13 +19,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int AddUser(Integer userid, String username, String password, Timestamp registtime, String place, Integer age, String birth, Integer admin, Integer state, Integer sex) {
-        return userDao.addUser(userid, username, password, registtime, place, age, birth, admin, state, sex);
+    public int AddUser(Integer userid, String username, String password, Timestamp registtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender) {
+        return userDao.addUser(userid, username, password, registtime, place, age, birth, admin, state, gender);
     }
 
     @Override
-    public int UpdateUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer sex) {
-        return userDao.updateUser(userid, username, password, place, age, birth, admin, state, sex);
+    public int UpdateUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer gender) {
+        return userDao.updateUser(userid, username, password, place, age, birth, admin, state, gender);
     }
 
     @Override

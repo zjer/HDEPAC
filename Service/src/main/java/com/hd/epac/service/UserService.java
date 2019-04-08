@@ -10,10 +10,10 @@ public interface UserService {
     public User CheckLogin(String username, String password);
 
     //新增用户
-    public int AddUser(Integer userid, String username, String password, Timestamp registtime, String place, Integer age, String birth, Integer admin, Integer state, Integer sex);
+    public int AddUser(Integer userid, String username, String password, Timestamp registtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
 
     //更新用户
-    public int UpdateUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer sex);
+    public int UpdateUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
 
     //获取所有用户
     public List<User> FindAllUsers();

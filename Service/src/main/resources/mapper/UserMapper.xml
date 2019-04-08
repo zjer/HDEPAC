@@ -11,10 +11,10 @@
     <result column="birth" jdbcType="VARCHAR" property="birth" />
     <result column="admin" jdbcType="INTEGER" property="admin" />
     <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, password, registtime, place, age, birth, admin, state
+    userid, username, password, registtime, place, age, birth, admin, state, gender
   </sql>
     <select id="checkLogin" resultMap="BaseResultMap">
         select
@@ -27,11 +27,11 @@
     insert into hd_user (userid, username, password,
       registtime, place, age,
       birth, admin, state,
-      sex)
+      gender)
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{registtime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
       #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
-      #{sex,jdbcType=INTEGER})
+      #{gender,jdbcType=INTEGER})
   </insert>
 
   <update id="updateUser">
@@ -43,7 +43,7 @@
       birth = #{birth,jdbcType=VARCHAR},
       admin = #{admin,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
-      sex = #{sex,jdbcType=INTEGER}
+      gender = #{gender,jdbcType=INTEGER}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 
