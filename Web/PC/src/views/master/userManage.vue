@@ -170,7 +170,7 @@
     data () {
       return {
         isloading: true,
-        tableHeight: 1030 + 'px',
+        tableHeight: 0 + 'px',
         tableData: [],
         PageIndex: 1,
         PageSize: 20,
@@ -219,11 +219,27 @@
     },
     created() {
       this.getUsers();
+      this.watchHeight();
       this.resetLabelWidth();
     },
     watch:{
     },
+    mounted() {
+      setTimeout(() => {
+        let winHeight = document.documentElement.clientHeight - 250;
+        this.tableHeight = winHeight;
+      }, 1);
+    },
     methods: {
+      watchHeight() {
+        setTimeout(() => {
+          const that = this;
+          window.onresize = function temp() {
+            let winHeight = document.documentElement.clientHeight - 250;
+            that.tableHeight = winHeight;
+          };
+        }, 1);
+      },
       resetLabelWidth() {
         if (getLocal('lang') === 'en_US') {
           this.labelWidth = 80 + 'px';

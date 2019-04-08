@@ -102,4 +102,20 @@ public class User {
     public void setSex(Integer sex) {
         this.sex = sex;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", registtime=" + registtime +
+                ", place='" + place + '\'' +
+                ", age=" + age +
+                ", birth='" + birth + '\'' +
+                ", admin=" + admin +
+                ", state=" + state +
+                ", sex=" + sex +
+                '}';
+    }
 }
