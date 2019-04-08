@@ -62,6 +62,22 @@ public class UserController {
         }
     }
 
+    @PostMapping(value = "/addUser")
+    @ResponseBody
+    public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "registtime", required = false) Timestamp registtime, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "sex", required = false) Integer sex) {
+        System.out.println(userid + ',' + username + ',' + password + ',' + registtime + ',' + place + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + sex);
+        Object user = userService.AddUser(userid, username, password, registtime, place, age, birth, admin, state, sex);
+        return ResultUtil.success("添加成功！", user);
+    }
+
+    @PostMapping(value = "/updateUser")
+    @ResponseBody
+    public ResultUtil UpdateUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "sex", required = false) Integer sex) {
+        System.out.println(userid + ',' + username + ',' + password + ',' + place + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + sex);
+        Object user = userService.UpdateUser(userid, username, password, place, age, birth, admin, state, sex);
+        return ResultUtil.success("修改成功！", user);
+    }
+
     @PostMapping(value = "/getUsers")
     @ResponseBody
     public ResultUtil FindAllUsers(@RequestParam(value = "pageIndex", required = false) Integer pageIndex, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -70,13 +86,5 @@ public class UserController {
         PageInfo pageInfo = new PageInfo(list);
         System.out.println(pageInfo);
         return ResultUtil.success("查询成功！", pageInfo);
-    }
-
-    @PostMapping(value = "/addUser")
-    @ResponseBody
-    public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "registtime", required = false) Timestamp registtime, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "sex", required = false) Integer sex) {
-        System.out.println(userid + ',' + username + ',' + password + ',' + registtime + ',' + place + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + sex);
-        Object user = userService.AddUser(userid, username, password, registtime, place, age, birth, admin, state, sex);
-        return ResultUtil.success("添加成功！", user);
     }
 }
