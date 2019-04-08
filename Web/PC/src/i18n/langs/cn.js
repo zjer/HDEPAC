@@ -56,6 +56,9 @@ let cn = {
     no: '否',
     choseDate: '选择日期',
     choseDateTime: '选择日期时间',
+    choseProvince: '选择省份',
+    choseCity: '选择市',
+    choseArea: '选择区',
   },
 
   ...zhLocale

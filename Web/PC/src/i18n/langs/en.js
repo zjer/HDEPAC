@@ -56,6 +56,9 @@ let en = {
     no: 'No',
     choseDate: 'Chose Date',
     choseDateTime: 'Chose Date Time',
+    choseProvince: 'Chose Province',
+    choseCity: 'Chose City',
+    choseArea: 'Chose Area',
   },
 
   ...enLocale

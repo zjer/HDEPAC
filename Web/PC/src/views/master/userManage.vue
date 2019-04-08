@@ -81,7 +81,7 @@
           :total="count">
         </el-pagination>
       </div>
-      <el-dialog :title="editTitle" :visible.sync="dialogVisible" width="600px" :close-on-click-modal='false'>
+      <el-dialog :title="editTitle" :visible.sync="dialogVisible" width="700px" :close-on-click-modal='false'>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" :label-width="labelWidth">
           <el-form-item :label="$t('message.account')" prop="username">
             <el-input v-model="ruleForm.username"></el-input>
@@ -97,7 +97,6 @@
               :placeholder="$t('message.choseDateTime')">
             </el-date-picker>
           </el-form-item>
-          {{ this.ruleForm.registtime }}
           <el-form-item :label="$t('message.age')" prop="age">
             <el-input-number v-model="ruleForm.age" controls-position="right" :min="18" :max="60"></el-input-number>
           </el-form-item>
@@ -111,20 +110,28 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item :label="$t('message.place')" prop="place">
-            <el-select v-model="ruleForm.place.province" placeholder="请选择">
+            <el-select v-model="ruleForm.place.province" :placeholder="$t('message.choseProvince')" @change="choseProvince">
               <el-option
                 v-for="item in provinceOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item.code"
+                :label="item.name"
+                :value="item.name">
               </el-option>
             </el-select>
-            <el-select v-model="ruleForm.place.city" placeholder="请选择">
+            <el-select v-model="ruleForm.place.city" :placeholder="$t('message.choseCity')" @change="choseCity" @focus="getCity">
               <el-option
                 v-for="item in cityOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item.code"
+                :label="item.name"
+                :value="item.name">
+              </el-option>
+            </el-select>
+            <el-select v-model="ruleForm.place.area" :placeholder="$t('message.choseArea')" @focus="getArea">
+              <el-option
+                v-for="item in areaOptions"
+                :key="item.code"
+                :label="item.name"
+                :value="item.name">
               </el-option>
             </el-select>
           </el-form-item>
@@ -162,7 +169,8 @@
 
 <script>
   import HeadTop from '../../components/headTop';
-  import { getLocal } from "../../config/mUtils";
+  import { getLocal, formatDate } from "../../config/mUtils";
+  import axios from 'axios'
 
   export default {
     name: "userManage",
@@ -180,21 +188,14 @@
         dialogVisible: false,
         labelWidth: 0 + 'px',
         isnew: 0,
-        provinceOptions: [
-          {
-            label: '江苏',
-            value: '江苏'
-          }
-        ],
-        cityOptions: [
-          {
-            label: '无锡',
-            value: '无锡'
-          }
-        ],
+        mapJson: '../../../static/map/map.json',
+        provinceOptions: [],
+        cityOptions: [],
+        areaOptions: [],
         ruleForm: {
           username: '',
           password: '',
+          registtime: '',
           age: 18,
           birth: '',
           place: {
@@ -221,6 +222,7 @@
       this.getUsers();
       this.watchHeight();
       this.resetLabelWidth();
+      this.getProvince();
     },
     watch:{
     },
@@ -283,17 +285,16 @@
       handleAdd() {
         this.editTitle = this.$t('message.add');
         this.dialogVisible = true;
-        let myDate = new Date();
-        console.log(myDate.toLocaleTimeString());
         this.ruleForm = {
           username: '',
           password: '',
-          registtime: '2019-04-08 00:00:00',
+          registtime: formatDate(new Date()),
           age: 18,
           birth: '',
           place: {
             province: '',
-            city: ''
+            city: '',
+            area: ''
           },
           sex: 1,
           admin: 0,
@@ -329,7 +330,8 @@
           birth: row.birth,
           place: {
             province: row.place,
-            city: row.place
+            city: row.place,
+            area: row.place,
           },
           sex: row.sex,
           admin: row.admin,
@@ -345,7 +347,7 @@
           registtime: this.ruleForm.registtime,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
-          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city,
+          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
           sex: this.ruleForm.sex,
           admin: this.ruleForm.admin,
           state: this.ruleForm.state,
@@ -358,6 +360,81 @@
               this.getUsers();
             }
           })
+      },
+      getProvince() {
+        axios.get(this.mapJson)
+          .then(res => {
+            if (res.status === 200) {
+              res.data.forEach(ele => {
+                let province = {
+                  code: ele.code,
+                  name: ele.name,
+                };
+                this.provinceOptions.push(province);
+              })
+            }
+          })
+      },
+      choseProvince() {
+        this.cityOptions = [];
+        this.ruleForm.place.city = '';
+        this.areaOptions = [];
+        this.ruleForm.place.area = '';
+      },
+      choseCity() {
+        this.areaOptions = [];
+        this.ruleForm.place.area = '';
+      },
+      getCity() {
+        let hasProvince = this.ruleForm.place.province;
+        if (hasProvince !== null || hasProvince !== '') {
+          axios.get(this.mapJson)
+            .then(res => {
+              if (res.status === 200) {
+                res.data.forEach(ele => {
+                  if (ele.name === hasProvince) {
+                    ele.children.forEach(item => {
+                      let city = {
+                        code: item.code,
+                        name: item.name,
+                      };
+                      this.cityOptions.push(city);
+                    });
+                  }
+                })
+              }
+            })
+        } else {
+          this.cityOptions = [];
+        }
+      },
+      getArea() {
+        let hasProvince = this.ruleForm.place.province;
+        let hasCity = this.ruleForm.place.city;
+        if (hasProvince !== null || hasProvince !== '' || hasCity !== null || hasCity !== '') {
+          axios.get(this.mapJson)
+            .then(res => {
+              if (res.status === 200) {
+                res.data.forEach(ele => {
+                  if (ele.name === hasProvince) {
+                    ele.children.forEach(item => {
+                      if (item.name === hasCity) {
+                        item.children.forEach(list => {
+                          let area = {
+                            code: list.code,
+                            name: list.name,
+                          };
+                          this.areaOptions.push(area);
+                        })
+                      }
+                    });
+                  }
+                })
+              }
+            })
+        } else {
+          this.areaOptions = [];
+        }
       },
       submit(formName) {
         this.$refs[formName].validate((valid) => {
