@@ -193,6 +193,7 @@
         cityOptions: [],
         areaOptions: [],
         ruleForm: {
+          userid: 0,
           username: '',
           password: '',
           registtime: '',
@@ -286,6 +287,7 @@
         this.editTitle = this.$t('message.add');
         this.dialogVisible = true;
         this.ruleForm = {
+          userid: 0,
           username: '',
           password: '',
           registtime: formatDate(new Date()),
@@ -323,15 +325,16 @@
         this.editTitle = this.$t('message.edit');
         this.dialogVisible = true;
         this.ruleForm = {
+          userid: row.userid,
           username: row.username,
           password: row.password,
           registtime: row.registtime,
           age: row.age,
           birth: row.birth,
           place: {
-            province: row.place,
-            city: row.place,
-            area: row.place,
+            province: row.place.split('-')[0],
+            city: row.place.split('-')[1],
+            area: row.place.split('-')[2],
           },
           sex: row.sex,
           admin: row.admin,
@@ -350,9 +353,30 @@
           place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
           sex: this.ruleForm.sex,
           admin: this.ruleForm.admin,
-          state: this.ruleForm.state,
+          state: this.ruleForm.state === true ? 1 : 0,
         };
         this.fetch.ajax('/user/addUser', param, 'POST')
+          .then(res => {
+            if (res.data.state) {
+              console.log(res);
+              this.dialogVisible = false;
+              this.getUsers();
+            }
+          })
+      },
+      updateUser() {
+        let param = {
+          userid: this.ruleForm.userid,
+          username: this.ruleForm.username,
+          password: this.ruleForm.password,
+          age: this.ruleForm.age,
+          birth: this.ruleForm.birth,
+          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
+          sex: this.ruleForm.sex,
+          admin: this.ruleForm.admin,
+          state: this.ruleForm.state,
+        };
+        this.fetch.ajax('/user/updateUser', param, 'POST')
           .then(res => {
             if (res.data.state) {
               console.log(res);
@@ -441,6 +465,8 @@
           if (valid) {
             if (this.isnew === 0) {
               this.addUser();
+            } else {
+              this.updateUser();
             }
           } else {
             console.log('error submit!!');
