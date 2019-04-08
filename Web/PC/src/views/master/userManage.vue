@@ -40,13 +40,13 @@
         </el-table-column>
         <el-table-column :label="$t('message.age')" prop="age">
         </el-table-column>
-        <el-table-column :label="$t('message.birth')" prop="birth">
+        <el-table-column :label="$t('message.birth')" prop="birth" >
         </el-table-column>
-        <el-table-column :label="$t('message.place')" prop="place">
+        <el-table-column :label="$t('message.place')" prop="place" :show-overflow-tooltip="true">
         </el-table-column>
-        <el-table-column :label="$t('message.sex')" prop="sex">
+        <el-table-column :label="$t('message.gender')" prop="gender">
         </el-table-column>
-        <el-table-column :label="$t('message.registtime')" prop="registtime" width="200px">
+        <el-table-column :label="$t('message.registtime')" prop="registtime">
         </el-table-column>
         <el-table-column :label="$t('message.admin')" prop="admin">
         </el-table-column>
@@ -81,7 +81,7 @@
           :total="count">
         </el-pagination>
       </div>
-      <el-dialog :title="editTitle" :visible.sync="dialogVisible" width="700px" :close-on-click-modal='false'>
+      <el-dialog :title="editTitle" :visible.sync="dialogVisible" width="670px" :close-on-click-modal='false'>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" :label-width="labelWidth">
           <el-form-item :label="$t('message.account')" prop="username">
             <el-input v-model="ruleForm.username"></el-input>
@@ -97,46 +97,48 @@
               :placeholder="$t('message.choseDateTime')">
             </el-date-picker>
           </el-form-item>
-          <el-form-item :label="$t('message.age')" prop="age">
-            <el-input-number v-model="ruleForm.age" controls-position="right" :min="18" :max="60"></el-input-number>
-          </el-form-item>
           <el-form-item :label="$t('message.birth')" prop="birth">
             <el-date-picker
               v-model="ruleForm.birth"
               type="date"
               format="yyyy-MM-dd"
               value-format="yyyy-MM-dd"
+              :picker-options="pickerOptions"
+              @blur="getAge(ruleForm.birth)"
               :placeholder="$t('message.choseDate')">
             </el-date-picker>
+          </el-form-item>
+          <el-form-item :label="$t('message.age')" prop="age">
+            <el-input-number v-model="ruleForm.age" controls-position="right" :min="18" :max="60" disabled></el-input-number>
           </el-form-item>
           <el-form-item :label="$t('message.place')" prop="place">
             <el-select v-model="ruleForm.place.province" :placeholder="$t('message.choseProvince')" @change="choseProvince">
               <el-option
-                v-for="item in provinceOptions"
-                :key="item.code"
+                v-for="(item, index) in provinceOptions"
+                :key="index"
                 :label="item.name"
                 :value="item.name">
               </el-option>
             </el-select>
             <el-select v-model="ruleForm.place.city" :placeholder="$t('message.choseCity')" @change="choseCity" @focus="getCity">
               <el-option
-                v-for="item in cityOptions"
-                :key="item.code"
+                v-for="(item, index) in cityOptions"
+                :key="index"
                 :label="item.name"
                 :value="item.name">
               </el-option>
             </el-select>
             <el-select v-model="ruleForm.place.area" :placeholder="$t('message.choseArea')" @focus="getArea">
               <el-option
-                v-for="item in areaOptions"
-                :key="item.code"
+                v-for="(item, index) in areaOptions"
+                :key="index"
                 :label="item.name"
                 :value="item.name">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('message.sex')" prop="sex">
-            <el-radio-group v-model="ruleForm.sex">
+          <el-form-item :label="$t('message.gender')" prop="gender">
+            <el-radio-group v-model="ruleForm.gender">
               <el-radio :label="1">{{ $t('message.man') }}</el-radio>
               <el-radio :label="0">{{ $t('message.woman') }}</el-radio>
             </el-radio-group>
@@ -192,6 +194,11 @@
         provinceOptions: [],
         cityOptions: [],
         areaOptions: [],
+        pickerOptions: {
+          disabledDate: (time) => {
+            return time.getTime() > new Date(1999, 11, 31)
+          }
+        },
         ruleForm: {
           userid: 0,
           username: '',
@@ -201,9 +208,10 @@
           birth: '',
           place: {
             province: '',
-            city: ''
+            city: '',
+            area: ''
           },
-          sex: 1,
+          gender: 1,
           admin: 0,
           state: 1
         },
@@ -212,8 +220,8 @@
           password: [{ required: true, message:this.$t('message.inputPassword'), trigger: 'blur' }],
           age: [{ required: true, message:this.$t('message.inputAge'), trigger: 'blur' }],
           birth: [{ required: true, message:this.$t('message.choseBirth'), trigger: 'blur' }],
-          place: [{ required: true, message:this.$t('message.chosePlace'), trigger: 'blur' }],
-          sex: [{ required: true, message:this.$t('message.choseSex'), trigger: 'blur' }],
+          place: [{ required: true, message:this.$t('message.chosePlace'), trigger: 'change' }],
+          gender: [{ required: true, message:this.$t('message.choseGender'), trigger: 'blur' }],
           admin: [{ required: true, message:this.$t('message.choseAdmin'), trigger: 'blur' }],
           state: [{ required: true, message:this.$t('message.choseState'), trigger: 'blur' }],
         }
@@ -229,7 +237,7 @@
     },
     mounted() {
       setTimeout(() => {
-        let winHeight = document.documentElement.clientHeight - 250;
+        let winHeight = document.documentElement.clientHeight - 252;
         this.tableHeight = winHeight;
       }, 1);
     },
@@ -238,7 +246,7 @@
         setTimeout(() => {
           const that = this;
           window.onresize = function temp() {
-            let winHeight = document.documentElement.clientHeight - 250;
+            let winHeight = document.documentElement.clientHeight - 252;
             that.tableHeight = winHeight;
           };
         }, 1);
@@ -262,7 +270,9 @@
               console.log(res);
               res.data.rows.list.forEach(item => {
                 item.registtime = item.registtime.substring(0, item.registtime.indexOf(".")).replace("T", " ");
+                item.gender = item.gender === 1 ? this.$t('message.man') : this.$t('message.woman');
                 item.state = item.state === 1 ? true : false;
+                item.admin = item.admin === 1 ? this.$t('message.yes') : this.$t('message.no');
                 this.tableData.push(item);
               });
               console.log(this.tableData);
@@ -298,7 +308,7 @@
             city: '',
             area: ''
           },
-          sex: 1,
+          gender: 1,
           admin: 0,
           state: 1
         };
@@ -332,13 +342,13 @@
           age: row.age,
           birth: row.birth,
           place: {
-            province: row.place.split('-')[0],
-            city: row.place.split('-')[1],
-            area: row.place.split('-')[2],
+            province: row.place ? row.place.split('-')[0] : '',
+            city: row.place ? row.place.split('-')[1] : '',
+            area: row.place ? row.place.split('-')[2] : '',
           },
-          sex: row.sex,
-          admin: row.admin,
-          state: row.state,
+          gender: row.gender === this.$t('message.man') ? 1 : 0,
+          admin: row.admin === this.$t('message.yes') ? 1 : 0,
+          state: row.state === true ? 1 : 0,
         };
         this.isnew = 1;
       },
@@ -351,7 +361,7 @@
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
           place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
-          sex: this.ruleForm.sex,
+          gender: this.ruleForm.gender,
           admin: this.ruleForm.admin,
           state: this.ruleForm.state === true ? 1 : 0,
         };
@@ -372,7 +382,7 @@
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
           place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
-          sex: this.ruleForm.sex,
+          gender: this.ruleForm.gender,
           admin: this.ruleForm.admin,
           state: this.ruleForm.state,
         };
@@ -384,6 +394,13 @@
               this.getUsers();
             }
           })
+      },
+      getAge(val) {
+        let newDate = new Date();
+        let curYear = newDate.getFullYear();
+        let choseYear = val.substring(0, 4);
+        console.log(choseYear)
+        this.ruleForm.age = curYear - choseYear;
       },
       getProvince() {
         axios.get(this.mapJson)
