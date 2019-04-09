@@ -37,8 +37,12 @@ public interface UserDao {
     public int delUser(@Param("userid") Integer userid);
 
     //批量删除用户
-    public int delUsers(@Param("userid") Integer userid);
+    public int delUsers(@Param("list") List list);
 
     //更改用户状态
     public int updateState(@Param("userid") Integer userid, @Param("state") Integer state);
+
+    //初始化用户密码
+    public int resetPWD(@Param("list") List list);
+
 }

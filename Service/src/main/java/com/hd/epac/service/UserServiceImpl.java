@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,12 +41,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int DelUsers(Integer userid) {
-        return userDao.delUsers(userid);
+    public int DelUsers(String idLists) {
+        String arr[] = idLists.split(",");
+        List list = new ArrayList();
+        for (int i = 0; i < arr.length; i ++) {
+            list.add(Integer.parseInt(arr[i]));
+        }
+        return userDao.delUsers(list);
     }
 
     @Override
     public int UpdateState(Integer userid, Integer state) {
         return userDao.updateState(userid, state);
+    }
+
+    @Override
+    public int ResetPWD(String idLists) {
+        String arr[] = idLists.split(",");
+        List list = new ArrayList();
+        for (int i = 0; i < arr.length; i ++) {
+            list.add(Integer.parseInt(arr[i]));
+        }
+        return userDao.resetPWD(list);
     }
 }

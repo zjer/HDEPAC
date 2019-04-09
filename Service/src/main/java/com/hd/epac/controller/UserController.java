@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -99,9 +101,9 @@ public class UserController {
 
     @PostMapping(value = "/delUsers")
     @ResponseBody
-    public ResultUtil DelUsers(@RequestParam(value = "userid", required = false) Integer userid) {
-        System.out.println(userid);
-        Object user = userService.DelUsers(userid);
+    public ResultUtil DelUsers(@RequestParam(value = "idLists", required = false) String idLists) {
+        System.out.println(idLists);
+        Object user = userService.DelUsers(idLists);
         return ResultUtil.success("删除成功！", user);
     }
 
@@ -111,5 +113,13 @@ public class UserController {
         System.out.println(userid + ',' + state);
         Object user = userService.UpdateState(userid, state);
         return ResultUtil.success("状态修改成功！", user);
+    }
+
+    @PostMapping(value = "/resetPWD")
+    @ResponseBody
+    public ResultUtil ResetPWD(@RequestParam(value = "idLists", required = false) String idLists) {
+        System.out.println(idLists);
+        Object user = userService.ResetPWD(idLists);
+        return ResultUtil.success("初始化密码成功！", user);
     }
 }

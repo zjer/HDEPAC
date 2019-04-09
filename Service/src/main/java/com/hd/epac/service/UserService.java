@@ -22,8 +22,11 @@ public interface UserService {
     public int DelUser(Integer userid);
 
     //批量删除用户
-    public int DelUsers(Integer userid);
+    public int DelUsers(String idLists);
 
     //更改用户状态
     public int UpdateState(Integer userid, Integer state);
+
+    //初始化用户密码
+    public int ResetPWD(String idLists);
 }

@@ -53,22 +53,31 @@
     from hd_user
   </select>
 
-  <delete id="delUsers" parameterType="java.util.List">
+  <delete id="delUser" parameterType="java.util.List">
     delete from hd_user
     where userid = #{userid,jdbcType=INTEGER}
   </delete>
 
-  <!--<delete id="delUser" parameterType="java.util.List">
+  <delete id="delUsers" parameterType="java.util.List">
     delete from hd_user
     where userid in
     <foreach collection="list" item="userid" open="(" separator="," close=")">
       #{userid,jdbcType=INTEGER}
     </foreach>
-  </delete>-->
+  </delete>
 
   <update id="updateState">
     update hd_user
     set state = #{state,jdbcType=INTEGER}
     where userid = #{userid,jdbcType=INTEGER}
+  </update>
+
+  <update id="resetPWD" parameterType="java.util.List">
+    update hd_user
+    set password = "123456"
+    where userid in
+    <foreach collection="list" item="userid" open="(" separator="," close=")">
+      #{userid,jdbcType=INTEGER}
+    </foreach>
   </update>
 </mapper>
