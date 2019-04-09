@@ -32,4 +32,13 @@ public interface UserDao {
 
     //获取所有用户
     public List<User> findAllUsers();
+
+    //删除用户
+    public int delUser(@Param("userid") Integer userid);
+
+    //批量删除用户
+    public int delUsers(@Param("userid") Integer userid);
+
+    //更改用户状态
+    public int updateState(@Param("userid") Integer userid, @Param("state") Integer state);
 }

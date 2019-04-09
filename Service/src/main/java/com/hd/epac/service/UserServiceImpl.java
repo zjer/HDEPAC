@@ -33,4 +33,19 @@ public class UserServiceImpl implements UserService {
         List<User> list = userDao.findAllUsers();
         return list;
     }
+
+    @Override
+    public int DelUser(Integer userid) {
+        return userDao.delUser(userid);
+    }
+
+    @Override
+    public int DelUsers(Integer userid) {
+        return userDao.delUsers(userid);
+    }
+
+    @Override
+    public int UpdateState(Integer userid, Integer state) {
+        return userDao.updateState(userid, state);
+    }
 }

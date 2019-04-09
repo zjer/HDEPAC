@@ -17,4 +17,13 @@ public interface UserService {
 
     //获取所有用户
     public List<User> FindAllUsers();
+
+    //删除用户
+    public int DelUser(Integer userid);
+
+    //批量删除用户
+    public int DelUsers(Integer userid);
+
+    //更改用户状态
+    public int UpdateState(Integer userid, Integer state);
 }

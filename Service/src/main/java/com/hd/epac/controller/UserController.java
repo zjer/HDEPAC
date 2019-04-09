@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -86,5 +87,29 @@ public class UserController {
         PageInfo pageInfo = new PageInfo(list);
         System.out.println(pageInfo);
         return ResultUtil.success("查询成功！", pageInfo);
+    }
+
+    @PostMapping(value = "/delUser")
+    @ResponseBody
+    public ResultUtil DelUser(@RequestParam(value = "userid", required = false) Integer userid) {
+        System.out.println(userid);
+        Object user = userService.DelUser(userid);
+        return ResultUtil.success("删除成功！", user);
+    }
+
+    @PostMapping(value = "/delUsers")
+    @ResponseBody
+    public ResultUtil DelUsers(@RequestParam(value = "userid", required = false) Integer userid) {
+        System.out.println(userid);
+        Object user = userService.DelUsers(userid);
+        return ResultUtil.success("删除成功！", user);
+    }
+
+    @PostMapping(value = "/updateState")
+    @ResponseBody
+    public ResultUtil UpdateState(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "state", required = false) Integer state) {
+        System.out.println(userid + ',' + state);
+        Object user = userService.UpdateState(userid, state);
+        return ResultUtil.success("状态修改成功！", user);
     }
 }
