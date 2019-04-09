@@ -7,6 +7,9 @@
           <el-tooltip class="item" effect="dark" :content="$t('message.add')" placement="top">
             <el-button class="addBtn" type="primary" icon="iconfont icon-xinzeng-kong" @click="handleAdd()"></el-button>
           </el-tooltip>
+          <el-tooltip class="item" effect="dark" :content="$t('message.del')" placement="top">
+            <el-button class="addBtn" type="primary" icon="iconfont icon-shanchu-kong" @click="handleDelete()"></el-button>
+          </el-tooltip>
         </el-button-group>
         <el-button-group>
           <el-tooltip class="item" effect="dark" :content="$t('message.resetPWD')" placement="top">
@@ -312,9 +315,9 @@
         };
         this.isnew = 0;
       },
-      delUser(val) {
+      delUsers(val) {
         let param = {
-          userid: val
+          idLists: val
         };
         this.fetch.ajax('/user/delUsers', param, 'POST')
           .then(res => {
@@ -328,24 +331,63 @@
             }
           })
       },
-      handleDel(index, row) {
-        this.$confirm(this.$t('message.deleteIt'), 'Warning', {
-          confirmButtonText: ' ',
-          cancelButtonText: ' ',
-          confirmButtonClass: 'icon iconfont icon-gou-wukuang',
-          cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
-          type: 'warning'
-        }).then(() => {
-          this.delUser(row.userid);
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: this.$t('message.deleteCanceled')
+      handleDelete() {
+        if (this.multipleSelection.length > 0) {
+          let str = '';
+          let arr = [];
+          this.multipleSelection.forEach(ele => {
+            arr.push(ele.userid);
           });
-        });
+          str = arr.join(',');
+          console.log(str);
+          this.$confirm(this.$t('message.deleteIt'), 'Warning', {
+            confirmButtonText: ' ',
+            cancelButtonText: ' ',
+            confirmButtonClass: 'icon iconfont icon-gou-wukuang',
+            cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
+            type: 'warning'
+          }).then(() => {
+            this.delUsers(str);
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: this.$t('message.deleteCanceled')
+            });
+          });
+        } else {
+          this.$message({
+            message: this.$t('message.choseDelData'),
+            type: 'warning'
+          });
+        }
+      },
+      resetPWD(val) {
+        let param = {
+          idLists: val
+        };
+        this.fetch.ajax('/user/resetPWD', param, 'POST')
+          .then(res => {
+            if (res.data.state) {
+              console.log(res);
+              this.$message({
+                type: "success",
+                message: this.$t('message.deleteSuccess')
+              });
+              this.getUsers();
+            }
+          })
       },
       handleResetPWD() {
-        if (this.multipleSelection.length > 0) {} else {
+        if (this.multipleSelection.length > 0) {
+          let str = '';
+          let arr = [];
+          this.multipleSelection.forEach(ele => {
+            arr.push(ele.userid);
+          });
+          str = arr.join(',');
+          console.log(str);
+          this.resetPWD(str);
+        } else {
           this.$message({
             message: this.$t('message.choseResetPWDData'),
             type: 'warning'
@@ -442,6 +484,38 @@
               this.getUsers();
             }
           })
+      },
+      delUser(val) {
+        let param = {
+          userid: val
+        };
+        this.fetch.ajax('/user/delUser', param, 'POST')
+          .then(res => {
+            if (res.data.state) {
+              console.log(res);
+              this.$message({
+                type: "success",
+                message: this.$t('message.deleteSuccess')
+              });
+              this.getUsers();
+            }
+          })
+      },
+      handleDel(index, row) {
+        this.$confirm(this.$t('message.deleteIt'), 'Warning', {
+          confirmButtonText: ' ',
+          cancelButtonText: ' ',
+          confirmButtonClass: 'icon iconfont icon-gou-wukuang',
+          cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
+          type: 'warning'
+        }).then(() => {
+          this.delUser(row.userid);
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: this.$t('message.deleteCanceled')
+          });
+        });
       },
       getAge(val) {
         let newDate = new Date();

@@ -100,7 +100,7 @@
         if (getLocal('lang') === 'en_US') {
           this.labelW = 130+'px';
         } else {
-          this.labelW = 85+'px';
+          this.labelW = 70+'px';
         }
       },
       getMenuStatus(isShowMenu){
