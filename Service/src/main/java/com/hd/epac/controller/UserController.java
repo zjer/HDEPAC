@@ -122,4 +122,12 @@ public class UserController {
         Object user = userService.ResetPWD(idLists);
         return ResultUtil.success("初始化密码成功！", user);
     }
+
+    @PostMapping(value = "/modifyPWD")
+    @ResponseBody
+    public ResultUtil ModifyPWD(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "password", required = false) String password) {
+        System.out.println(userid + ',' + password);
+        Object user = userService.ModifyPWD(userid, password);
+        return ResultUtil.success("密码修改成功！", user);
+    }
 }

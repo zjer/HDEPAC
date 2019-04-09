@@ -45,4 +45,7 @@ public interface UserDao {
     //初始化用户密码
     public int resetPWD(@Param("list") List list);
 
+    //修改密码
+    public int modifyPWD(@Param("userid") Integer userid, @Param("password") String password);
+
 }

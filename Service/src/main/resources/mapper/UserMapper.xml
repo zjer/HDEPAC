@@ -51,6 +51,7 @@
     select
     <include refid="Base_Column_List" />
     from hd_user
+    where userid != 10000
   </select>
 
   <delete id="delUser" parameterType="java.util.List">
@@ -79,5 +80,11 @@
     <foreach collection="list" item="userid" open="(" separator="," close=")">
       #{userid,jdbcType=INTEGER}
     </foreach>
+  </update>
+
+  <update id="modifyPWD">
+    update hd_user
+    set password = #{password,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

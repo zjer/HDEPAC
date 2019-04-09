@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
         }
         return userDao.resetPWD(list);
     }
+
+    @Override
+    public int ModifyPWD(Integer userid, String password) {
+        return userDao.modifyPWD(userid, password);
+    }
 }

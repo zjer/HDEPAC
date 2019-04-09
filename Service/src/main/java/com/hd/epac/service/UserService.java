@@ -29,4 +29,7 @@ public interface UserService {
 
     //初始化用户密码
     public int ResetPWD(String idLists);
+
+    //修改密码
+    public int ModifyPWD(Integer userid, String password);
 }
