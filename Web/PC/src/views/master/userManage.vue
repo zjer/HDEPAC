@@ -7,9 +7,6 @@
           <el-tooltip class="item" effect="dark" :content="$t('message.add')" placement="top">
             <el-button class="addBtn" type="primary" icon="iconfont icon-xinzeng-kong" @click="handleAdd()"></el-button>
           </el-tooltip>
-          <el-tooltip class="item" effect="dark" :content="$t('message.del')" placement="top">
-            <el-button class="addBtn" type="primary" icon="iconfont icon-shanchu-kong" @click="handleDel()"></el-button>
-          </el-tooltip>
         </el-button-group>
         <el-button-group>
           <el-tooltip class="item" effect="dark" :content="$t('message.resetPWD')" placement="top">
@@ -57,7 +54,7 @@
               v-model="scope.row.state"
               active-color="#13ce66"
               inactive-color="#ff4949"
-              @change="setState">
+              @change="setState(scope.row)">
             </el-switch>
           </template>
         </el-table-column>
@@ -65,6 +62,9 @@
           <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" :content="$t('message.edit')" placement="top">
               <el-button icon="iconfont icon-bianji-kong" class="hoverBtn" @click="handleEdit(scope.$index, scope.row)"></el-button>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" :content="$t('message.del')" placement="top">
+              <el-button icon="iconfont icon-shanchu-kong" class="hoverBtn" @click="handleDel(scope.$index, scope.row)"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -267,7 +267,6 @@
         this.fetch.ajax('/user/getUsers', param, 'POST')
           .then(res => {
             if (res.data.state) {
-              console.log(res);
               res.data.rows.list.forEach(item => {
                 item.registtime = item.registtime.substring(0, item.registtime.indexOf(".")).replace("T", " ");
                 item.gender = item.gender === 1 ? this.$t('message.man') : this.$t('message.woman');
@@ -275,7 +274,6 @@
                 item.admin = item.admin === 1 ? this.$t('message.yes') : this.$t('message.no');
                 this.tableData.push(item);
               });
-              console.log(this.tableData);
               this.count = res.data.rows.total;
               this.isloading = false;
             }
@@ -314,13 +312,37 @@
         };
         this.isnew = 0;
       },
-      handleDel() {
-        if (this.multipleSelection.length > 0) {} else {
+      delUser(val) {
+        let param = {
+          userid: val
+        };
+        this.fetch.ajax('/user/delUsers', param, 'POST')
+          .then(res => {
+            if (res.data.state) {
+              console.log(res);
+              this.$message({
+                type: "success",
+                message: this.$t('message.deleteSuccess')
+              });
+              this.getUsers();
+            }
+          })
+      },
+      handleDel(index, row) {
+        this.$confirm(this.$t('message.deleteIt'), 'Warning', {
+          confirmButtonText: ' ',
+          cancelButtonText: ' ',
+          confirmButtonClass: 'icon iconfont icon-gou-wukuang',
+          cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
+          type: 'warning'
+        }).then(() => {
+          this.delUser(row.userid);
+        }).catch(() => {
           this.$message({
-            message: this.$t('message.choseDelData'),
-            type: 'warning'
+            type: 'info',
+            message: this.$t('message.deleteCanceled')
           });
-        }
+        });
       },
       handleResetPWD() {
         if (this.multipleSelection.length > 0) {} else {
@@ -330,7 +352,25 @@
           });
         }
       },
-      setState() {},
+      updateState(id, state) {
+        let param = {
+          userid: id,
+          state: state === true ? 1 : 0
+        };
+        this.fetch.ajax('/user/updateState', param, 'POST')
+          .then(res => {
+            if (res.data.state) {
+              console.log(res);
+              this.$message({
+                type: "success",
+                message: this.$t('message.updateSuccess')
+              });
+            }
+          })
+      },
+      setState(val) {
+        this.updateState(val.userid, val.state);
+      },
       handleEdit(index, row) {
         this.editTitle = this.$t('message.edit');
         this.dialogVisible = true;
@@ -370,6 +410,10 @@
             if (res.data.state) {
               console.log(res);
               this.dialogVisible = false;
+              this.$message({
+                type: "success",
+                message: this.$t('message.saveSuccess')
+              });
               this.getUsers();
             }
           })
@@ -391,6 +435,10 @@
             if (res.data.state) {
               console.log(res);
               this.dialogVisible = false;
+              this.$message({
+                type: "success",
+                message: this.$t('message.saveSuccess')
+              });
               this.getUsers();
             }
           })
@@ -490,9 +538,6 @@
             return false;
           }
         });
-      },
-      resetForm() {
-        this.$refs['ruleForm'].resetFields();
       }
     }
   }

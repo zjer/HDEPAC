@@ -59,6 +59,11 @@ let cn = {
     choseProvince: '选择省份',
     choseCity: '选择市',
     choseArea: '选择区',
+    deleteIt: '是否确认删除？',
+    deleteCanceled: '取消删除',
+    deleteSuccess: '删除成功',
+    saveSuccess: '保存成功',
+    updateSuccess: '更新成功',
   },
 
   ...zhLocale

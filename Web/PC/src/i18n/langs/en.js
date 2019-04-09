@@ -59,6 +59,11 @@ let en = {
     choseProvince: 'Chose Province',
     choseCity: 'Chose City',
     choseArea: 'Chose Area',
+    deleteIt: 'Whether To Confirm The Deletion?',
+    deleteCanceled: 'Delete Canceled',
+    deleteSuccess: 'Delete Success',
+    saveSuccess: 'Save Success',
+    updateSuccess: 'Update Success',
   },
 
   ...enLocale

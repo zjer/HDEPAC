@@ -29,10 +29,6 @@ export default {
         console.log(result);
         if (result.state) {
           callback(res);   //callback在promise执行器内部
-          Message({
-            message: result.message,
-            type: 'success'
-          });
         } else {
           Message({
             message: result.message,

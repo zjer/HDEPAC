@@ -9,7 +9,6 @@ import echarts from 'echarts'
 import i18n from './i18n/i18n'
 import store from './store'
 import fetch from './config/fetch'
-import { getLocal } from "./config/mUtils";
 
 Vue.config.productionTip = false;
 
