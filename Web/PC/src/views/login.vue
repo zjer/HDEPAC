@@ -109,9 +109,9 @@
     methods: {
       resetLabelWidth() {
         if (getLocal('lang') === 'en_US') {
-          this.labelW = 90 + 'px';
+          this.labelW = 80 + 'px';
         } else {
-          this.labelW = 70 + 'px';
+          this.labelW = 65 + 'px';
         }
       },
       setCode() {
@@ -121,7 +121,7 @@
         console.log(this.codePath);
       },
       setLanguage() {
-        this.$refs['ruleForm'].resetFields();
+        this.clearValidate('ruleForm');
         if (this.ruleForm.language === 'en_US') {
           this.$i18n.locale = 'en_US';
         } else {
@@ -153,6 +153,11 @@
               setStore('token', token);
               setStore('username', res.data.rows.username);
               setLocal('lang', this.ruleForm.language);
+              setLocal('curId', res.data.rows.userid);
+              this.$message({
+                type: 'success',
+                message: this.$t('message.loginSuccess'),
+              });
               this.$router.push('manage');
               this.setCode();
             } else {
@@ -172,6 +177,9 @@
             return false;
           }
         });
+      },
+      clearValidate(formName) {
+        this.$refs[formName].clearValidate();
       }
     }
   }

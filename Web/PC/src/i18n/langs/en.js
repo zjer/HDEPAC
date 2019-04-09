@@ -15,6 +15,7 @@ let en = {
     len5to10: '5 To 10 Characters In Length',
     len4: '4 Characters In Length',
     remember: 'Remember Account',
+    loginSuccess: 'Login Success!',
     home: 'Home',
     masterData: 'Master Data',
     userData: 'User Data',
@@ -61,9 +62,10 @@ let en = {
     choseArea: 'Chose Area',
     deleteIt: 'Whether To Confirm The Deletion?',
     deleteCanceled: 'Delete Canceled',
-    deleteSuccess: 'Delete Success',
-    saveSuccess: 'Save Success',
-    updateSuccess: 'Update Success',
+    deleteSuccess: 'Delete Success!',
+    saveSuccess: 'Save Success!',
+    updateSuccess: 'Update Success!',
+    resetSuccess: 'Reset Success!',
   },
 
   ...enLocale

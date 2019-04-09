@@ -389,8 +389,8 @@
           this.resetPWD(str);
         } else {
           this.$message({
-            message: this.$t('message.choseResetPWDData'),
-            type: 'warning'
+            type: 'success',
+            message: this.$t('message.choseResetPWDData')
           });
         }
       },

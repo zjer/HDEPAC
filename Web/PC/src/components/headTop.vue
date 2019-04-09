@@ -132,8 +132,8 @@
       modify(formname) {
         this.$refs[formname].validate((valid) => {
           if (valid) {
+            this.modifyPWD(this.ruleForm.newPassword);
             this.dialogVisible = false;
-            this.resetLabelWidth();
           } else {
             console.log('error submit!!');
             return false;
@@ -149,20 +149,21 @@
         setLocal('lang', this.curLanguage);
         this.resetLabelWidth();
       },
-      async changePwd(){
-        const res = await ModPassword({
-          userId: sessionStorage.getItem('Id'),
-          password: this.ruleForm.newPassword
-        });
-        if(res.Flag){
-          this.$message({
-            message: this.$t('message.Success'),
-            type: 'success'
-          });
-          this.$nextTick(function () {
-            this.$refs['ruleForm'].resetFields();
-          });
-        }
+      modifyPWD(val) {
+        let param = {
+          userid: getLocal('curId'),
+          password: val
+        };
+        this.fetch.ajax('/user/modifyPWD', param, 'POST')
+          .then(res => {
+            if (res.data.state) {
+              console.log(res);
+              this.$message({
+                type: "success",
+                message: this.$t('message.saveSuccess')
+              });
+            }
+          })
       },
       cancel(){
         this.dialogVisible = false;

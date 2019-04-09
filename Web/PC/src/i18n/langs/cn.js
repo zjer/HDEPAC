@@ -15,6 +15,7 @@ let cn = {
     len5to10: '长度为 5 到 10 个字符',
     len4: '长度为4 个字符',
     remember: '记住账号',
+    loginSuccess: '登录成功！',
     home: '首页',
     masterData: '主数据',
     userData: '用户主数据',
@@ -61,9 +62,10 @@ let cn = {
     choseArea: '选择区',
     deleteIt: '是否确认删除？',
     deleteCanceled: '取消删除',
-    deleteSuccess: '删除成功',
-    saveSuccess: '保存成功',
-    updateSuccess: '更新成功',
+    deleteSuccess: '删除成功！',
+    saveSuccess: '保存成功！',
+    updateSuccess: '更新成功！',
+    resetSuccess: '重置成功！',
   },
 
   ...zhLocale
