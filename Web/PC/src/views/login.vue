@@ -148,12 +148,10 @@
         this.fetch.ajax('/user/login', param, 'POST')
           .then(res => {
             if (res.data.state) {
-              console.log(res);
-              let token = Base64.encode(res.data.rows.username + res.data.rows.password + new Date());
-              setStore('token', token);
               setStore('username', res.data.rows.username);
-              setLocal('lang', this.ruleForm.language);
               setLocal('curId', res.data.rows.userid);
+              setStore('token', res.data.rows.token);
+              setLocal('lang', this.ruleForm.language);
               this.$message({
                 type: 'success',
                 message: this.$t('message.loginSuccess'),

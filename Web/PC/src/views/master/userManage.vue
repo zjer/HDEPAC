@@ -534,6 +534,7 @@
         this.ruleForm.age = curYear - choseYear;
       },
       getProvince() {
+        this.provinceOptions = [];
         axios.get(this.mapJson)
           .then(res => {
             if (res.status === 200) {
@@ -558,6 +559,7 @@
         this.ruleForm.place.area = '';
       },
       getCity() {
+        this.cityOptions = [];
         let hasProvince = this.ruleForm.place.province;
         if (hasProvince !== null || hasProvince !== '') {
           axios.get(this.mapJson)
@@ -581,6 +583,7 @@
         }
       },
       getArea() {
+        this.areaOptions = [];
         let hasProvince = this.ruleForm.place.province;
         let hasCity = this.ruleForm.place.city;
         if (hasProvince !== null || hasProvince !== '' || hasCity !== null || hasCity !== '') {
