@@ -8,15 +8,13 @@ import com.hd.epac.util.ResultUtil;
 import com.hd.epac.util.ValidateCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -63,8 +61,15 @@ public class UserController {
         if (user == null) {
             return ResultUtil.error("用户名或者密码不正确，请重新输入！");
         } else {
-            request.getSession().setAttribute("userInfo", user);
-            return ResultUtil.success("登录成功！", user);
+            String string = username + password + new Date();
+            byte[] bytes = string.getBytes();
+            String token = (new BASE64Encoder()).encodeBuffer(bytes);
+            Map<String, Object> map = new HashMap<>();
+            map.put("token", token);
+            map.put("userid", user.getUserid());
+            map.put("username", user.getUsername());
+            map.put("admin", user.getAdmin());
+            return ResultUtil.success("登录成功！", map);
         }
     }
 
