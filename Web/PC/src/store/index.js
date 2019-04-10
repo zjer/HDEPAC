@@ -5,21 +5,13 @@ import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex);
 
 const state = {
-  showGuide: true,
-  showWeather: false,
-  showNews: false
+  language: 1,
 };
 
 const mutations = {
-  setGuide(state, guide) {
-    state.showGuide = guide;
-  },
-  setWeather(state, weather) {
-    state.showWeather = weather;
-  },
-  setNews(state, news) {
-    state.showNews = news;
-  },
+  setLang(state, lang) {
+    state.language = lang;
+  }
 };
 
 export default new Vuex.Store({

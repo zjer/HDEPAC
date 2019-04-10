@@ -236,7 +236,16 @@
       this.resetLabelWidth();
       this.getProvince();
     },
+    computed:{
+      curLang() {
+        return this.$store.state.language
+      }
+    },
     watch:{
+      curLang: function (val) {
+        console.log(val);
+        this.resetLabelWidth();
+      }
     },
     mounted() {
       setTimeout(() => {
@@ -445,7 +454,7 @@
           place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
           gender: this.ruleForm.gender,
           admin: this.ruleForm.admin,
-          state: this.ruleForm.state === true ? 1 : 0,
+          state: this.ruleForm.state,
         };
         this.fetch.ajax('/user/addUser', param, 'POST')
           .then(res => {
@@ -521,7 +530,7 @@
         let newDate = new Date();
         let curYear = newDate.getFullYear();
         let choseYear = val.substring(0, 4);
-        console.log(choseYear)
+        console.log(choseYear);
         this.ruleForm.age = curYear - choseYear;
       },
       getProvince() {

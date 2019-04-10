@@ -11,8 +11,8 @@ var service = axios.create({
   baseURL: baseUrl,
   timeout: 5000,
   headers: {
-    'content-type': 'application/x-www-form-urlencoded',
-    "token": getStore('token') ? getStore('token') : '14a1347f412b319b0fef270489f'
+    'Content-type': 'application/x-www-form-urlencoded',
+    "Authorization": getStore('token') ? getStore('token') : '14a1347f412b319b0fef270489f'
   }
 });
 

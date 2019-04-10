@@ -143,8 +143,10 @@
       setLanguage() {
         if (this.curLanguage === 'en_US') {
           this.$i18n.locale = 'en_US';
+          this.$store.commit('setLang', 0);
         } else {
           this.$i18n.locale = 'zh_CN';
+          this.$store.commit('setLang', 1);
         }
         setLocal('lang', this.curLanguage);
         this.resetLabelWidth();
