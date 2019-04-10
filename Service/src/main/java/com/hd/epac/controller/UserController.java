@@ -45,6 +45,9 @@ public class UserController {
         return null;
     }
 
+    /*
+     * 登录
+     * */
     @PostMapping(value = "/login")
     @ResponseBody
     public ResultUtil CheckLogin(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "code", required = false) String code, HttpServletRequest request, HttpServletResponse response) {
@@ -65,6 +68,9 @@ public class UserController {
         }
     }
 
+    /*
+     * 添加用户
+     * */
     @PostMapping(value = "/addUser")
     @ResponseBody
     public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "registtime", required = false) Timestamp registtime, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender) {
@@ -73,6 +79,9 @@ public class UserController {
         return ResultUtil.success("添加成功！", user);
     }
 
+    /*
+     * 更新用户信息
+     * */
     @PostMapping(value = "/updateUser")
     @ResponseBody
     public ResultUtil UpdateUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender) {
@@ -81,16 +90,25 @@ public class UserController {
         return ResultUtil.success("修改成功！", user);
     }
 
+    /*
+     * 获取所有用户
+     * */
     @PostMapping(value = "/getUsers")
     @ResponseBody
     public ResultUtil FindAllUsers(@RequestParam(value = "pageIndex", required = false) Integer pageIndex, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         List<User> list = userService.FindAllUsers();
         PageInfo pageInfo = new PageInfo(list);
-        System.out.println(pageInfo);
-        return ResultUtil.success("查询成功！", pageInfo);
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", pageInfo.getTotal());
+        map.put("list", pageInfo.getList());
+        System.out.println(map);
+        return ResultUtil.success("查询成功！", map);
     }
 
+    /*
+     * 删除用户（单删）
+     * */
     @PostMapping(value = "/delUser")
     @ResponseBody
     public ResultUtil DelUser(@RequestParam(value = "userid", required = false) Integer userid) {
@@ -99,6 +117,9 @@ public class UserController {
         return ResultUtil.success("删除成功！", user);
     }
 
+    /*
+     * 删除用户（多删）
+     * */
     @PostMapping(value = "/delUsers")
     @ResponseBody
     public ResultUtil DelUsers(@RequestParam(value = "idLists", required = false) String idLists) {
@@ -107,6 +128,9 @@ public class UserController {
         return ResultUtil.success("删除成功！", user);
     }
 
+    /*
+     * 更改用户状态
+     * */
     @PostMapping(value = "/updateState")
     @ResponseBody
     public ResultUtil UpdateState(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "state", required = false) Integer state) {
@@ -115,6 +139,9 @@ public class UserController {
         return ResultUtil.success("状态修改成功！", user);
     }
 
+    /*
+     * 重置用户密码（批量重置）
+     * */
     @PostMapping(value = "/resetPWD")
     @ResponseBody
     public ResultUtil ResetPWD(@RequestParam(value = "idLists", required = false) String idLists) {
@@ -123,6 +150,9 @@ public class UserController {
         return ResultUtil.success("初始化密码成功！", user);
     }
 
+    /*
+     * 修改登录人密码
+     * */
     @PostMapping(value = "/modifyPWD")
     @ResponseBody
     public ResultUtil ModifyPWD(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "password", required = false) String password) {

@@ -16,14 +16,17 @@
   <sql id="Base_Column_List">
     userid, username, password, registtime, place, age, birth, admin, state, gender
   </sql>
-    <select id="checkLogin" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from hd_user
-        where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
-    </select>
 
-    <insert id="addUser">
+  <!--登录-->
+  <select id="checkLogin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hd_user
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <!--添加用户-->
+  <insert id="addUser">
     insert into hd_user (userid, username, password,
       registtime, place, age,
       birth, admin, state,
@@ -34,6 +37,7 @@
       #{gender,jdbcType=INTEGER})
   </insert>
 
+  <!--更新用户信息-->
   <update id="updateUser">
     update hd_user
     set username = #{username,jdbcType=VARCHAR},
@@ -47,6 +51,7 @@
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 
+  <!--获取所有用户-->
   <select id="findAllUsers" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -54,11 +59,13 @@
     where userid != 10000
   </select>
 
+  <!--删除用户（单删）-->
   <delete id="delUser" parameterType="java.util.List">
     delete from hd_user
     where userid = #{userid,jdbcType=INTEGER}
   </delete>
 
+  <!--删除用户（多删）-->
   <delete id="delUsers" parameterType="java.util.List">
     delete from hd_user
     where userid in
@@ -67,12 +74,14 @@
     </foreach>
   </delete>
 
+  <!--更改用户状态-->
   <update id="updateState">
     update hd_user
     set state = #{state,jdbcType=INTEGER}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 
+  <!--重置用户密码（批量重置）-->
   <update id="resetPWD" parameterType="java.util.List">
     update hd_user
     set password = "123456"
@@ -82,6 +91,7 @@
     </foreach>
   </update>
 
+  <!--修改登录人密码-->
   <update id="modifyPWD">
     update hd_user
     set password = #{password,jdbcType=VARCHAR}
