@@ -34,21 +34,13 @@
           type="selection"
           width="55">
         </el-table-column>
-        <el-table-column :label="$t('message.account')" prop="username">
+        <el-table-column :label="$t('message.productcode')" prop="productcode">
         </el-table-column>
-        <el-table-column :label="$t('message.password')" prop="password">
+        <el-table-column :label="$t('message.productname')" prop="productname">
         </el-table-column>
-        <el-table-column :label="$t('message.age')" prop="age">
+        <el-table-column :label="$t('message.producttype')" prop="producttype">
         </el-table-column>
-        <el-table-column :label="$t('message.birth')" prop="birth" >
-        </el-table-column>
-        <el-table-column :label="$t('message.place')" prop="place" :show-overflow-tooltip="true">
-        </el-table-column>
-        <el-table-column :label="$t('message.gender')" prop="gender">
-        </el-table-column>
-        <el-table-column :label="$t('message.createtime')" prop="createtime">
-        </el-table-column>
-        <el-table-column :label="$t('message.admin')" prop="admin">
+        <el-table-column :label="$t('message.createtime')" prop="createtime" >
         </el-table-column>
         <el-table-column :label="$t('message.state')" prop="state">
           <template slot-scope="scope">
@@ -86,11 +78,14 @@
       </div>
       <el-dialog :title="editTitle" :visible.sync="dialogVisible" width="670px" :close-on-click-modal='false'>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" :label-width="labelWidth">
-          <el-form-item :label="$t('message.account')" prop="username">
-            <el-input v-model="ruleForm.username"></el-input>
+          <el-form-item :label="$t('message.productcode')" prop="productcode">
+            <el-input v-model="ruleForm.productcode"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('message.password')" prop="password">
-            <el-input v-model="ruleForm.password"></el-input>
+          <el-form-item :label="$t('message.productname')" prop="productname">
+            <el-input v-model="ruleForm.productname"></el-input>
+          </el-form-item>
+          <el-form-item :label="$t('message.producttype')" prop="producttype">
+            <el-input v-model="ruleForm.producttype"></el-input>
           </el-form-item>
           <el-form-item :label="$t('message.createtime')" prop="createtime">
             <el-date-picker
@@ -99,58 +94,6 @@
               disabled
               :placeholder="$t('message.choseDateTime')">
             </el-date-picker>
-          </el-form-item>
-          <el-form-item :label="$t('message.birth')" prop="birth">
-            <el-date-picker
-              v-model="ruleForm.birth"
-              type="date"
-              format="yyyy-MM-dd"
-              value-format="yyyy-MM-dd"
-              :picker-options="pickerOptions"
-              @blur="getAge(ruleForm.birth)"
-              :placeholder="$t('message.choseDate')">
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item :label="$t('message.age')" prop="age">
-            <el-input-number v-model="ruleForm.age" controls-position="right" :min="18" :max="60" disabled></el-input-number>
-          </el-form-item>
-          <el-form-item :label="$t('message.place')" prop="place">
-            <el-select v-model="ruleForm.place.province" :placeholder="$t('message.choseProvince')" @change="choseProvince">
-              <el-option
-                v-for="(item, index) in provinceOptions"
-                :key="index"
-                :label="item.name"
-                :value="item.name">
-              </el-option>
-            </el-select>
-            <el-select v-model="ruleForm.place.city" :placeholder="$t('message.choseCity')" @change="choseCity" @focus="getCity">
-              <el-option
-                v-for="(item, index) in cityOptions"
-                :key="index"
-                :label="item.name"
-                :value="item.name">
-              </el-option>
-            </el-select>
-            <el-select v-model="ruleForm.place.area" :placeholder="$t('message.choseArea')" @focus="getArea">
-              <el-option
-                v-for="(item, index) in areaOptions"
-                :key="index"
-                :label="item.name"
-                :value="item.name">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item :label="$t('message.gender')" prop="gender">
-            <el-radio-group v-model="ruleForm.gender">
-              <el-radio :label="1">{{ $t('message.man') }}</el-radio>
-              <el-radio :label="0">{{ $t('message.woman') }}</el-radio>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item :label="$t('message.admin')" prop="admin">
-            <el-radio-group v-model="ruleForm.admin">
-              <el-radio :label="1">{{ $t('message.yes') }}</el-radio>
-              <el-radio :label="0">{{ $t('message.no') }}</el-radio>
-            </el-radio-group>
           </el-form-item>
           <el-form-item :label="$t('message.state')" prop="state">
             <el-radio-group v-model="ruleForm.state">
@@ -175,10 +118,9 @@
 <script>
   import HeadTop from '../../components/headTop';
   import { getLocal, formatDate } from "../../config/mUtils";
-  import axios from 'axios'
 
   export default {
-    name: "userManage",
+    name: "productManage",
     components: { HeadTop },
     data () {
       return {
@@ -193,48 +135,26 @@
         dialogVisible: false,
         labelWidth: 0 + 'px',
         isnew: 0,
-        mapJson: '../../../static/map/map.json',
-        provinceOptions: [],
-        cityOptions: [],
-        areaOptions: [],
-        pickerOptions: {
-          disabledDate: (time) => {
-            return time.getTime() > new Date(1999, 11, 31)
-          }
-        },
         ruleForm: {
-          userid: 0,
-          username: '',
-          password: '',
+          productid: 0,
+          productcode: '',
+          productname: '',
+          producttype: '',
           createtime: '',
-          age: 18,
-          birth: '',
-          place: {
-            province: '',
-            city: '',
-            area: ''
-          },
-          gender: 1,
-          admin: 0,
           state: 1
         },
         rules: {
-          username: [{ required: true, message:this.$t('message.inputUsername'), trigger: 'blur' }],
-          password: [{ required: true, message:this.$t('message.inputPassword'), trigger: 'blur' }],
-          age: [{ required: true, message:this.$t('message.inputAge'), trigger: 'blur' }],
-          birth: [{ required: true, message:this.$t('message.choseBirth'), trigger: 'blur' }],
-          place: [{ required: true, message:this.$t('message.chosePlace'), trigger: 'change' }],
-          gender: [{ required: true, message:this.$t('message.choseGender'), trigger: 'blur' }],
-          admin: [{ required: true, message:this.$t('message.choseAdmin'), trigger: 'blur' }],
+          productcode: [{ required: true, message:this.$t('message.inputproductcode'), trigger: 'blur' }],
+          productname: [{ required: true, message:this.$t('message.inputproductname'), trigger: 'blur' }],
+          producttype: [{ required: true, message:this.$t('message.inputAge'), trigger: 'blur' }],
           state: [{ required: true, message:this.$t('message.choseState'), trigger: 'blur' }],
         }
       }
     },
     created() {
-      this.getUsers();
+      this.getProducts();
       this.watchHeight();
       this.resetLabelWidth();
-      this.getProvince();
     },
     computed:{
       curLang() {
@@ -265,25 +185,23 @@
       },
       resetLabelWidth() {
         if (getLocal('lang') === 'en_US') {
-          this.labelWidth = 80 + 'px';
+          this.labelWidth = 100 + 'px';
         } else {
-          this.labelWidth = 60 + 'px';
+          this.labelWidth = 70 + 'px';
         }
       },
-      getUsers() {
+      getProducts() {
         let param = {
           pageIndex: this.PageIndex,
           pageSize: this.PageSize
         };
         this.tableData = [];
-        this.fetch.ajax('/user/getUsers', param, 'POST')
+        this.fetch.ajax('/product/getProducts', param, 'POST')
           .then(res => {
             if (res.data.state) {
               res.data.rows.list.forEach(item => {
                 item.createtime = item.createtime.substring(0, item.createtime.indexOf(".")).replace("T", " ");
-                item.gender = item.gender === 1 ? this.$t('message.man') : this.$t('message.woman');
                 item.state = item.state === 1 ? true : false;
-                item.admin = item.admin === 1 ? this.$t('message.yes') : this.$t('message.no');
                 this.tableData.push(item);
               });
               this.count = res.data.rows.total;
@@ -297,29 +215,21 @@
       handleSizeChange(val) {
         this.PageIndex = 1;
         this.PageSize = val;
-        this.getUsers();
+        this.getProducts();
       },
       handleCurrentChange(val) {
         this.PageIndex = val;
-        this.getUsers();
+        this.getProducts();
       },
       handleAdd() {
         this.editTitle = this.$t('message.add');
         this.dialogVisible = true;
         this.ruleForm = {
-          userid: 0,
-          username: '',
-          password: '',
+          productid: 0,
+          productcode: '',
+          productname: '',
           createtime: formatDate(new Date()),
-          age: 18,
-          birth: '',
-          place: {
-            province: '',
-            city: '',
-            area: ''
-          },
-          gender: 1,
-          admin: 0,
+          producttype: '',
           state: 1
         };
         this.isnew = 0;
@@ -336,7 +246,7 @@
                 type: "success",
                 message: this.$t('message.deleteSuccess')
               });
-              this.getUsers();
+              this.getProducts();
             }
           })
       },
@@ -345,7 +255,7 @@
           let str = '';
           let arr = [];
           this.multipleSelection.forEach(ele => {
-            arr.push(ele.userid);
+            arr.push(ele.productid);
           });
           str = arr.join(',');
           console.log(str);
@@ -382,7 +292,7 @@
                 type: "success",
                 message: this.$t('message.deleteSuccess')
               });
-              this.getUsers();
+              this.getProducts();
             }
           })
       },
@@ -391,7 +301,7 @@
           let str = '';
           let arr = [];
           this.multipleSelection.forEach(ele => {
-            arr.push(ele.userid);
+            arr.push(ele.productid);
           });
           str = arr.join(',');
           console.log(str);
@@ -405,7 +315,7 @@
       },
       updateState(id, state) {
         let param = {
-          userid: id,
+          productid: id,
           state: state === true ? 1 : 0
         };
         this.fetch.ajax('/user/updateState', param, 'POST')
@@ -420,15 +330,15 @@
           })
       },
       setState(val) {
-        this.updateState(val.userid, val.state);
+        this.updateState(val.productid, val.state);
       },
       handleEdit(index, row) {
         this.editTitle = this.$t('message.edit');
         this.dialogVisible = true;
         this.ruleForm = {
-          userid: row.userid,
-          username: row.username,
-          password: row.password,
+          productid: row.productid,
+          productcode: row.productcode,
+          productname: row.productname,
           createtime: row.createtime,
           age: row.age,
           birth: row.birth,
@@ -443,20 +353,16 @@
         };
         this.isnew = 1;
       },
-      addUser() {
+      addProduct() {
         let param = {
-          userid: 0,
-          username: this.ruleForm.username,
-          password: this.ruleForm.password,
+          productid: 0,
+          productcode: this.ruleForm.productcode,
+          productname: this.ruleForm.productname,
+          producttype: this.ruleForm.producttype,
           createtime: this.ruleForm.createtime,
-          age: this.ruleForm.age,
-          birth: this.ruleForm.birth,
-          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
-          gender: this.ruleForm.gender,
-          admin: this.ruleForm.admin,
           state: this.ruleForm.state,
         };
-        this.fetch.ajax('/user/addUser', param, 'POST')
+        this.fetch.ajax('/product/addProduct', param, 'POST')
           .then(res => {
             if (res.data.state) {
               console.log(res);
@@ -465,15 +371,15 @@
                 type: "success",
                 message: this.$t('message.saveSuccess')
               });
-              this.getUsers();
+              this.getProducts();
             }
           })
       },
       updateUser() {
         let param = {
-          userid: this.ruleForm.userid,
-          username: this.ruleForm.username,
-          password: this.ruleForm.password,
+          productid: this.ruleForm.productid,
+          productcode: this.ruleForm.productcode,
+          productname: this.ruleForm.productname,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
           place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
@@ -490,13 +396,13 @@
                 type: "success",
                 message: this.$t('message.saveSuccess')
               });
-              this.getUsers();
+              this.getProducts();
             }
           })
       },
       delUser(val) {
         let param = {
-          userid: val
+          productid: val
         };
         this.fetch.ajax('/user/delUser', param, 'POST')
           .then(res => {
@@ -506,7 +412,7 @@
                 type: "success",
                 message: this.$t('message.deleteSuccess')
               });
-              this.getUsers();
+              this.getProducts();
             }
           })
       },
@@ -518,7 +424,7 @@
           cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
           type: 'warning'
         }).then(() => {
-          this.delUser(row.userid);
+          this.delUser(row.productid);
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -533,89 +439,11 @@
         console.log(choseYear);
         this.ruleForm.age = curYear - choseYear;
       },
-      getProvince() {
-        this.provinceOptions = [];
-        axios.get(this.mapJson)
-          .then(res => {
-            if (res.status === 200) {
-              res.data.forEach(ele => {
-                let province = {
-                  code: ele.code,
-                  name: ele.name,
-                };
-                this.provinceOptions.push(province);
-              })
-            }
-          })
-      },
-      choseProvince() {
-        this.cityOptions = [];
-        this.ruleForm.place.city = '';
-        this.areaOptions = [];
-        this.ruleForm.place.area = '';
-      },
-      choseCity() {
-        this.areaOptions = [];
-        this.ruleForm.place.area = '';
-      },
-      getCity() {
-        this.cityOptions = [];
-        let hasProvince = this.ruleForm.place.province;
-        if (hasProvince !== null || hasProvince !== '') {
-          axios.get(this.mapJson)
-            .then(res => {
-              if (res.status === 200) {
-                res.data.forEach(ele => {
-                  if (ele.name === hasProvince) {
-                    ele.children.forEach(item => {
-                      let city = {
-                        code: item.code,
-                        name: item.name,
-                      };
-                      this.cityOptions.push(city);
-                    });
-                  }
-                })
-              }
-            })
-        } else {
-          this.cityOptions = [];
-        }
-      },
-      getArea() {
-        this.areaOptions = [];
-        let hasProvince = this.ruleForm.place.province;
-        let hasCity = this.ruleForm.place.city;
-        if (hasProvince !== null || hasProvince !== '' || hasCity !== null || hasCity !== '') {
-          axios.get(this.mapJson)
-            .then(res => {
-              if (res.status === 200) {
-                res.data.forEach(ele => {
-                  if (ele.name === hasProvince) {
-                    ele.children.forEach(item => {
-                      if (item.name === hasCity) {
-                        item.children.forEach(list => {
-                          let area = {
-                            code: list.code,
-                            name: list.name,
-                          };
-                          this.areaOptions.push(area);
-                        })
-                      }
-                    });
-                  }
-                })
-              }
-            })
-        } else {
-          this.areaOptions = [];
-        }
-      },
       submit(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             if (this.isnew === 0) {
-              this.addUser();
+              this.addProduct();
             } else {
               this.updateUser();
             }

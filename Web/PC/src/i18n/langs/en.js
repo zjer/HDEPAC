@@ -19,6 +19,7 @@ let en = {
     home: 'Home',
     masterData: 'Master Data',
     userData: 'User Data',
+    productData: 'Product Data',
     chart: 'Chart',
     systemSetting: 'System Setting',
     modifyPW: 'ModifyPW',
@@ -32,7 +33,7 @@ let en = {
     birth: 'Birth',
     place: 'Place',
     gender: 'Gender',
-    registtime: 'Regist Time',
+    createtime: 'Create Time',
     admin: 'Admin',
     state: 'State',
     operate: 'Operate',
@@ -66,6 +67,9 @@ let en = {
     saveSuccess: 'Save Success!',
     updateSuccess: 'Update Success!',
     resetSuccess: 'Reset Success!',
+    productcode: 'Productcode',
+    productname: 'Productname',
+    producttype: 'Producttype',
   },
 
   ...enLocale

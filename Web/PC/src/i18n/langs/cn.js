@@ -19,6 +19,7 @@ let cn = {
     home: '首页',
     masterData: '主数据',
     userData: '用户主数据',
+    productData: '产品主数据',
     chart: '图表',
     systemSetting: '系统设置',
     modifyPW: '修改密码',
@@ -32,7 +33,7 @@ let cn = {
     birth: '生日',
     place: '地区',
     gender: '性别',
-    registtime: '注册时间',
+    createtime: '创建时间',
     admin: '管理员',
     state: '状态',
     operate: '操作',
@@ -66,6 +67,9 @@ let cn = {
     saveSuccess: '保存成功！',
     updateSuccess: '更新成功！',
     resetSuccess: '重置成功！',
+    productcode: '产品编码',
+    productname: '产品名称',
+    producttype: '产品类型',
   },
 
   ...zhLocale

@@ -17,6 +17,10 @@
             <i class="iconfont icon-renyuanzu-kong"></i>
             <span slot="title">{{ $t('message.userData') }}</span>
           </el-menu-item>
+          <el-menu-item index="productManage">
+            <i class="iconfont icon-chanpin"></i>
+            <span slot="title">{{ $t('message.productData') }}</span>
+          </el-menu-item>
         </el-submenu>
         <el-menu-item index="charts">
           <i class="iconfont icon-tubiaofenxi"></i>

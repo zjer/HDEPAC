@@ -5,6 +5,7 @@ import Manage from '@/views/manage'
 import Home from '@/views/home'
 import Lists from '@/views/lists'
 import userManage from '@/views/master/userManage'
+import productManage from '@/views/master/productManage'
 import Charts from '@/views/charts'
 import Settings from '@/views/settings'
 
@@ -45,6 +46,11 @@ export default new Router({
           path: '/userManage',
           name: 'userManage',
           component: userManage,
+          meta: ['masterData', 'userData']
+        }, {
+          path: '/productManage',
+          name: 'productManage',
+          component: productManage,
           meta: ['masterData', 'userData']
         },
       ]
