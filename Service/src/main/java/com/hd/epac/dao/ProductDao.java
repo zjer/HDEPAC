@@ -20,7 +20,7 @@ public interface ProductDao {
     int updateByPrimaryKey(Product record);
 
     //新增产品
-    public int addProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("createtime") Timestamp createtime);
+    public int addProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("createtime") Timestamp createtime, @Param("state") Integer state);
 
 
     //获取所有用户

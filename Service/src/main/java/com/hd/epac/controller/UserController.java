@@ -78,9 +78,9 @@ public class UserController {
      * */
     @PostMapping(value = "/addUser")
     @ResponseBody
-    public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "registtime", required = false) Timestamp registtime, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender) {
-        System.out.println(userid + ',' + username + ',' + password + ',' + registtime + ',' + place + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + gender);
-        Object user = userService.AddUser(userid, username, password, registtime, place, age, birth, admin, state, gender);
+    public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "createtime", required = false) Timestamp createtime, @RequestParam(value = "place", required = false) String place, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender) {
+        System.out.println(userid + ',' + username + ',' + password + ',' + createtime + ',' + place + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + gender);
+        Object user = userService.AddUser(userid, username, password, createtime, place, age, birth, admin, state, gender);
         return ResultUtil.success("添加成功！", user);
     }
 

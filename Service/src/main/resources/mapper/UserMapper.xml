@@ -5,7 +5,7 @@
     <id column="userid" jdbcType="INTEGER" property="userid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="registtime" jdbcType="TIMESTAMP" property="registtime" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="place" jdbcType="VARCHAR" property="place" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="birth" jdbcType="VARCHAR" property="birth" />
@@ -14,7 +14,7 @@
     <result column="gender" jdbcType="INTEGER" property="gender" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, password, registtime, place, age, birth, admin, state, gender
+    userid, username, password, createtime, place, age, birth, admin, state, gender
   </sql>
 
   <!--登录-->
@@ -28,11 +28,11 @@
   <!--添加用户-->
   <insert id="addUser">
     insert into hd_user (userid, username, password,
-      registtime, place, age,
+      createtime, place, age,
       birth, admin, state,
       gender)
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{registtime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+      #{createtime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
       #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
       #{gender,jdbcType=INTEGER})
   </insert>

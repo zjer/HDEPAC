@@ -14,6 +14,8 @@ public class Product {
 
     private Timestamp createtime;
 
+    private Integer state;
+
     public Integer getProductid() {
         return productid;
     }
@@ -54,6 +56,14 @@ public class Product {
         this.createtime = createtime;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -62,6 +72,7 @@ public class Product {
                 ", productname='" + productname + '\'' +
                 ", producttype=" + producttype +
                 ", createtime=" + createtime +
+                ", state=" + state +
                 '}';
     }
 }

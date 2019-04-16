@@ -9,7 +9,7 @@ public class User {
 
     private String password;
 
-    private Timestamp registtime;
+    private Timestamp createtime;
 
     private String place;
 
@@ -47,12 +47,12 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public Timestamp getRegisttime() {
-        return registtime;
+    public Timestamp getCreatetime() {
+        return createtime;
     }
 
-    public void setRegisttime(Timestamp registtime) {
-        this.registtime = registtime;
+    public void setCreatetime(Timestamp createtime) {
+        this.createtime = createtime;
     }
 
     public String getPlace() {
@@ -109,7 +109,7 @@ public class User {
                 "userid=" + userid +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", registtime=" + registtime +
+                ", createtime=" + createtime +
                 ", place='" + place + '\'' +
                 ", age=" + age +
                 ", birth='" + birth + '\'' +

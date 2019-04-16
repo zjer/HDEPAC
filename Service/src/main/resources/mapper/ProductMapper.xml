@@ -7,15 +7,16 @@
     <result column="productname" property="productname" jdbcType="VARCHAR" />
     <result column="producttype" property="producttype" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    productid, productcode, productname, producttype, createtime
+    productid, productcode, productname, producttype, createtime, state
   </sql>
 
   <!--添加产品-->
   <insert id="addProduct">
-    insert into hd_product (productid, productcode, productname, producttype, createtime)
-    values (#{productid,jdbcType=INTEGER}, #{productcode,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+    insert into hd_product (productid, productcode, productname, producttype, createtime, state)
+    values (#{productid,jdbcType=INTEGER}, #{productcode,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
   </insert>
 
   <!--获取所有产品-->

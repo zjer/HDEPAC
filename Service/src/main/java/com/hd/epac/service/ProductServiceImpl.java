@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
      * 添加产品
      * */
     @Override
-    public int AddProduct(Integer productid, String productcode, String productname, Integer producttype, Timestamp createtime) {
-        return productDao.addProduct(productid, productcode, productname, producttype, createtime);
+    public int AddProduct(Integer productid, String productcode, String productname, Integer producttype, Timestamp createtime, Integer state) {
+        return productDao.addProduct(productid, productcode, productname, producttype, createtime, state);
     }
 
     /*

@@ -25,7 +25,7 @@ public interface UserDao {
     public User checkLogin(@Param("username") String username, @Param("password") String password);
 
     //新增用户
-    public int addUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("registtime") Timestamp registtime, @Param("place") String place, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender);
+    public int addUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("createtime") Timestamp createtime, @Param("place") String place, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender);
 
     //更新用户
     public int updateUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("place") String place, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender);

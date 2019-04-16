@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
      * 添加用户
      * */
     @Override
-    public int AddUser(Integer userid, String username, String password, Timestamp registtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender) {
-        return userDao.addUser(userid, username, password, registtime, place, age, birth, admin, state, gender);
+    public int AddUser(Integer userid, String username, String password, Timestamp createtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender) {
+        return userDao.addUser(userid, username, password, createtime, place, age, birth, admin, state, gender);
     }
 
     /*

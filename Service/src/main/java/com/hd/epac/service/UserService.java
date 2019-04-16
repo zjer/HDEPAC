@@ -10,7 +10,7 @@ public interface UserService {
     public User CheckLogin(String username, String password);
 
     //新增用户
-    public int AddUser(Integer userid, String username, String password, Timestamp registtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
+    public int AddUser(Integer userid, String username, String password, Timestamp createtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
 
     //更新用户
     public int UpdateUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
