@@ -238,7 +238,7 @@
     },
     computed:{
       curLang() {
-        return this.$store.state.language
+        return this.$store.state.language;
       }
     },
     watch:{
@@ -265,7 +265,7 @@
       },
       resetLabelWidth() {
         if (getLocal('lang') === 'en_US') {
-          this.labelWidth = 80 + 'px';
+          this.labelWidth = 85 + 'px';
         } else {
           this.labelWidth = 60 + 'px';
         }
@@ -398,7 +398,7 @@
           this.resetPWD(str);
         } else {
           this.$message({
-            type: 'success',
+            type: 'warning',
             message: this.$t('message.choseResetPWDData')
           });
         }

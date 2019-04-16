@@ -11,11 +11,6 @@
             <el-button class="addBtn" type="primary" icon="iconfont icon-shanchu-kong" @click="handleDelete()"></el-button>
           </el-tooltip>
         </el-button-group>
-        <el-button-group>
-          <el-tooltip class="item" effect="dark" :content="$t('message.resetPWD')" placement="top">
-            <el-button class="addBtn" icon="iconfont icon-zhongzhi" @click="handleResetPWD()"></el-button>
-          </el-tooltip>
-        </el-button-group>
       </div>
       <el-table
         v-loading='isloading'
@@ -85,7 +80,14 @@
             <el-input v-model="ruleForm.productname"></el-input>
           </el-form-item>
           <el-form-item :label="$t('message.producttype')" prop="producttype">
-            <el-input v-model="ruleForm.producttype"></el-input>
+            <el-select v-model="ruleForm.producttype" placeholder="请选择">
+              <el-option
+                v-for="(item, index) in options"
+                :key="index"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item :label="$t('message.createtime')" prop="createtime">
             <el-date-picker
@@ -148,7 +150,17 @@
           productname: [{ required: true, message:this.$t('message.inputproductname'), trigger: 'blur' }],
           producttype: [{ required: true, message:this.$t('message.inputAge'), trigger: 'blur' }],
           state: [{ required: true, message:this.$t('message.choseState'), trigger: 'blur' }],
-        }
+        },
+        options: [
+          {
+            label: '灯饰',
+            value: 0
+          },
+          {
+            label: '橱柜',
+            value: 1
+          },
+        ]
       }
     },
     created() {
@@ -158,7 +170,7 @@
     },
     computed:{
       curLang() {
-        return this.$store.state.language
+        return this.$store.state.language;
       }
     },
     watch:{
@@ -234,11 +246,11 @@
         };
         this.isnew = 0;
       },
-      delUsers(val) {
+      delProducts(val) {
         let param = {
           idLists: val
         };
-        this.fetch.ajax('/user/delUsers', param, 'POST')
+        this.fetch.ajax('/product/delProducts', param, 'POST')
           .then(res => {
             if (res.data.state) {
               console.log(res);
@@ -266,7 +278,7 @@
             cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
             type: 'warning'
           }).then(() => {
-            this.delUsers(str);
+            this.delProducts(str);
           }).catch(() => {
             this.$message({
               type: 'info',
@@ -280,45 +292,12 @@
           });
         }
       },
-      resetPWD(val) {
-        let param = {
-          idLists: val
-        };
-        this.fetch.ajax('/user/resetPWD', param, 'POST')
-          .then(res => {
-            if (res.data.state) {
-              console.log(res);
-              this.$message({
-                type: "success",
-                message: this.$t('message.deleteSuccess')
-              });
-              this.getProducts();
-            }
-          })
-      },
-      handleResetPWD() {
-        if (this.multipleSelection.length > 0) {
-          let str = '';
-          let arr = [];
-          this.multipleSelection.forEach(ele => {
-            arr.push(ele.productid);
-          });
-          str = arr.join(',');
-          console.log(str);
-          this.resetPWD(str);
-        } else {
-          this.$message({
-            type: 'success',
-            message: this.$t('message.choseResetPWDData')
-          });
-        }
-      },
       updateState(id, state) {
         let param = {
           productid: id,
           state: state === true ? 1 : 0
         };
-        this.fetch.ajax('/user/updateState', param, 'POST')
+        this.fetch.ajax('/product/updateState', param, 'POST')
           .then(res => {
             if (res.data.state) {
               console.log(res);
@@ -339,16 +318,7 @@
           productid: row.productid,
           productcode: row.productcode,
           productname: row.productname,
-          createtime: row.createtime,
-          age: row.age,
-          birth: row.birth,
-          place: {
-            province: row.place ? row.place.split('-')[0] : '',
-            city: row.place ? row.place.split('-')[1] : '',
-            area: row.place ? row.place.split('-')[2] : '',
-          },
-          gender: row.gender === this.$t('message.man') ? 1 : 0,
-          admin: row.admin === this.$t('message.yes') ? 1 : 0,
+          producttype: row.producttype,
           state: row.state === true ? 1 : 0,
         };
         this.isnew = 1;
@@ -375,19 +345,15 @@
             }
           })
       },
-      updateUser() {
+      updateProduct() {
         let param = {
           productid: this.ruleForm.productid,
           productcode: this.ruleForm.productcode,
           productname: this.ruleForm.productname,
-          age: this.ruleForm.age,
-          birth: this.ruleForm.birth,
-          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
-          gender: this.ruleForm.gender,
-          admin: this.ruleForm.admin,
-          state: this.ruleForm.state,
+          producttype: this.ruleForm.producttype,
+          state: this.ruleForm.state
         };
-        this.fetch.ajax('/user/updateUser', param, 'POST')
+        this.fetch.ajax('/product/updateProduct', param, 'POST')
           .then(res => {
             if (res.data.state) {
               console.log(res);
@@ -400,11 +366,11 @@
             }
           })
       },
-      delUser(val) {
+      delProduct(val) {
         let param = {
           productid: val
         };
-        this.fetch.ajax('/user/delUser', param, 'POST')
+        this.fetch.ajax('/product/delProduct', param, 'POST')
           .then(res => {
             if (res.data.state) {
               console.log(res);
@@ -424,7 +390,7 @@
           cancelButtonClass: 'icon iconfont icon-guanbi-wukuang',
           type: 'warning'
         }).then(() => {
-          this.delUser(row.productid);
+          this.delProduct(row.productid);
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -445,7 +411,7 @@
             if (this.isnew === 0) {
               this.addProduct();
             } else {
-              this.updateUser();
+              this.updateProduct();
             }
           } else {
             console.log('error submit!!');
