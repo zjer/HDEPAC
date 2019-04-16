@@ -22,7 +22,18 @@ public interface ProductDao {
     //新增产品
     public int addProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("createtime") Timestamp createtime, @Param("state") Integer state);
 
+    //更新产品
+    public int updateProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("state") Integer state);
 
-    //获取所有用户
+    //获取所有产品
     public List<Product> findAllProducts();
+
+    //删除产品
+    public int delProduct(@Param("productid") Integer productid);
+
+    //批量删除产品
+    public int delProducts(@Param("list") List list);
+
+    //更改产品状态
+    public int updateState(@Param("productid") Integer productid, @Param("state") Integer state);
 }

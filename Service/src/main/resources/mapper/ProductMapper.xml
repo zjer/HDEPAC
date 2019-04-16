@@ -19,10 +19,42 @@
     values (#{productid,jdbcType=INTEGER}, #{productcode,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
   </insert>
 
+  <!--更新用户信息-->
+  <update id="updateProduct">
+    update hd_product
+    set productcode = #{productcode,jdbcType=VARCHAR},
+      productname = #{productname,jdbcType=VARCHAR},
+      producttype = #{producttype,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+
   <!--获取所有产品-->
   <select id="findAllProducts" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from hd_product
   </select>
+
+  <!--删除产品（单删）-->
+  <delete id="delProduct" parameterType="java.util.List">
+    delete from hd_product
+    where productid = #{productid,jdbcType=INTEGER}
+  </delete>
+
+  <!--删除产品（多删）-->
+  <delete id="delProducts" parameterType="java.util.List">
+    delete from hd_product
+    where productid in
+    <foreach collection="list" item="productid" open="(" separator="," close=")">
+      #{productid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+
+  <!--更改产品状态-->
+  <update id="updateState">
+    update hd_product
+    set state = #{state,jdbcType=INTEGER}
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
 </mapper>
