@@ -12,10 +12,10 @@ public interface UserService {
     public User SearchUser(String username);
 
     //新增用户
-    public int AddUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
+    public int AddUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area);
 
     //更新用户
-    public int UpdateUser(Integer userid, String username, String password, String place, Integer age, String birth, Integer admin, Integer state, Integer gender);
+    public int UpdateUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area);
 
     //获取所有用户
     public List<User> FindAllUsers();

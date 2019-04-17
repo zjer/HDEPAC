@@ -11,8 +11,6 @@ public class User {
 
     private Timestamp createtime;
 
-    private String place;
-
     private Integer age;
 
     private String birth;
@@ -27,6 +25,12 @@ public class User {
 
     private Timestamp updatetime;
 
+    private String province;
+
+    private String city;
+
+    private String area;
+
     public Integer getUserid() {
         return userid;
     }
@@ -40,7 +44,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getPassword() {
@@ -48,7 +52,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public Timestamp getCreatetime() {
@@ -57,14 +61,6 @@ public class User {
 
     public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place == null ? null : place.trim();
     }
 
     public Integer getAge() {
@@ -80,7 +76,7 @@ public class User {
     }
 
     public void setBirth(String birth) {
-        this.birth = birth == null ? null : birth.trim();
+        this.birth = birth;
     }
 
     public Integer getAdmin() {
@@ -123,6 +119,30 @@ public class User {
         this.updatetime = updatetime;
     }
 
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -130,12 +150,16 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", createtime=" + createtime +
-                ", place='" + place + '\'' +
                 ", age=" + age +
                 ", birth='" + birth + '\'' +
                 ", admin=" + admin +
                 ", state=" + state +
                 ", gender=" + gender +
+                ", logintime=" + logintime +
+                ", updatetime=" + updatetime +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", area='" + area + '\'' +
                 '}';
     }
 }

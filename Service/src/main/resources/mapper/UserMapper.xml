@@ -6,7 +6,6 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="place" jdbcType="VARCHAR" property="place" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="birth" jdbcType="VARCHAR" property="birth" />
     <result column="admin" jdbcType="INTEGER" property="admin" />
@@ -14,9 +13,12 @@
     <result column="gender" jdbcType="INTEGER" property="gender" />
     <result column="logintime" jdbcType="TIMESTAMP" property="logintime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, password, createtime, place, age, birth, admin, state, gender, logintime, updatetime
+    userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area
   </sql>
 
   <!--登录-->
@@ -37,8 +39,8 @@
 
   <!--添加用户-->
   <insert id="addUser">
-    insert into hd_user (userid, username, password, createtime, place, age, birth, admin, state, gender, logintime, updatetime)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, current_timestamp, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, current_timestamp, current_timestamp)
+    insert into hd_user (userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, current_timestamp, #{age,jdbcType=INTEGER}, #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, current_timestamp, current_timestamp, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR})
   </insert>
 
   <!--更新用户信息-->
@@ -46,12 +48,14 @@
     update hd_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      place = #{place,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       birth = #{birth,jdbcType=VARCHAR},
       admin = #{admin,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       gender = #{gender,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
       updatetime = current_timestamp
     where userid = #{userid,jdbcType=INTEGER}
   </update>
