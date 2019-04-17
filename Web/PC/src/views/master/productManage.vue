@@ -37,6 +37,8 @@
         </el-table-column>
         <el-table-column :label="$t('message.createtime')" prop="createtime" >
         </el-table-column>
+        <el-table-column :label="$t('message.updatetime')" prop="updatetime" >
+        </el-table-column>
         <el-table-column :label="$t('message.state')" prop="state">
           <template slot-scope="scope">
             <el-switch
@@ -213,6 +215,7 @@
             if (res.data.state) {
               res.data.rows.list.forEach(item => {
                 item.createtime = item.createtime.substring(0, item.createtime.indexOf(".")).replace("T", " ");
+                item.updatetime = item.updatetime.substring(0, item.updatetime.indexOf(".")).replace("T", " ");
                 item.state = item.state === 1 ? true : false;
                 this.tableData.push(item);
               });

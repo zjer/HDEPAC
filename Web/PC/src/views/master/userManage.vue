@@ -42,7 +42,11 @@
         </el-table-column>
         <el-table-column :label="$t('message.birth')" prop="birth" >
         </el-table-column>
-        <el-table-column :label="$t('message.place')" prop="place" :show-overflow-tooltip="true">
+        <el-table-column :label="$t('message.province')" prop="province">
+        </el-table-column>
+        <el-table-column :label="$t('message.city')" prop="city">
+        </el-table-column>
+        <el-table-column :label="$t('message.area')" prop="area">
         </el-table-column>
         <el-table-column :label="$t('message.gender')" prop="gender">
         </el-table-column>
@@ -269,7 +273,7 @@
         if (getLocal('lang') === 'en_US') {
           this.labelWidth = 85 + 'px';
         } else {
-          this.labelWidth = 60 + 'px';
+          this.labelWidth = 70 + 'px';
         }
       },
       getUsers() {
@@ -437,9 +441,9 @@
           age: row.age,
           birth: row.birth,
           place: {
-            province: row.place ? row.place.split('-')[0] : '',
-            city: row.place ? row.place.split('-')[1] : '',
-            area: row.place ? row.place.split('-')[2] : '',
+            province: row.province,
+            city: row.city,
+            area: row.area,
           },
           gender: row.gender === this.$t('message.man') ? 1 : 0,
           admin: row.admin === this.$t('message.yes') ? 1 : 0,
@@ -454,7 +458,9 @@
           password: this.ruleForm.password,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
-          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
+          province: this.ruleForm.place.province,
+          city: this.ruleForm.place.city,
+          area: this.ruleForm.place.area,
           gender: this.ruleForm.gender,
           admin: this.ruleForm.admin,
           state: this.ruleForm.state,
@@ -474,12 +480,14 @@
       },
       updateUser() {
         let param = {
-          userid: this.ruleForm.userid,
+          userid: parseInt(this.ruleForm.userid),
           username: this.ruleForm.username,
           password: this.ruleForm.password,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
-          place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
+          province: this.ruleForm.place.province,
+          city: this.ruleForm.place.city,
+          area: this.ruleForm.place.area,
           gender: this.ruleForm.gender,
           admin: this.ruleForm.admin,
           state: this.ruleForm.state,
