@@ -16,9 +16,10 @@
     <result column="province" jdbcType="VARCHAR" property="province" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="chinesename" jdbcType="VARCHAR" property="chinesename" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area
+    userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area, chinesename
   </sql>
 
   <!--登录-->
@@ -39,8 +40,8 @@
 
   <!--添加用户-->
   <insert id="addUser">
-    insert into hd_user (userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, current_timestamp, #{age,jdbcType=INTEGER}, #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, current_timestamp, current_timestamp, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR})
+    insert into hd_user (userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area, chinesename)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, current_timestamp, #{age,jdbcType=INTEGER}, #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, current_timestamp, current_timestamp, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{chinesename,jdbcType=VARCHAR})
   </insert>
 
   <!--更新用户信息-->
@@ -56,6 +57,7 @@
       province = #{province,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       area = #{area,jdbcType=VARCHAR},
+      chinesename = #{chinesename,jdbcType=VARCHAR},
       updatetime = current_timestamp
     where userid = #{userid,jdbcType=INTEGER}
   </update>

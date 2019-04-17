@@ -86,9 +86,9 @@ public class UserController {
      * */
     @PostMapping(value = "/addUser")
     @ResponseBody
-    public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender, @RequestParam(value = "province", required = false) String province, @RequestParam(value = "city", required = false) String city, @RequestParam(value = "area", required = false) String area) {
-        System.out.println(userid + ',' + username + ',' + password + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + gender + ',' + province + ',' + city + ',' + area);
-        Object user = userService.AddUser(userid, username, password, age, birth, admin, state, gender, province, city, area);
+    public ResultUtil AddUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender, @RequestParam(value = "province", required = false) String province, @RequestParam(value = "city", required = false) String city, @RequestParam(value = "area", required = false) String area, @RequestParam(value = "chinesename", required = false) String chinesename) {
+        System.out.println(userid + ',' + username + ',' + password + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + gender + ',' + province + ',' + city + ',' + area + ',' + chinesename);
+        Object user = userService.AddUser(userid, username, password, age, birth, admin, state, gender, province, city, area, chinesename);
         return ResultUtil.success("添加成功！", user);
     }
 
@@ -97,9 +97,9 @@ public class UserController {
      * */
     @PostMapping(value = "/updateUser")
     @ResponseBody
-    public ResultUtil UpdateUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender, @RequestParam(value = "province", required = false) String province, @RequestParam(value = "city", required = false) String city, @RequestParam(value = "area", required = false) String area) {
-        System.out.println(userid + ',' + username + ',' + password + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + gender + ',' + province + ',' + city + ',' + area);
-        Object user = userService.UpdateUser(userid, username, password, age, birth, admin, state, gender, province, city, area);
+    public ResultUtil UpdateUser(@RequestParam(value = "userid", required = false) Integer userid, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "birth", required = false) String birth, @RequestParam(value = "admin", required = false) Integer admin, @RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "gender", required = false) Integer gender, @RequestParam(value = "province", required = false) String province, @RequestParam(value = "city", required = false) String city, @RequestParam(value = "area", required = false) String area, @RequestParam(value = "chinesename", required = false) String chinesename) {
+        System.out.println(userid + ',' + username + ',' + password + ',' + age + ',' + birth + ',' + admin + ',' + state + ',' + gender + ',' + province + ',' + city + ',' + area + ',' + chinesename);
+        Object user = userService.UpdateUser(userid, username, password, age, birth, admin, state, gender, province, city, area, chinesename);
         return ResultUtil.success("修改成功！", user);
     }
 

@@ -31,6 +31,8 @@ public class User {
 
     private String area;
 
+    private String chinesename;
+
     public Integer getUserid() {
         return userid;
     }
@@ -143,6 +145,14 @@ public class User {
         this.area = area;
     }
 
+    public String getChinesename() {
+        return chinesename;
+    }
+
+    public void setChinesename(String chinesename) {
+        this.chinesename = chinesename;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -160,6 +170,7 @@ public class User {
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
                 ", area='" + area + '\'' +
+                ", chinesename='" + chinesename + '\'' +
                 '}';
     }
 }

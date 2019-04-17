@@ -33,16 +33,16 @@ public class UserServiceImpl implements UserService {
      * 添加用户
      * */
     @Override
-    public int AddUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area) {
-        return userDao.addUser(userid, username, password, age, birth, admin, state, gender, province, city, area);
+    public int AddUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area, String chinesename) {
+        return userDao.addUser(userid, username, password, age, birth, admin, state, gender, province, city, area, chinesename);
     }
 
     /*
      * 更新用户信息
      * */
     @Override
-    public int UpdateUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area) {
-        return userDao.updateUser(userid, username, password, age, birth, admin, state, gender, province, city, area);
+    public int UpdateUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area, String chinesename) {
+        return userDao.updateUser(userid, username, password, age, birth, admin, state, gender, province, city, area, chinesename);
     }
 
     /*
