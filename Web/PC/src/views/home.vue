@@ -1,20 +1,18 @@
 <template>
   <div>
     <head-top></head-top>
-    <el-main>
-    </el-main>
+    <home-main></home-main>
   </div>
 </template>
 
 <script>
   import { getLocal } from "../config/mUtils";
-  import Guide from "../components/home/guide";
   import HomeMain from "../components/home/homeMain";
   import HeadTop from "../components/headTop";
 
   export default {
     name: 'home',
-    components: { HeadTop },
+    components: { HomeMain, HeadTop },
     data () {
       return {
         headerTitle: this.$t('home'),
@@ -33,6 +31,7 @@
         this.$store.state.showGuide = val;
       }*/
     },
+
   }
 </script>
 
