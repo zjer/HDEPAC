@@ -329,7 +329,6 @@
           productcode: this.ruleForm.productcode,
           productname: this.ruleForm.productname,
           producttype: this.ruleForm.producttype,
-          createtime: this.ruleForm.createtime,
           state: this.ruleForm.state,
         };
         this.fetch.ajax('/product/addProduct', param, 'POST')

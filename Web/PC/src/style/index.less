@@ -296,6 +296,35 @@ html,body{
   }
 }
 
+.search-box {
+  background-color: @white;
+  padding: 20px;
+  .brs(5px);
+  margin: 50px 20px 20px;
+  position: relative;
+  .el-form {
+    width: 100%;
+    overflow: hidden;
+    .el-form-item {
+      width: calc((100% / 4) - 20px);
+      float: left;
+      margin: 0 20px 0 0;
+      .el-select, .el-date-editor.el-input, .el-date-editor.el-input__inner {
+        width: 100%;
+      }
+    }
+    .button-line {
+      width: 100%;
+      overflow: hidden;
+      .el-form-item {
+        width: auto;
+        float: right;
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
 .table_container {
   padding: 20px;
   background-color: @white;

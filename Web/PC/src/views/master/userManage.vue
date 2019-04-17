@@ -48,6 +48,8 @@
         </el-table-column>
         <el-table-column :label="$t('message.createtime')" prop="createtime">
         </el-table-column>
+        <el-table-column :label="$t('message.updatetime')" prop="updatetime">
+        </el-table-column>
         <el-table-column :label="$t('message.admin')" prop="admin">
         </el-table-column>
         <el-table-column :label="$t('message.state')" prop="state">
@@ -281,6 +283,7 @@
             if (res.data.state) {
               res.data.rows.list.forEach(item => {
                 item.createtime = item.createtime.substring(0, item.createtime.indexOf(".")).replace("T", " ");
+                item.updatetime = item.updatetime.substring(0, item.updatetime.indexOf(".")).replace("T", " ");
                 item.gender = item.gender === 1 ? this.$t('message.man') : this.$t('message.woman');
                 item.state = item.state === 1 ? true : false;
                 item.admin = item.admin === 1 ? this.$t('message.yes') : this.$t('message.no');
@@ -416,6 +419,7 @@
                 type: "success",
                 message: this.$t('message.updateSuccess')
               });
+              this.getUsers();
             }
           })
       },
@@ -448,7 +452,6 @@
           userid: 0,
           username: this.ruleForm.username,
           password: this.ruleForm.password,
-          createtime: this.ruleForm.createtime,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
           place: this.ruleForm.place.province + '-' + this.ruleForm.place.city + '-' + this.ruleForm.place.area,
