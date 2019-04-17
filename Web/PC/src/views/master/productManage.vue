@@ -322,6 +322,7 @@
           productcode: row.productcode,
           productname: row.productname,
           producttype: row.producttype,
+          createtime: row.createtime,
           state: row.state === true ? 1 : 0,
         };
         this.isnew = 1;

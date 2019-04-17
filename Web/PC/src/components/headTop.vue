@@ -62,7 +62,7 @@
       return {
         isShowMenu: getLocal('isShowMenu'),
         curLanguage: getLocal('lang'),
-        userName: getStore('username'),
+        userName: getStore('chinesename'),
         dialogVisible: false,
         labelW: 0 + 'px',
         ruleForm: {

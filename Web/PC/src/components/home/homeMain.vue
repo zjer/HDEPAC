@@ -27,7 +27,7 @@
     },
     mounted() {
       setTimeout(() => {
-        let winHeight = document.documentElement.clientHeight - 252;
+        let winHeight = document.documentElement.clientHeight - 172;
         document.getElementById("height").style.height = winHeight + 'px';
       }, 1);
     },
@@ -35,7 +35,7 @@
       watchHeight() {
         setTimeout(() => {
           window.onresize = function temp() {
-            let winHeight = document.documentElement.clientHeight - 252;
+            let winHeight = document.documentElement.clientHeight - 172;
             document.getElementById("height").style.height = winHeight + 'px';
           };
         }, 1);

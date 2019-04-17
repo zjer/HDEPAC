@@ -139,6 +139,15 @@
           removeLocal('username');
         }
       },
+      setLogintime(val) {
+        let param = {
+          userid: val
+        }
+        this.fetch.ajax('/user/setLogintime', param, 'POST')
+          .then(res => {
+            if (res.data.state) {}
+          })
+      },
       login() {
         let param = {
           username: this.ruleForm.username.trim(),
@@ -149,9 +158,11 @@
           .then(res => {
             if (res.data.state) {
               setStore('username', res.data.rows.username);
+              setStore('chinesename', res.data.rows.chinesename);
               setLocal('curId', res.data.rows.userid);
               setStore('token', res.data.rows.token);
               setLocal('lang', this.ruleForm.language);
+              this.setLogintime(res.data.rows.userid);
               this.$message({
                 type: 'success',
                 message: this.$t('message.loginSuccess'),
