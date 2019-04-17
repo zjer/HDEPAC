@@ -75,12 +75,23 @@ public class UserController {
                 map.put("username", user.getUsername());
                 map.put("admin", user.getAdmin());
                 map.put("createtime", user.getCreatetime());
-                map.put("logintime", user.getLogintime());
+                map.put("logintime", new Date());
+                map.put("chinesename", user.getChinesename());
                 return ResultUtil.success("登录成功！", map);
             }
         }
     }
 
+    /*
+     * 更新登录时间
+     * */
+    @PostMapping(value = "/setLogintime")
+    @ResponseBody
+    public ResultUtil SetLogintime(@RequestParam(value = "userid", required = false) Integer userid) {
+        System.out.println(userid);
+        Object user = userService.SetLogintime(userid);
+        return ResultUtil.success("登录时间更新成功！", user);
+    }
     /*
      * 添加用户
      * */

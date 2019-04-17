@@ -26,6 +26,9 @@ public interface UserDao {
     //根据用户名查找
     public User searchUser(@Param("username") String username);
 
+    //更新登录时间
+    public int setLogintime(@Param("userid") Integer userid);
+
     //新增用户
     public int addUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender, @Param("province") String province, @Param("city") String city, @Param("area") String area, @Param("chinesename") String chinesename);
 

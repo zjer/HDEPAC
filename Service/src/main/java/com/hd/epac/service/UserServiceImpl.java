@@ -30,6 +30,14 @@ public class UserServiceImpl implements UserService {
     }
 
     /*
+     * 更新登录时间
+     * */
+    @Override
+    public int SetLogintime(Integer userid) {
+        return userDao.setLogintime(userid);
+    }
+
+    /*
      * 添加用户
      * */
     @Override

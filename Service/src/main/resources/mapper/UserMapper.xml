@@ -38,6 +38,13 @@
     where username = #{username,jdbcType=VARCHAR}
   </select>
 
+  <!--更新登录时间-->
+  <update id="setLogintime">
+    update hd_user
+    set logintime = current_timestamp
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+
   <!--添加用户-->
   <insert id="addUser">
     insert into hd_user (userid, username, password, createtime, age, birth, admin, state, gender, logintime, updatetime, province, city, area, chinesename)

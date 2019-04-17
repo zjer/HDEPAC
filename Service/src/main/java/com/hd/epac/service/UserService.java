@@ -11,6 +11,9 @@ public interface UserService {
     //根据用户名查找
     public User SearchUser(String username);
 
+    //更新登录时间
+    public int SetLogintime(Integer userid);
+
     //新增用户
     public int AddUser(Integer userid, String username, String password, Integer age, String birth, Integer admin, Integer state, Integer gender, String province, String city, String area, String chinesename);
 
