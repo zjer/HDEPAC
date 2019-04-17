@@ -3,7 +3,6 @@ package com.hd.epac.dao;
 import com.hd.epac.entity.Product;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public interface ProductDao {
@@ -20,7 +19,7 @@ public interface ProductDao {
     int updateByPrimaryKey(Product record);
 
     //新增产品
-    public int addProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("createtime") Timestamp createtime, @Param("state") Integer state);
+    public int addProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("state") Integer state);
 
     //更新产品
     public int updateProduct(@Param("productid") Integer productid, @Param("productcode") String productcode, @Param("productname") String productname, @Param("producttype") Integer producttype, @Param("state") Integer state);

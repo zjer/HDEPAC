@@ -8,15 +8,16 @@
     <result column="producttype" property="producttype" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    productid, productcode, productname, producttype, createtime, state
+    productid, productcode, productname, producttype, createtime, state, updatetime
   </sql>
 
   <!--添加产品-->
   <insert id="addProduct">
-    insert into hd_product (productid, productcode, productname, producttype, createtime, state)
-    values (#{productid,jdbcType=INTEGER}, #{productcode,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
+    insert into hd_product (productid, productcode, productname, producttype, createtime, state, updatetime)
+    values (#{productid,jdbcType=INTEGER}, #{productcode,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttype,jdbcType=INTEGER}, current_timestamp, #{state,jdbcType=INTEGER}, current_timestamp)
   </insert>
 
   <!--更新用户信息-->
@@ -25,7 +26,8 @@
     set productcode = #{productcode,jdbcType=VARCHAR},
       productname = #{productname,jdbcType=VARCHAR},
       producttype = #{producttype,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER}
+      state = #{state,jdbcType=INTEGER},
+      updatetime = current_timestamp
     where productid = #{productid,jdbcType=INTEGER}
   </update>
 
@@ -54,7 +56,8 @@
   <!--更改产品状态-->
   <update id="updateState">
     update hd_product
-    set state = #{state,jdbcType=INTEGER}
+    set state = #{state,jdbcType=INTEGER},
+      updatetime = current_timestamp
     where productid = #{productid,jdbcType=INTEGER}
   </update>
 </mapper>

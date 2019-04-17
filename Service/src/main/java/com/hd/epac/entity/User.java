@@ -23,6 +23,10 @@ public class User {
 
     private Integer gender;
 
+    private Timestamp logintime;
+
+    private Timestamp updatetime;
+
     public Integer getUserid() {
         return userid;
     }
@@ -101,6 +105,22 @@ public class User {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public Timestamp getLogintime() {
+        return logintime;
+    }
+
+    public void setLogintime(Timestamp logintime) {
+        this.logintime = logintime;
+    }
+
+    public Timestamp getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Timestamp updatetime) {
+        this.updatetime = updatetime;
     }
 
     @Override

@@ -5,7 +5,6 @@ import com.hd.epac.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +22,19 @@ public class UserServiceImpl implements UserService {
     }
 
     /*
+     * 根据用户名查找
+     * */
+    @Override
+    public User SearchUser(String username) {
+        return userDao.searchUser(username);
+    }
+
+    /*
      * 添加用户
      * */
     @Override
-    public int AddUser(Integer userid, String username, String password, Timestamp createtime, String place, Integer age, String birth, Integer admin, Integer state, Integer gender) {
-        return userDao.addUser(userid, username, password, createtime, place, age, birth, admin, state, gender);
+    public int AddUser(Integer userid, String username, String password ,String place, Integer age, String birth, Integer admin, Integer state, Integer gender) {
+        return userDao.addUser(userid, username, password, place, age, birth, admin, state, gender);
     }
 
     /*

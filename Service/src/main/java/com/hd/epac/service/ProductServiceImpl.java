@@ -5,7 +5,6 @@ import com.hd.epac.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
      * 添加产品
      * */
     @Override
-    public int AddProduct(Integer productid, String productcode, String productname, Integer producttype, Timestamp createtime, Integer state) {
-        return productDao.addProduct(productid, productcode, productname, producttype, createtime, state);
+    public int AddProduct(Integer productid, String productcode, String productname, Integer producttype, Integer state) {
+        return productDao.addProduct(productid, productcode, productname, producttype, state);
     }
 
     /*

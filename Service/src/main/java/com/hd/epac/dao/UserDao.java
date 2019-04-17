@@ -4,7 +4,6 @@ import com.hd.epac.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Component
@@ -24,8 +23,11 @@ public interface UserDao {
     //登录
     public User checkLogin(@Param("username") String username, @Param("password") String password);
 
+    //根据用户名查找
+    public User searchUser(@Param("username") String username);
+
     //新增用户
-    public int addUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("createtime") Timestamp createtime, @Param("place") String place, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender);
+    public int addUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("place") String place, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender);
 
     //更新用户
     public int updateUser(@Param("userid") Integer userid, @Param("username") String username, @Param("password") String password, @Param("place") String place, @Param("age") Integer age, @Param("birth") String birth, @Param("admin") Integer admin, @Param("state") Integer state, @Param("gender") Integer gender);

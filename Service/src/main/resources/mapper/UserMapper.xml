@@ -12,9 +12,11 @@
     <result column="admin" jdbcType="INTEGER" property="admin" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="logintime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, password, createtime, place, age, birth, admin, state, gender
+    userid, username, password, createtime, place, age, birth, admin, state, gender, logintime, updatetime
   </sql>
 
   <!--登录-->
@@ -25,16 +27,18 @@
     where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
 
+  <!--根据用户名查找-->
+  <select id="searchUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hd_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
   <!--添加用户-->
   <insert id="addUser">
-    insert into hd_user (userid, username, password,
-      createtime, place, age,
-      birth, admin, state,
-      gender)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{createtime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
-      #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
-      #{gender,jdbcType=INTEGER})
+    insert into hd_user (userid, username, password, createtime, place, age, birth, admin, state, gender, logintime, updatetime)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, current_timestamp, #{place,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birth,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, current_timestamp, current_timestamp)
   </insert>
 
   <!--更新用户信息-->
@@ -47,7 +51,8 @@
       birth = #{birth,jdbcType=VARCHAR},
       admin = #{admin,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
-      gender = #{gender,jdbcType=INTEGER}
+      gender = #{gender,jdbcType=INTEGER},
+      updatetime = current_timestamp
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 
@@ -77,14 +82,16 @@
   <!--更改用户状态-->
   <update id="updateState">
     update hd_user
-    set state = #{state,jdbcType=INTEGER}
+    set state = #{state,jdbcType=INTEGER},
+      updatetime = current_timestamp
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 
   <!--重置用户密码（批量重置）-->
   <update id="resetPWD" parameterType="java.util.List">
     update hd_user
-    set password = "123456"
+    set password = "123456",
+      updatetime = current_timestamp
     where userid in
     <foreach collection="list" item="userid" open="(" separator="," close=")">
       #{userid,jdbcType=INTEGER}
@@ -94,7 +101,8 @@
   <!--修改登录人密码-->
   <update id="modifyPWD">
     update hd_user
-    set password = #{password,jdbcType=VARCHAR}
+    set password = #{password,jdbcType=VARCHAR},
+      updatetime = current_timestamp
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

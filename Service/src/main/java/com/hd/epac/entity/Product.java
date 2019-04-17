@@ -1,7 +1,6 @@
 package com.hd.epac.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Product {
     private Integer productid;
@@ -15,6 +14,8 @@ public class Product {
     private Timestamp createtime;
 
     private Integer state;
+
+    private Timestamp updatetime;
 
     public Integer getProductid() {
         return productid;
@@ -64,6 +65,14 @@ public class Product {
         this.state = state;
     }
 
+    public Timestamp getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Timestamp updatetime) {
+        this.updatetime = updatetime;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -73,6 +82,7 @@ public class Product {
                 ", producttype=" + producttype +
                 ", createtime=" + createtime +
                 ", state=" + state +
+                ", updatetime=" + updatetime +
                 '}';
     }
 }

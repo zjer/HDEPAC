@@ -24,9 +24,9 @@ public class ProductController {
      * */
     @PostMapping(value = "/addProduct")
     @ResponseBody
-    public ResultUtil AddProduct(@RequestParam(value = "productid", required = false) Integer productid, @RequestParam(value = "productcode", required = false) String productcode, @RequestParam(value = "productname", required = false) String productname, @RequestParam(value = "producttype", required = false) Integer producttype, @RequestParam(value = "createtime", required = false) Timestamp createtime, @RequestParam(value = "state", required = false) Integer state) {
-        System.out.println(productid + ',' + productcode + ',' + productname + ',' + producttype + ',' + createtime + ',' + state);
-        Object product = productService.AddProduct(productid, productcode, productname, producttype, createtime, state);
+    public ResultUtil AddProduct(@RequestParam(value = "productid", required = false) Integer productid, @RequestParam(value = "productcode", required = false) String productcode, @RequestParam(value = "productname", required = false) String productname, @RequestParam(value = "producttype", required = false) Integer producttype, @RequestParam(value = "state", required = false) Integer state) {
+        System.out.println(productid + ',' + productcode + ',' + productname + ',' + producttype + ',' + state);
+        Object product = productService.AddProduct(productid, productcode, productname, producttype, state);
         return ResultUtil.success("添加成功！", product);
     }
 
