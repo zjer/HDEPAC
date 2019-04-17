@@ -31,7 +31,7 @@ let en = {
     save: 'Save',
     search: 'Search',
     reset: 'Reset',
-    username: 'UserName',
+    username: 'Full Name',
     age: 'Age',
     birth: 'Birth',
     place: 'Place',

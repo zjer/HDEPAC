@@ -36,6 +36,8 @@
         </el-table-column>
         <el-table-column :label="$t('message.account')" prop="username">
         </el-table-column>
+        <el-table-column :label="$t('message.username')" prop="chinesename">
+        </el-table-column>
         <el-table-column :label="$t('message.password')" prop="password">
         </el-table-column>
         <el-table-column :label="$t('message.age')" prop="age">
@@ -94,6 +96,9 @@
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" :label-width="labelWidth">
           <el-form-item :label="$t('message.account')" prop="username">
             <el-input v-model="ruleForm.username"></el-input>
+          </el-form-item>
+          <el-form-item :label="$t('message.username')" prop="chinesename">
+            <el-input v-model="ruleForm.chinesename"></el-input>
           </el-form-item>
           <el-form-item :label="$t('message.password')" prop="password">
             <el-input v-model="ruleForm.password"></el-input>
@@ -211,6 +216,7 @@
         ruleForm: {
           userid: 0,
           username: '',
+          chinesename: '',
           password: '',
           createtime: '',
           age: 18,
@@ -226,6 +232,7 @@
         },
         rules: {
           username: [{ required: true, message:this.$t('message.inputUsername'), trigger: 'blur' }],
+          chinesename: [{ required: true, message:this.$t('message.inputUsername'), trigger: 'blur' }],
           password: [{ required: true, message:this.$t('message.inputPassword'), trigger: 'blur' }],
           age: [{ required: true, message:this.$t('message.inputAge'), trigger: 'blur' }],
           birth: [{ required: true, message:this.$t('message.choseBirth'), trigger: 'blur' }],
@@ -316,6 +323,7 @@
         this.ruleForm = {
           userid: 0,
           username: '',
+          inputUsername: '',
           password: '',
           createtime: formatDate(new Date()),
           age: 18,
@@ -436,6 +444,7 @@
         this.ruleForm = {
           userid: row.userid,
           username: row.username,
+          chinesename: row.chinesename,
           password: row.password,
           createtime: row.createtime,
           age: row.age,
@@ -455,6 +464,7 @@
         let param = {
           userid: 0,
           username: this.ruleForm.username,
+          chinesename: this.ruleForm.chinesename,
           password: this.ruleForm.password,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,
@@ -482,6 +492,7 @@
         let param = {
           userid: parseInt(this.ruleForm.userid),
           username: this.ruleForm.username,
+          chinesename: this.ruleForm.chinesename,
           password: this.ruleForm.password,
           age: this.ruleForm.age,
           birth: this.ruleForm.birth,

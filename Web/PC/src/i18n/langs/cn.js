@@ -31,7 +31,7 @@ let cn = {
     save: '保存',
     search: '搜索',
     reset: '重置',
-    username: '用户名称',
+    username: '中文名',
     age: '年龄',
     birth: '生日',
     place: '所在地区',
