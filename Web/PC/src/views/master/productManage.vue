@@ -128,7 +128,7 @@
     components: { HeadTop },
     data () {
       return {
-        isloading: true,
+        isloading: false,
         tableHeight: 0 + 'px',
         tableData: [],
         PageIndex: 1,
@@ -212,6 +212,7 @@
         this.tableData = [];
         this.fetch.ajax('/product/getProducts', param, 'POST')
           .then(res => {
+            this.isloading = true;
             if (res.data.state) {
               res.data.rows.list.forEach(item => {
                 item.createtime = item.createtime.substring(0, item.createtime.indexOf(".")).replace("T", " ");

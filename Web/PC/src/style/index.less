@@ -297,10 +297,56 @@ html,body{
 }
 
 .indexMain {
-  background-color: @white;
-  padding: 20px;
   margin: 50px 20px 20px;
-  .brs(5px);
+  .grid-content {
+    background-color: @white;
+    padding: 20px;
+    .brs(5px);
+    .title {
+      width: 100%;
+      height: 15px;
+      margin-bottom: 5px;
+      font-size: 14px;
+      line-height: 15px;
+      span {
+        float: left;
+      }
+      i {
+        float: right;
+        cursor: pointer;
+      }
+    }
+    .content {
+      width: 100%;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #999999;
+      overflow: hidden;
+      .news {
+        width: 100%;
+        height: 30px;
+        font-size: 12px;
+        line-height: 30px;
+        position: relative;
+        .newsTitle {
+          float: left;
+          cursor: pointer;
+          &.active {
+            color: @blue;
+          }
+        }
+        .newsCreatetime {
+          float: right;
+        }
+      }
+      .curCity {
+        width: 100%;
+        height: 30px;
+        font-size: 12px;
+        line-height: 30px;
+      }
+    }
+  }
 }
 
 .search-box {

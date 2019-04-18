@@ -2,13 +2,13 @@
   <div class="indexMain" id="height">
     <el-row :gutter="20">
       <el-col :span="16">
-        <div class="grid-content bg-purple">
-          <weather v-if="$store.state.showWeather"></weather>
+        <div class="grid-content">
+          <news></news>
         </div>
       </el-col>
       <el-col :span="8">
-        <div class="grid-content bg-purple">
-          <news v-if="$store.state.showNews"></news>
+        <div class="grid-content">
+          <weather></weather>
         </div>
       </el-col>
     </el-row>
@@ -27,7 +27,8 @@
     },
     mounted() {
       setTimeout(() => {
-        let winHeight = document.documentElement.clientHeight - 172;
+        let winHeight = document.documentElement.clientHeight - 170;
+        document.getElementById("height").style.maxHeight = winHeight + 'px';
         document.getElementById("height").style.height = winHeight + 'px';
       }, 1);
     },
@@ -35,7 +36,8 @@
       watchHeight() {
         setTimeout(() => {
           window.onresize = function temp() {
-            let winHeight = document.documentElement.clientHeight - 172;
+            let winHeight = document.documentElement.clientHeight - 170;
+            document.getElementById("height").style.maxHeight = winHeight + 'px';
             document.getElementById("height").style.height = winHeight + 'px';
           };
         }, 1);

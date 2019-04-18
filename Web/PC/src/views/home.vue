@@ -31,7 +31,6 @@
         this.$store.state.showGuide = val;
       }*/
     },
-
   }
 </script>
 

@@ -77,6 +77,10 @@ let cn = {
     productcode: '产品编码',
     productname: '产品名称',
     producttype: '产品类型',
+    coinNews: '币快报',
+    refresh: '刷新',
+    weather: '今日天气',
+    curCity: '当前城市：'
   },
 
   ...zhLocale

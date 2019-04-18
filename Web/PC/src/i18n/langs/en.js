@@ -77,6 +77,10 @@ let en = {
     productcode: 'Productcode',
     productname: 'Productname',
     producttype: 'Producttype',
+    coinNews: 'Coin News',
+    refresh: 'Refresh',
+    weather: 'Today Weather',
+    curCity: 'City:'
   },
 
   ...enLocale
