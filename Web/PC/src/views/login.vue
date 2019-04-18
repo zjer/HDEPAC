@@ -162,6 +162,7 @@
               setLocal('curId', res.data.rows.userid);
               setStore('token', res.data.rows.token);
               setLocal('lang', this.ruleForm.language);
+              setLocal('logintime', res.data.rows.logintime.substring(0, res.data.rows.logintime.indexOf(".")).replace("T", " "));
               this.setLogintime(res.data.rows.userid);
               this.$message({
                 type: 'success',

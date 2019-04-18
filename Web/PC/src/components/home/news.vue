@@ -39,13 +39,30 @@
     created() {
       this.getNews();
     },
+    mounted() {
+      if (this.timer) {
+        clearInterval(this.timer);
+      } else {
+        this.timer = setInterval(() => {
+          this.getNews();
+        }, 300000);
+      }
+    },
+    destroyed() {
+      clearInterval(this.timer);
+    },
     methods: {
       getNews() {
         axios.get(baseUrl + '/httpclient/getNews').then(res => {
           this.isloading = true;
           this.newsLists = [];
           if (res.data.state) {
-            let datas = JSON.parse(res.data.rows).list[0].lives;
+            let datas = res.data.rows.list[0].lives;
+            if (datas.length < 10) {
+              res.data.rows.list[1].lives.forEach(item => {
+                datas.push(item);
+              });
+            }
             console.log(datas);
             datas.forEach(ele => {
               ele.title = ele.content.substring(0, ele.content.indexOf('】')+1);

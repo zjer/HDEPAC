@@ -199,6 +199,32 @@ html,body{
   }
 }
 
+.el-carousel {
+  background-color: #d3dce6;
+  .el-carousel__item {
+    padding: 0 10px;
+  }
+}
+
+.el-popover {
+  font-size: 12px;
+  line-height: 20px;
+  padding: 15px 20px;
+}
+
+.fl {
+   float: left;
+ }
+ .fr {
+   float: right;
+ }
+ .ml5 {
+   margin-left: 5px;
+ }
+ .ml10 {
+   margin-left: 10px;
+ }
+
 .loginBg {
   .wh(100%, 100vh);
   .bis('../assets/img/loginBg.jpg');
@@ -281,6 +307,7 @@ html,body{
   float: right;
 }
 .navDash {
+  font-size: 12px;
   color: @white;
   i {
     color: @white;
@@ -297,53 +324,66 @@ html,body{
 }
 
 .indexMain {
+  max-width: 1200px;
   margin: 50px 20px 20px;
-  .grid-content {
-    background-color: @white;
-    padding: 20px;
-    .brs(5px);
-    .title {
-      width: 100%;
-      height: 15px;
-      margin-bottom: 5px;
-      font-size: 14px;
-      line-height: 15px;
-      span {
-        float: left;
+  .el-row {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    .grid-content {
+      background-color: @white;
+      padding: 20px;
+      .brs(5px);
+      span.blue {
+        color: @blue;
       }
-      i {
-        float: right;
-        cursor: pointer;
-      }
-    }
-    .content {
-      width: 100%;
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 1px solid #999999;
-      overflow: hidden;
-      .news {
+      .title {
         width: 100%;
-        height: 30px;
-        font-size: 12px;
-        line-height: 30px;
-        position: relative;
-        .newsTitle {
+        height: 15px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        line-height: 15px;
+        span {
           float: left;
+        }
+        i {
+          float: right;
           cursor: pointer;
-          &.active {
-            color: @blue;
+        }
+      }
+      .content {
+        width: 100%;
+        min-height: 300px;
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid #999999;
+        overflow: hidden;
+        .news {
+          width: 100%;
+          height: 30px;
+          font-size: 12px;
+          line-height: 30px;
+          position: relative;
+          .newsTitle {
+            float: left;
+            cursor: pointer;
+            &.active {
+              color: @blue;
+            }
+          }
+          .newsCreatetime {
+            float: right;
           }
         }
-        .newsCreatetime {
-          float: right;
+        .weather {
+          width: 100%;
+          height: auto;
+          font-size: 12px;
+          line-height: 30px;
+          .iconfont {
+            font-size: 12px;
+          }
         }
-      }
-      .curCity {
-        width: 100%;
-        height: 30px;
-        font-size: 12px;
-        line-height: 30px;
       }
     }
   }
