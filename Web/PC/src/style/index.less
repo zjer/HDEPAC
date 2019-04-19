@@ -367,7 +367,8 @@ html,body{
           .newsTitle {
             float: left;
             cursor: pointer;
-            &.active {
+            .trans(0.5s);
+            &:hover, &.active {
               color: @blue;
             }
           }
