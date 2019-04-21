@@ -1,5 +1,8 @@
 package com.hd.epac.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hd.epac.service.HttpClient;
 import com.hd.epac.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ public class HttpClientController {
     @Autowired
     private HttpClient httpClient;
 
+    /*
+     * 获取金色财经快讯
+     * */
     @GetMapping(value = "/getNews")
     @ResponseBody
     public ResultUtil GetNews() {
@@ -24,9 +30,13 @@ public class HttpClientController {
         HttpMethod method = HttpMethod.GET;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         Object client = httpClient.client(url, method, params);
-        return ResultUtil.success("获取成功！", client);
+        JSONObject jsonObject = JSON.parseObject((String) client);
+        return ResultUtil.success("获取成功！", jsonObject);
     }
 
+    /*
+     * 获取一周天气
+     * */
     @GetMapping(value = "/getWeather")
     @ResponseBody
     public ResultUtil GetWeather() {
@@ -34,6 +44,21 @@ public class HttpClientController {
         HttpMethod method = HttpMethod.GET;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         Object client = httpClient.client(url, method, params);
-        return ResultUtil.success("获取成功！", client);
+        JSONObject jsonObject = JSON.parseObject((String) client);
+        return ResultUtil.success("获取成功！", jsonObject);
+    }
+
+    /*
+     * 获取金色财经币价
+     * */
+    @GetMapping(value = "/getCoinPrice")
+    @ResponseBody
+    public ResultUtil getCoinPrice() {
+        String url = "https://api.jinse.com/v6/coin/getList?page=1&limit=10&sortby=market_cap&order=desc&search=&currency=CNY";
+        HttpMethod method = HttpMethod.GET;
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        Object client = httpClient.client(url, method, params);
+        JSONArray jsonArray = JSON.parseArray((String) client);
+        return ResultUtil.success("获取成功！", jsonArray);
     }
 }
