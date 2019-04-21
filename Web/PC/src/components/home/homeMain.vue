@@ -19,6 +19,13 @@
         </div>
       </el-col>
     </el-row>
+    <el-row :gutter="24">
+      <el-col :span="24">
+        <div class="grid-content">
+          <coins></coins>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -26,6 +33,7 @@
   import { getLocal, getStore } from "../../config/mUtils";
   import Weather from "./weather";
   import News from "./news";
+  import Coins from "./coins";
 
   export default {
     name: 'homeMain',
@@ -35,7 +43,7 @@
         logintime: getLocal('logintime')
       }
     },
-    components: { News, Weather },
+    components: { Coins, News, Weather },
     created() {
       this.watchHeight();
     },

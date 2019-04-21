@@ -212,6 +212,34 @@ html,body{
   padding: 15px 20px;
 }
 
+.el-table {
+  font-size: 12px;
+  th {
+    padding: 10px 0;
+    .cell {
+      font-weight: normal;
+    }
+  }
+  td {
+    padding: 8px 0;
+    .cell {
+      line-height: 20px;
+      font-weight: normal;
+      img.coinIcon {
+        .wh(25px, 25px);
+        display: inline-block;
+        line-height: 25px;
+        float: left;
+      }
+      span.coinName {
+        line-height: 25px;
+        float: left;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
 .fl {
    float: left;
  }
@@ -466,4 +494,8 @@ html,body{
       background-color: @blue;
     }
   }
+}
+
+.siteWrapper {
+  display: none;
 }

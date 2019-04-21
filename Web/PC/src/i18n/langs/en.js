@@ -95,6 +95,13 @@ let en = {
     dayWea: 'Day Weather:',
     dayTem: 'Day Temperature:',
     dayWind: 'Day Wind:',
+    coinPrice: 'Hot Coin Price',
+    coinName: 'Coin Name',
+    price: 'Price(￥)',
+    change24H: 'Change In 24H',
+    trade24H: 'Trade In 24H',
+    cap: 'Cap(￥)',
+    supply: 'Supply'
   },
 
   ...enLocale

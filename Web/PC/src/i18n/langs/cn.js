@@ -95,6 +95,14 @@ let cn = {
     dayWea: '当日天气：',
     dayTem: '当日温度：',
     dayWind: '当日风力：',
+    coinPrice: '热门加密货币行情',
+    coinName: '币种',
+    price: '价格（￥）',
+    change24H: '24H涨跌幅',
+    trade24H: '24H成交额',
+    cap: '市值￥',
+    supply: '流通量'
+
   },
 
   ...zhLocale
