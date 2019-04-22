@@ -49,16 +49,16 @@ public class HttpClientController {
     }
 
     /*
-     * 获取金色财经币价
+     * 获取牛眼行情币价
      * */
     @GetMapping(value = "/getCoinPrice")
     @ResponseBody
     public ResultUtil getCoinPrice() {
-        String url = "https://api.jinse.com/v6/coin/getList?page=1&limit=10&sortby=market_cap&order=desc&search=&currency=CNY";
+        String url = "https://fastmarket.niuyan.com/api/v2/web/coins?page=1&pagesize=10&lan=zh-cn";
         HttpMethod method = HttpMethod.GET;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         Object client = httpClient.client(url, method, params);
-        JSONArray jsonArray = JSON.parseArray((String) client);
-        return ResultUtil.success("获取成功！", jsonArray);
+        JSONObject jsonObject = JSON.parseObject((String) client);
+        return ResultUtil.success("获取成功！", jsonObject);
     }
 }
