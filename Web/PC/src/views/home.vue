@@ -1,12 +1,11 @@
 <template>
   <div>
     <head-top></head-top>
-    <home-main></home-main>
+    <home-main id="height"></home-main>
   </div>
 </template>
 
 <script>
-  import { getLocal } from "../config/mUtils";
   import HomeMain from "../components/home/homeMain";
   import HeadTop from "../components/headTop";
 
@@ -20,17 +19,27 @@
         showArrow: false
       }
     },
-    computed: {
-      /*listenGuid() {
-        return this.$store.state.showGuide
-      }*/
+    created() {
+      this.watchHeight();
     },
-    watch: {
-      /*listenGuid: function (val) {
-        console.log(val)
-        this.$store.state.showGuide = val;
-      }*/
+    mounted() {
+      setTimeout(() => {
+        let winHeight = document.documentElement.clientHeight - 170;
+        document.getElementById("height").style.maxHeight = winHeight + 'px';
+        document.getElementById("height").style.height = winHeight + 'px';
+      }, 1);
     },
+    methods: {
+      watchHeight() {
+        setTimeout(() => {
+          window.onresize = function temp() {
+            let winHeight = document.documentElement.clientHeight - 170;
+            document.getElementById("height").style.maxHeight = winHeight + 'px';
+            document.getElementById("height").style.height = winHeight + 'px';
+          };
+        }, 1);
+      }
+    }
   }
 </script>
 

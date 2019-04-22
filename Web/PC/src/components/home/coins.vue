@@ -11,8 +11,8 @@
         style="width: 100%">
         <el-table-column :label="$t('message.coinName')">
           <template slot-scope="scope">
-            <img class="coinIcon" :src="scope.row.icon_url" alt="">
-            <span class="coinName">{{ scope.row.cn_name }}</span>
+            <img class="coinIcon" :src="'https://static.niuyan.com' + scope.row[3]" alt="">
+            <span class="coinName">{{ scope.row[1] }} - {{ scope.row[4] }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="price" :label="$t('message.price')">
@@ -26,7 +26,6 @@
         <el-table-column prop="supply" :label="$t('message.supply')">
         </el-table-column>
       </el-table>
-      <iframe src="https://cn.widgets.investing.com/top-cryptocurrencies?theme=darkTheme" width="100%" height="480px" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
     </div>
   </div>
 </template>
@@ -65,7 +64,7 @@
           this.isloading = true;
           this.tableData = [];
           if (res.data.state) {
-            let datas = res.data.rows;
+            let datas = res.data.rows.data.data;
             console.log(datas);
             datas.forEach(ele => {
               ele.change = ele.change > 0 ? '+' +ele.change + '%' : ele.change + '%';

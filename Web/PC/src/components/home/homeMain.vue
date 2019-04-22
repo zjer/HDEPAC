@@ -1,5 +1,5 @@
 <template>
-  <div class="indexMain" id="height">
+  <div class="indexMain">
     <el-row :gutter="24">
       <el-col :span="24">
         <div class="grid-content">
@@ -45,25 +45,13 @@
     },
     components: { Coins, News, Weather },
     created() {
-      this.watchHeight();
+
     },
     mounted() {
-      setTimeout(() => {
-        let winHeight = document.documentElement.clientHeight - 170;
-        document.getElementById("height").style.maxHeight = winHeight + 'px';
-        document.getElementById("height").style.height = winHeight + 'px';
-      }, 1);
+
     },
     methods: {
-      watchHeight() {
-        setTimeout(() => {
-          window.onresize = function temp() {
-            let winHeight = document.documentElement.clientHeight - 170;
-            document.getElementById("height").style.maxHeight = winHeight + 'px';
-            document.getElementById("height").style.height = winHeight + 'px';
-          };
-        }, 1);
-      }
+
     }
   }
 </script>
