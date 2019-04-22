@@ -47,23 +47,27 @@
         isDown: true,
         oldPrice: [],
         nowPrice: [],
+        webSock: null
       }
     },
     created() {
       this.getCoinPrice();
       this.getNowPrice();
+      this.initWebSocket();
     },
     mounted() {
       if (this.timer) {
         clearInterval(this.timer);
       } else {
         this.timer = setInterval(() => {
-          this.getNowPrice();
-        }, 30000);
+          /*this.getNowPrice();
+          this.getCoinPrice();*/
+        }, 10000000);
       }
     },
     destroyed() {
       clearInterval(this.timer);
+      this.initWebSocket();
     },
     methods: {
       getNowPrice() {
@@ -82,7 +86,7 @@
               });
             }
             this.nowPrice.push({name: 'BTC', price: coins.BTC});
-            this.nowPrice.push({name: 'BTC', price: coins.ETH});
+            this.nowPrice.push({name: 'ETH', price: coins.ETH});
             console.log(this.oldPrice);
             console.log(this.nowPrice);
           }
@@ -98,12 +102,10 @@
             datas.forEach(ele => {
               ele.supply = ele[10];
               this.nowPrice.forEach((item, index) => {
-                console.log(item.name);
-                console.log(ele[1]);
-                if (item.name === ele[1]) {
+                if (ele[1] === item.name) {
                   console.log(item.name);
                   console.log(ele[1]);
-                  ele.price = item.price * 6.7;
+                  ele.price = parseFloat(item.price) * 6.7;
                   ele.isDown = parseFloat(item.price) < this.oldPrice[index] ? true : false;
                 }
               });
@@ -113,6 +115,30 @@
             });
           }
         });
+      },
+      initWebSocket() { //初始化
+        const wsUrl = 'wss://ws.niuyan.com/api/v2/web/coin/ws';
+        this.webSock = new WebSocket(wsUrl);
+        this.webSock.onopen = this.webSocketOnopen;
+        this.webSock.onerror = this.webSocketOnerror;
+        this.webSock.onmessage = this.webSocketOnmessage;
+        this.webSock.onclose = this.webSocketClose;
+      },
+      webSocketOnopen() { //连接
+        console.log("WebSocket连接成功");
+      },
+      webSocketOnerror(e) { //错误
+        console.log("WebSocket连接发生错误");
+      },
+      webSocketOnmessage(e){ //数据接收
+        const redata = JSON.parse(e.data);
+        console.log(redata.value);
+      },
+      webSocketSend(agentData){//数据发送
+        this.webSock.send(agentData);
+      },
+      webSocketClose(e){ //关闭
+        console.log("connection closed (" + e.code + ")");
       }
     }
   }
