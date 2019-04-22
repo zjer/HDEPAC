@@ -61,4 +61,18 @@ public class HttpClientController {
         JSONObject jsonObject = JSON.parseObject((String) client);
         return ResultUtil.success("获取成功！", jsonObject);
     }
+
+    /*
+     * 获取牛眼行情币价
+     * */
+    @GetMapping(value = "/getNowPrice")
+    @ResponseBody
+    public ResultUtil getNowPrice() {
+        String url = "https://fastmarket.niuyan.com/api/v2/common/financerate?lan=zh-cn";
+        HttpMethod method = HttpMethod.GET;
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        Object client = httpClient.client(url, method, params);
+        JSONObject jsonObject = JSON.parseObject((String) client);
+        return ResultUtil.success("获取成功！", jsonObject);
+    }
 }
