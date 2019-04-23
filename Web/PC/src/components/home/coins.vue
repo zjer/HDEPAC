@@ -106,14 +106,14 @@
               ele.supply = ele[10];
               this.nowPrice.forEach((item, index) => {
                 if (ele[1] === item.name) {
-                  ele.price = (parseFloat(item.price) * 6.7).toFixed(2);
+                  ele.price = parseFloat((parseFloat(item.price) * 6.72).toFixed(2)).toLocaleString();
+                  ele.market_cap = parseInt(parseFloat(item.price) * 6.72 * ele.supply).toLocaleString();
                   ele.isDown = parseFloat(item.price) < parseFloat(this.oldPrice[index].price) ? true : false;
                   console.log('old:' + this.oldPrice[index].price);
                   console.log('old:' + item.price);
                 }
               });
               ele.change = ele[13] > 0 ? '+' + ele[13] + '%' : ele[13] + '%';
-              ele.market_cap = ele.price * ele.supply;
               this.tableData.push(ele);
               this.isloading = false;
             });
