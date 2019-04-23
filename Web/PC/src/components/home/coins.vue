@@ -60,9 +60,9 @@
         clearInterval(this.timer);
       } else {
         this.timer = setInterval(() => {
-          /*this.getNowPrice();
-          this.getCoinPrice();*/
-        }, 10000000);
+          this.getNowPrice();
+          this.getCoinPrice();
+        }, 1000);
       }
     },
     destroyed() {
@@ -75,16 +75,19 @@
           if (res.data.state) {
             let coins = res.data.rows.data.coin_rate;
             let legals = res.data.rows.data.legal_rate;
-            this.$set(this.oldPrice, 0, this.nowPrice);
+            this.oldPrice = [];
+            this.nowPrice.forEach(ele => {
+              this.oldPrice.push(ele);
+            });
             this.nowPrice = [];
-            for (let legal in legals) {
-              let msg = {};
-              msg[legal] = legals[legal];
-              this.nowPrice.push({
-                name: legal,
-                price: legals[legal]
-              });
-            }
+            // for (let legal in legals) {
+            //   let msg = {};
+            //   msg[legal] = legals[legal];
+            //   this.nowPrice.push({
+            //     name: legal,
+            //     price: legals[legal]
+            //   });
+            // }
             this.nowPrice.push({name: 'BTC', price: coins.BTC});
             this.nowPrice.push({name: 'ETH', price: coins.ETH});
             console.log(this.oldPrice);
@@ -103,13 +106,14 @@
               ele.supply = ele[10];
               this.nowPrice.forEach((item, index) => {
                 if (ele[1] === item.name) {
-                  console.log(item.name);
-                  console.log(ele[1]);
-                  ele.price = parseFloat(item.price) * 6.7;
-                  ele.isDown = parseFloat(item.price) < this.oldPrice[index] ? true : false;
+                  ele.price = (parseFloat(item.price) * 6.7).toFixed(2);
+                  ele.isDown = parseFloat(item.price) < parseFloat(this.oldPrice[index].price) ? true : false;
+                  console.log('old:' + this.oldPrice[index].price);
+                  console.log('old:' + item.price);
                 }
               });
               ele.change = ele[13] > 0 ? '+' + ele[13] + '%' : ele[13] + '%';
+              ele.market_cap = ele.price * ele.supply;
               this.tableData.push(ele);
               this.isloading = false;
             });
