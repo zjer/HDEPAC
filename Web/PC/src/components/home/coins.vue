@@ -27,6 +27,9 @@
         <el-table-column prop="supply" :label="$t('message.supply')">
         </el-table-column>
         <el-table-column prop="change" :label="$t('message.change24H')">
+          <template slot-scope="scope">
+            <div class="positive" v-bind:class="{negative: scope.row.isNegative}">{{ scope.row.change }}</div>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -45,6 +48,7 @@
         curIndex: -1,
         tableData: [],
         isDown: true,
+        isNegative: true,
         oldPrice: [],
         nowPrice: [],
         webSock: null
@@ -113,7 +117,8 @@
                   console.log('old:' + item.price);
                 }
               });
-              ele.change = ele[13] > 0 ? '+' + ele[13] + '%' : ele[13] + '%';
+              ele.change = ele[13] > 0 ? '+' + (ele[13] * 100).toFixed(2) + '%' : (ele[13] * 100).toFixed(2) + '%';
+              ele.isNegative = ele[13] < 0 ? true : false;
               this.tableData.push(ele);
               this.isloading = false;
             });
