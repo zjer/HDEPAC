@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import xlwt
 from datetime import datetime
 from aiowebsocket.converses import AioWebSocket
 
@@ -20,9 +21,28 @@ async def startup(uri):
         await converse.send('{"event":"subscribe","type":"price","channel":"dash"}')
         while True:
             mes = await converse.receive()
-            print('{time}-Client receive: {rec}'
-                  .format(time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rec=mes))
 
+            wb = xlwt.Workbook()
+            ws = wb.add_sheet('coin')
+
+            ws.write(0, 0, '币种')
+            ws.write(0, 1, '价格')
+            ws.write(0, 2, '24H成交额')
+            ws.write(0, 3, '市值')
+            ws.write(0, 4, '成交量')
+            ws.write(0, 5, '24H涨跌幅')
+
+            wb.save('./coin.xls')
+
+            data = mes
+            for i, item in data:
+                print(str(item))
+                # ws.write(i + 1, 0, item[0])
+                # ws.write(i + 1, 1, item[1])
+                # ws.write(i + 1, 2, item[2])
+                # ws.write(i + 1, 3, item[3])
+                # ws.write(i + 1, 4, item[4])
+                # ws.write(i + 1, 5, item[5])
 
 if __name__ == '__main__':
     remote = 'wss://ws.niuyan.com/api/v2/web/coin/ws'
