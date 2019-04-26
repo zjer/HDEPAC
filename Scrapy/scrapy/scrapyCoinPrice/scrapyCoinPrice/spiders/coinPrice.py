@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import xlwt
-from datetime import datetime
+import numpy as np
 from aiowebsocket.converses import AioWebSocket
 
 
@@ -23,7 +23,7 @@ async def startup(uri):
             mes = await converse.receive()
 
             wb = xlwt.Workbook()
-            ws = wb.add_sheet('coin')
+            ws = wb.add_sheet('coin', cell_overwrite_ok=True)
 
             ws.write(0, 0, '币种')
             ws.write(0, 1, '价格')
@@ -34,15 +34,21 @@ async def startup(uri):
 
             wb.save('./coin.xls')
 
-            data = mes
+            data = mes.decode('utf-8').replace('\n', '')
+
+            print(np.array(data))
+
             for i, item in data:
-                print(str(item))
-                # ws.write(i + 1, 0, item[0])
-                # ws.write(i + 1, 1, item[1])
-                # ws.write(i + 1, 2, item[2])
-                # ws.write(i + 1, 3, item[3])
-                # ws.write(i + 1, 4, item[4])
-                # ws.write(i + 1, 5, item[5])
+                print(i)
+                print(item)
+                ws.write(i + 1, 0, item)
+                ws.write(i + 1, 1, item)
+                ws.write(i + 1, 2, item)
+                ws.write(i + 1, 3, item)
+                ws.write(i + 1, 4, item)
+                ws.write(i + 1, 5, item)
+
+            wb.save('./coin.xls')
 
 if __name__ == '__main__':
     remote = 'wss://ws.niuyan.com/api/v2/web/coin/ws'
