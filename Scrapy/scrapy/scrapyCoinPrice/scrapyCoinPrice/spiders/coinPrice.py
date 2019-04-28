@@ -45,10 +45,8 @@ async def startup(uri):
 
             ws.write(0, 0, '币种')
             ws.write(0, 1, '价格')
-            ws.write(0, 2, '24H成交额')
-            ws.write(0, 3, '市值')
-            ws.write(0, 4, '成交量')
-            ws.write(0, 5, '24H涨跌幅')
+            ws.write(0, 2, '24H涨跌幅')
+            ws.write(0, 3, '24H成交量')
 
             BTCData = bytes.decode(BTCMsg, 'utf-8').replace('[', '').replace(']', '').replace('"', '').split(',')
             BTCData = np.array(BTCData)
@@ -86,8 +84,6 @@ async def startup(uri):
                 ws.write(1, 1, BTCData[1])
                 ws.write(1, 2, BTCData[2])
                 ws.write(1, 3, BTCData[3])
-                ws.write(1, 4, BTCData[4])
-                ws.write(1, 5, BTCData[5])
 
             for eth in ETHData:
                 print(eth)
@@ -95,8 +91,6 @@ async def startup(uri):
                 ws.write(2, 1, ETHData[1])
                 ws.write(2, 2, ETHData[2])
                 ws.write(2, 3, ETHData[3])
-                ws.write(2, 4, ETHData[4])
-                ws.write(2, 5, ETHData[5])
 
             for xrp in XRPData:
                 print(xrp)
@@ -104,8 +98,6 @@ async def startup(uri):
                 ws.write(3, 1, XRPData[1])
                 ws.write(3, 2, XRPData[2])
                 ws.write(3, 3, XRPData[3])
-                ws.write(3, 4, XRPData[4])
-                ws.write(3, 5, XRPData[5])
 
             for bth in BTHData:
                 print(bth)
@@ -113,8 +105,6 @@ async def startup(uri):
                 ws.write(4, 1, BTHData[1])
                 ws.write(4, 2, BTHData[2])
                 ws.write(4, 3, BTHData[3])
-                ws.write(4, 4, BTHData[4])
-                ws.write(4, 5, BTHData[5])
 
             for eos in EOSData:
                 print(eos)
@@ -122,8 +112,6 @@ async def startup(uri):
                 ws.write(5, 1, EOSData[1])
                 ws.write(5, 2, EOSData[2])
                 ws.write(5, 3, EOSData[3])
-                ws.write(5, 4, EOSData[4])
-                ws.write(5, 5, EOSData[5])
 
             for ltc in LTCData:
                 print(ltc)
@@ -131,8 +119,6 @@ async def startup(uri):
                 ws.write(6, 1, LTCData[1])
                 ws.write(6, 2, LTCData[2])
                 ws.write(6, 3, LTCData[3])
-                ws.write(6, 4, LTCData[4])
-                ws.write(6, 5, LTCData[5])
 
             for bnb in BNBData:
                 print(bnb)
@@ -140,8 +126,6 @@ async def startup(uri):
                 ws.write(7, 1, BNBData[1])
                 ws.write(7, 2, BNBData[2])
                 ws.write(7, 3, BNBData[3])
-                ws.write(7, 4, BNBData[4])
-                ws.write(7, 5, BNBData[5])
 
             for usdt in USDTData:
                 print(usdt)
@@ -149,8 +133,6 @@ async def startup(uri):
                 ws.write(8, 1, USDTData[1])
                 ws.write(8, 2, USDTData[2])
                 ws.write(8, 3, USDTData[3])
-                ws.write(8, 4, USDTData[4])
-                ws.write(8, 5, USDTData[5])
 
             for xmr in XMRData:
                 print(xmr)
@@ -158,8 +140,6 @@ async def startup(uri):
                 ws.write(9, 1, XMRData[1])
                 ws.write(9, 2, XMRData[2])
                 ws.write(9, 3, XMRData[3])
-                ws.write(9, 4, XMRData[4])
-                ws.write(9, 5, XMRData[5])
 
             for dash in DASHData:
                 print(dash)
@@ -167,8 +147,6 @@ async def startup(uri):
                 ws.write(10, 1, DASHData[1])
                 ws.write(10, 2, DASHData[2])
                 ws.write(10, 3, DASHData[3])
-                ws.write(10, 4, DASHData[4])
-                ws.write(10, 5, DASHData[5])
 
             wb.save('./coin.xls')
 
