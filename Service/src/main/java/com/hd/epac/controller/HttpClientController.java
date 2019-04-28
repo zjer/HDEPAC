@@ -63,7 +63,7 @@ public class HttpClientController {
     }
 
     /*
-     * 获取牛眼行情币价
+     * 获取牛眼行情币价(实时)
      * */
     @GetMapping(value = "/getNowPrice")
     @ResponseBody
