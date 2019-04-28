@@ -118,12 +118,12 @@ async def startup(uri):
 
             for eos in EOSData:
                 print(eos)
-                ws.write(5, 0, XRPData[0])
-                ws.write(5, 1, XRPData[1])
-                ws.write(5, 2, XRPData[2])
-                ws.write(5, 3, XRPData[3])
-                ws.write(5, 4, XRPData[4])
-                ws.write(5, 5, XRPData[5])
+                ws.write(5, 0, EOSData[0])
+                ws.write(5, 1, EOSData[1])
+                ws.write(5, 2, EOSData[2])
+                ws.write(5, 3, EOSData[3])
+                ws.write(5, 4, EOSData[4])
+                ws.write(5, 5, EOSData[5])
 
             for ltc in LTCData:
                 print(ltc)
