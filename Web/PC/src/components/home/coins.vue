@@ -75,27 +75,9 @@
     },
     methods: {
       getNowPrice() {
-        axios.get(baseUrl + '/httpclient/getNowPrice').then(res => {
+        axios.get(baseUrl + '/getExcelData/getCoin').then(res => {
           if (res.data.state) {
-            let coins = res.data.rows.data.coin_rate;
-            let legals = res.data.rows.data.legal_rate;
-            this.oldPrice = [];
-            this.nowPrice.forEach(ele => {
-              this.oldPrice.push(ele);
-            });
-            this.nowPrice = [];
-            // for (let legal in legals) {
-            //   let msg = {};
-            //   msg[legal] = legals[legal];
-            //   this.nowPrice.push({
-            //     name: legal,
-            //     price: legals[legal]
-            //   });
-            // }
-            this.nowPrice.push({name: 'BTC', price: coins.BTC});
-            this.nowPrice.push({name: 'ETH', price: coins.ETH});
-            console.log(this.oldPrice);
-            console.log(this.nowPrice);
+            console.log(res)
           }
         });
       },
